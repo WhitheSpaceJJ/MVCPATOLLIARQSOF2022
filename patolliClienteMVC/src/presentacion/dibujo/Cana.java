@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package presentacion.dibujo;
 
 import java.awt.Color;
@@ -9,27 +6,21 @@ import java.awt.Graphics;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 
-/**
- * Clase que dibuja los dados. Sera utilizado por el panel de tablero.
- * @author Judi
- */
-public class Dado extends Figura {
+public class Cana extends Figura {
 
     private int x;
     private int y;
     private int width;
     private int heigth;
     private boolean cara;
-    private Graphics g;
 
-    public Dado(int x, int y, int width, int heigth, boolean cara, Graphics g, String posicion) {
+    public Cana(int x, int y, int width, int heigth, boolean cara,int  posicion) {
         super(posicion);
         this.x = x;
         this.y = y;
         this.width = width;
         this.heigth = heigth;
         this.cara = cara;
-        this.g = g;
     }
 
     @Override

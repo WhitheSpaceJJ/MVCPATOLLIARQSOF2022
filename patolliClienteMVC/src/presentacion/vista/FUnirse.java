@@ -1,18 +1,13 @@
 package presentacion.vista;
 
-import Dominio.Jugador;
-import control.Control;
-import control.IControl;
 import javax.swing.JOptionPane;
 
 /**
  * Framde para la union de jugadores
  *
- * @author Judi
  */
 public class FUnirse extends javax.swing.JFrame {
 
-    private IControl control;
 
     /**
      * Creates new form FUnirse2
@@ -20,7 +15,6 @@ public class FUnirse extends javax.swing.JFrame {
     public FUnirse() {
         initComponents();
 //        this.partida = Partida.getPartida();
-        this.control = Control.getControl();
     }
 
     /**
@@ -154,12 +148,12 @@ public class FUnirse extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonMenuActionPerformed
 
     private void jButtonUnirseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUnirseActionPerformed
-        if (validarConfiguración() == false) {
-//            this.control.agregarJugador(txtnomjugador.getText().toString(), this.BoxColor.getSelectedItem().toString());
-            Jugador jugador = new Jugador(txtnomjugador.getText(), this.BoxColor.getSelectedItem().toString());
-            this.control.agregarJugador(jugador);
-            this.mostrarPantallaLobby();
-        }
+//        if (validarConfiguración() == false) {
+////            this.control.agregarJugador(txtnomjugador.getText().toString(), this.BoxColor.getSelectedItem().toString());
+//            Jugador jugador = new Jugador(txtnomjugador.getText(), this.BoxColor.getSelectedItem().toString());
+//            this.control.agregarJugador(jugador);
+//            this.mostrarPantallaLobby();
+//        }
 
 
     }//GEN-LAST:event_jButtonUnirseActionPerformed
@@ -202,23 +196,23 @@ public class FUnirse extends javax.swing.JFrame {
 //Metodo que valida la configuración  datos del jugador, si la partida tiene espacios, etc.
     public boolean validarConfiguración() {
 
-        if (this.txtnomjugador.getText().isEmpty()) {
-            this.mostrarMensajeError("Establece el nombre del jugador");
-            return true;
-        }
-        if (this.control.validarJugadores()) {
-            this.mostrarMensajeError("Ya no hay espacios para la partida actual.Espera a que termine.");
-            return true;
-        }
-        if (this.control.verificarNombre(this.txtnomjugador.getText())) {
-            this.mostrarMensajeError("Nombre ya ocupado");
-            return true;
-        }
-        if (this.control.verificarColor(this.BoxColor.getSelectedItem().toString())) {
-            this.mostrarMensajeError("Color ya ocupado");
-            return true;
-        }
-
+//        if (this.txtnomjugador.getText().isEmpty()) {
+//            this.mostrarMensajeError("Establece el nombre del jugador");
+//            return true;
+//        }
+//        if (this.control.validarJugadores()) {
+//            this.mostrarMensajeError("Ya no hay espacios para la partida actual.Espera a que termine.");
+//            return true;
+//        }
+//        if (this.control.verificarNombre(this.txtnomjugador.getText())) {
+//            this.mostrarMensajeError("Nombre ya ocupado");
+//            return true;
+//        }
+//        if (this.control.verificarColor(this.BoxColor.getSelectedItem().toString())) {
+//            this.mostrarMensajeError("Color ya ocupado");
+//            return true;
+//        }
+//
         return false;
     }
 

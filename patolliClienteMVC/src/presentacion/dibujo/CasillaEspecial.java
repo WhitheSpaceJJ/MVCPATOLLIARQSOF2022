@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package presentacion.dibujo;
 
 import java.awt.Color;
@@ -16,14 +13,12 @@ public class CasillaEspecial extends Figura {
 
     private int[] x;
     private int[] y;
-    private Graphics g;
     private Polygon p;
 
-    public CasillaEspecial(int[] x, int[] y, Graphics g, String posicion, Polygon p) {
+    public CasillaEspecial(int[] x, int[] y, int posicion, Polygon p) {
         super(posicion);
         this.x = x;
         this.y = y;
-        this.g = g;
         this.p = p;
     }
 

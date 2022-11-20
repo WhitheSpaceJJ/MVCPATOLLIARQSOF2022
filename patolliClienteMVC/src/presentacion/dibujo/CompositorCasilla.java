@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package presentacion.dibujo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Clase que representa el compuesto de figuras.
@@ -12,9 +9,9 @@ import java.util.ArrayList;
  */
 public class CompositorCasilla extends Figura {
 
-    private java.util.List< Figura> lista = new ArrayList<>();
+    private List< Figura> lista = new ArrayList<>();
 
-    public CompositorCasilla(String posicion) {
+    public CompositorCasilla(int posicion) {
         super(posicion);
     }
 

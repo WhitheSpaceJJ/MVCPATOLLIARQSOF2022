@@ -1,13 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package presentacion.vista;
 
-import Dibujo.TableroGrafico;
-import Dominio.Jugador;
-import control.Control;
-import control.IControl;
 /**
  * Clase que representa el juego.
  * @author Equipo1.
@@ -16,20 +9,19 @@ public class FJuego extends javax.swing.JFrame {
 
     private static FJuego instanceFJuego;
     private int tamaño;
-    private IControl control;
 //Comentario Prueba
     /**
      * Creates new form FLobbyHost
      */
     private FJuego() {
         initComponents();
-        this.control = Control.getControl();
-        this.tamaño = this.control.getTamañoTablero();
-        TableroGrafico tablero2 = new TableroGrafico(tamaño);
-        getContentPane().add(tablero2);
-        tablero2.setBounds(0, 0, 600, 600);
-        Jugador jugador=this.control.getTurno();
-        nombre.setText(jugador.getNombre());
+//        this.control = Control.getControl();
+//        this.tamaño = this.control.getTamañoTablero();
+//        TableroGrafico tablero2 = new TableroGrafico(tamaño);
+//        getContentPane().add(tablero2);
+//        tablero2.setBounds(0, 0, 600, 600);
+//        Jugador jugador=this.control.getTurno();
+//        nombre.setText(jugador.getNombre());
     }
 
     public static FJuego getFJuego() {

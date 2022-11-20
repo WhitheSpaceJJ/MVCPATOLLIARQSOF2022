@@ -1,34 +1,40 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package presentacion.dibujo;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
-/**
- * Casilla que representa la punta de un aspa del tablero.
- * @author Judi
- */
 public class CasillaBordeada extends Figura {
 
     private int[] x;
     private int[] y;
-    private Graphics g;
-
-    public CasillaBordeada(int[] x, int[] y, Graphics g, String posicion) {
+    private Color color;
+    
+    public CasillaBordeada(int[] x, int[] y,int posicion) {
         super(posicion);
         this.x = x;
         this.y = y;
-        this.g = g;
+    }
+
+    public CasillaBordeada(int[] x, int[] y, Color color, int posicion) {
+        super(posicion);
+        this.x = x;
+        this.y = y;
+        this.color = color;
+    }
+
+    
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     @Override
     public void dibujar() {
+        g.setColor(color);
         //Se pinta en rojo solo con el fin  de identificarlo.
-        g.setColor(Color.red);
+        //Quitar
+//        g.setColor(Color.red);
         Polygon polygon1 = new Polygon(x, y, x.length);
         g.drawPolygon(polygon1);
     }

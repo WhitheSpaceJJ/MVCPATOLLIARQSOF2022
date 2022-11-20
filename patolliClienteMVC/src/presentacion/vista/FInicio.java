@@ -1,27 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package presentacion.vista;
 
-import control.Control;
-import control.IControl;
-
 import javax.swing.JOptionPane;
+
 /**
  * Frame de inicio del juego.
+ *
  * @author Equipo1
  */
 public class FInicio extends javax.swing.JFrame {
-
-    private IControl control;
 
     /**
      * Creates new form Inicio
      */
     public FInicio() {
         initComponents();
-        this.control = Control.getControl();
     }
 
     /**
@@ -87,10 +79,11 @@ public class FInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
-      this.mostrarPantallaCrear();
+        this.mostrarPantallaCrear();
     }//GEN-LAST:event_crearActionPerformed
 //Mostrar pantalla de creacion de partida
-    public void mostrarPantallaCrear(){
+
+    public void mostrarPantallaCrear() {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -98,8 +91,8 @@ public class FInicio extends javax.swing.JFrame {
             }
         });
     }
-    
-    
+
+
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
         this.recuperarPartidas();
     }//GEN-LAST:event_entrarActionPerformed
@@ -149,16 +142,16 @@ public class FInicio extends javax.swing.JFrame {
     //Metodo que valida si una partida a sido establecida o creada.
     //Con el fin de realizar una adecuada simulacion
     public void recuperarPartidas() {
-        if (this.control.validarCreacion()) {
-            this.mostrarMensajeError("No hay partidas creadas por el momento");
-        } else {
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    new FUnirse().setVisible(true);
-                }
-            });
-        }
+//        if (this.control.validarCreacion()) {
+//            this.mostrarMensajeError("No hay partidas creadas por el momento");
+//        } else {
+//            java.awt.EventQueue.invokeLater(new Runnable() {
+//                @Override
+//                public void run() {
+//                    new FUnirse().setVisible(true);
+//                }
+//            });
+//        }
 
     }
 //Metodo que muestra mensaje de error. 

@@ -16,10 +16,18 @@ public class Ficha {
      */
     private Jugador jugador;
     private boolean enJuego;
-//Constructores
+    private boolean eliminada;
 
+//Constructores
     public Ficha() {
         this.enJuego = true;
+    }
+
+    public Ficha(int numeroPosicion, Jugador jugador, boolean enJuego, boolean eliminada) {
+        this.numeroPosicion = numeroPosicion;
+        this.jugador = jugador;
+        this.enJuego = enJuego;
+        this.eliminada = eliminada;
     }
 
     public Ficha(int numeroPosicion, Jugador jugador) {
@@ -28,6 +36,22 @@ public class Ficha {
         this.enJuego = true;
     }
 //Metodos get y set
+
+    public int getNumeroPosicion() {
+        return numeroPosicion;
+    }
+
+    public void setNumeroPosicion(int numeroPosicion) {
+        this.numeroPosicion = numeroPosicion;
+    }
+
+    public boolean isEliminada() {
+        return eliminada;
+    }
+
+    public void setEliminada(boolean eliminada) {
+        this.eliminada = eliminada;
+    }
 
     public int getNumero() {
         return numeroPosicion;
@@ -58,6 +82,5 @@ public class Ficha {
     public String toString() {
         return "Ficha{" + "numero=" + numeroPosicion + ", jugador=" + jugador + ", enJuego=" + enJuego + '}';
     }
-
 
 }

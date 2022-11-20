@@ -1,27 +1,51 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package presentacion.dibujo;
 
+import dominio.Tablero;
 import java.awt.Graphics;
 import java.awt.Polygon;
 import javax.swing.JPanel;
+import javax.swing.JPanel;
+
 /**
  * CLase que realiza el dibujo del tablero y lanzamienento de dados.
- * @author Equipo1 
+ *
+ * @author Equipo1
  */
 public class TableroGrafico extends JPanel {
 
     private int tamaño;
+    private Tablero tablero;
+
+    public TableroGrafico(Tablero tablero) {
+        this.tablero = tablero;
+        this.tamaño = tablero.getTamano();
+    }
 
     public TableroGrafico(int tamaño) {
         this.tamaño = tamaño;
     }
 
+    public int getTamaño() {
+        return tamaño;
+    }
+
+    public void setTamaño(int tamaño) {
+        this.tamaño = tamaño;
+    }
+
+    public Tablero getTablero() {
+        return tablero;
+    }
+
+    public void setTablero(Tablero tablero) {
+        this.tablero = tablero;
+    }
+
     @Override
     public void paintComponent(Graphics g) {
-         if (tamaño == 14) {
+        /*
+        Se reactualizara el metodo para dibujar con valores mas facilmente. ya que se tenga el tablero lleno
+        if (tamaño == 14) {
 
             int xA1[] = {260, 300, 272, 232};
             int yA1[] = {260, 220, 192, 232};
@@ -887,9 +911,14 @@ public class TableroGrafico extends JPanel {
             ce.addElemento(cCE4);
             ce.dibujar();
         }
+         */
     }
 
-/*
+    @Override
+    public void repaint() {
+    }
+    /*
+    Metodo Repaint utilizara estas cordenadas
     int x14[] = {358, 385, 412, 439, 466, 493, 520, 480, 453, 426, 399, 372, 345, 318, 280, 251, 221, 194, 167, 140, 110, 80,
         40, 70, 100, 127, 154, 181, 211, 240, 210, 180, 148, 121, 94, 67, 40, 80, 107, 134, 161, 188, 220, 250, 280,
         310, 340, 370, 400, 430, 460, 490, 525, 500, 470, 440, 415, 390, 365, 320};
@@ -907,6 +936,6 @@ public class TableroGrafico extends JPanel {
     int y10[] = {250, 220, 188, 161, 134, 94, 121, 148, 180, 210, 256, 211, 181, 154, 127, 100,
         140, 167, 194, 221, 251, 290, 318, 345, 372, 399, 426, 466, 439, 412, 385, 358,
         320, 365, 390, 415, 440, 470, 430, 400, 370, 340, 310, 290};
-    */
+     */
 
 }

@@ -52,6 +52,14 @@ public class Tablero {
         this.casillas = casillas;
     }
 
+    public int getTamano() {
+        return tamano;
+    }
+
+    public void setTamano(int tamano) {
+        this.tamano = tamano;
+    }
+
  
 //Metodo to string.    
 

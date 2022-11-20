@@ -1,30 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package presentacion.dibujo;
 
+import java.awt.Graphics;
 import java.util.Objects;
 
-/**
- * Clase que representa las figuras(Casillas ,dados).
- * @author Judi
- */
+
 public abstract class Figura {
 
-    private String posicion;
-
-    public Figura(String posicion) {
+    protected int posicion;
+    protected Graphics g;
+    public Figura(int posicion) {
         this.posicion = posicion;
     }
 
     public abstract void dibujar();
 
-    public String getPosicion() {
+    public int getPosicion() {
         return posicion;
     }
 
-    public void setPosicion(String posicion) {
+    public void setPosicion(int posicion) {
         this.posicion = posicion;
     }
 

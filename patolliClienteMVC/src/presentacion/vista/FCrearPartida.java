@@ -1,12 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package presentacion.vista;
 
-import Dominio.Jugador;
-import control.Control;
-import control.IControl;
+
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 
@@ -17,14 +12,12 @@ import javax.swing.JOptionPane;
  */
 public class FCrearPartida extends javax.swing.JFrame {
 
-    private IControl control;
 
     /**
      * Creates new form FCrearPartida
      */
     public FCrearPartida() {
         initComponents();
-        this.control = Control.getControl();
     }
 
     /**
@@ -225,15 +218,15 @@ public class FCrearPartida extends javax.swing.JFrame {
 
 
     private void jButtonComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComenzarActionPerformed
-        if (validarConfiguracion() == false) {
-            int tamaño = Integer.valueOf(tamanoTablero.getSelectedItem().toString());
-            int totalJugadores = Integer.valueOf(cantidadJugadores.getSelectedItem().toString());
-            this.control.establecerJuego(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "" + Calendar.getInstance().get(Calendar.SECOND), totalJugadores, tamaño, Double.valueOf(this.montoApuesta.getText()), Double.valueOf(this.fondoJugador.getText()));
-//            this.control.agregarJugador(txtnomjugador.getText(), this.BoxColor.getSelectedItem().toString());
-            Jugador jugador = new Jugador(nombreJugador.getText(), this.colorJugador.getSelectedItem().toString());
-            this.control.agregarJugador(jugador);
-            this.mostrarPantallaLobby();
-        }
+//        if (validarConfiguracion() == false) {
+//            int tamaño = Integer.valueOf(tamanoTablero.getSelectedItem().toString());
+//            int totalJugadores = Integer.valueOf(cantidadJugadores.getSelectedItem().toString());
+//            this.control.establecerJuego(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "" + Calendar.getInstance().get(Calendar.SECOND), totalJugadores, tamaño, Double.valueOf(this.montoApuesta.getText()), Double.valueOf(this.fondoJugador.getText()));
+////            this.control.agregarJugador(txtnomjugador.getText(), this.BoxColor.getSelectedItem().toString());
+//            Jugador jugador = new Jugador(nombreJugador.getText(), this.colorJugador.getSelectedItem().toString());
+//            this.control.agregarJugador(jugador);
+//            this.mostrarPantallaLobby();
+//        }
     }//GEN-LAST:event_jButtonComenzarActionPerformed
 
     private void resetDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetDatosActionPerformed

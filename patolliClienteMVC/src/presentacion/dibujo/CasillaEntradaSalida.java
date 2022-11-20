@@ -1,31 +1,39 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package presentacion.dibujo;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
-/**
- * Clase que representa una casilla de salida o entrada, casillas amarillas.
- * @author Equipo1
- */
-public class CasillaEntradaSalida  extends Figura {
+
+public class CasillaEntradaSalida extends Figura {
+
     private int[] x;
     private int[] y;
-    private Graphics g;
+    private int marcador;
 
-    public CasillaEntradaSalida (int[] x, int[] y, Graphics g, String posicion) {
+    public CasillaEntradaSalida(int[] x, int[] y, int posicion) {
         super(posicion);
         this.x = x;
         this.y = y;
-        this.g = g;
+    }
+
+    public CasillaEntradaSalida(int[] x, int[] y, int marcador, int posicion) {
+        super(posicion);
+        this.x = x;
+        this.y = y;
+        this.marcador = marcador;
+    }
+
+    public int getMarcador() {
+        return marcador;
+    }
+
+    public void setMarcador(int marcador) {
+        this.marcador = marcador;
     }
 
     @Override
     public void dibujar() {
-          g.setColor(Color.yellow);
+        g.setColor(Color.yellow);
         Polygon relleno = new Polygon(x, y, x.length);
         g.fillPolygon(relleno);
         g.setColor(Color.black);
@@ -58,4 +66,3 @@ public class CasillaEntradaSalida  extends Figura {
     }
 
 }
-
