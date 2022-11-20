@@ -11,7 +11,7 @@ public class Casilla {
     /**
      * Tipo de casilla
      */
-    private String tipo;
+    private TipoCasilla tipo;
     /**
      * La ficha que tendra la casilla.
      */
@@ -22,15 +22,15 @@ public class Casilla {
      *
      * @param tipo
      */
-    public Casilla(String tipo) {
+    public Casilla(TipoCasilla tipo) {
         this.tipo = tipo;
     }
     //Metodos y set de casilla.
-    public String getTipo() {
+    public TipoCasilla getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoCasilla tipo) {
         this.tipo = tipo;
     }
 

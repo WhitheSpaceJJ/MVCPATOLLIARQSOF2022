@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dominio;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Clase que representa el tablero de la partida.
@@ -16,17 +14,26 @@ public class Tablero {
 
     private String numeroTablero;
     //Casillas del tablero
-    private ArrayList<Casilla> casillas = new ArrayList();
+    private List<Casilla> casillas ;
+    private int tamano;
+    
     //Jugadores del tablero.
-    private ArrayList<Jugador> jugadores = new ArrayList();
 //Constructores 
 
     public Tablero() {
     }
 
-    public Tablero(String numeroTablero) {
+    public Tablero(String numeroTablero, int tamano) {
         this.numeroTablero = numeroTablero;
+        this.tamano = tamano;
+        this.casillas= new ArrayList();
+        //Inicializar casillas orden
+        if(tamano==10){
+        }else if(tamano==12){
+        }else if(tamano==14){
+        }
     }
+
 //Metodos get y set
 
     public String getNumeroTablero() {
@@ -37,7 +44,7 @@ public class Tablero {
         this.numeroTablero = numeroTablero;
     }
 
-    public ArrayList<Casilla> getCasillas() {
+    public List<Casilla> getCasillas() {
         return casillas;
     }
 
@@ -45,18 +52,12 @@ public class Tablero {
         this.casillas = casillas;
     }
 
-    public ArrayList<Jugador> getJugadores() {
-        return jugadores;
-    }
-
-    public void setJugadores(ArrayList<Jugador> jugadores) {
-        this.jugadores = jugadores;
-    }
+ 
 //Metodo to string.    
 
     @Override
     public String toString() {
-        return "Tablero{" + "numeroTablero=" + numeroTablero + ", casillas=" + casillas + ", jugadores=" + jugadores + '}';
+        return "Tablero{" + "numeroTablero=" + numeroTablero + ", casillas=" + casillas +'}';
     }
 
 }

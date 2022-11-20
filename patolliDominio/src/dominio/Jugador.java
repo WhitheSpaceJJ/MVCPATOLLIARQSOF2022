@@ -1,6 +1,7 @@
 package dominio;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Clase que representa un jugador.
@@ -10,13 +11,14 @@ import java.util.ArrayList;
 public class Jugador {
 //Nombre color
 
-    private String nombre, color;
+    private String nombre;
+    private String color;
     //Dinero
     private Dinero dinero;
     /**
      * Lista de fichas.
      */
-    private ArrayList<Ficha> fichas = new ArrayList();
+    private List<Ficha> fichas;
 //Constructores
 
     public Jugador() {
@@ -44,14 +46,23 @@ public class Jugador {
         this.color = color;
     }
 
-    public ArrayList<Ficha> getFichas() {
+    public List<Ficha> getFichas() {
         return fichas;
+    }
+
+    public Dinero getDinero() {
+        return dinero;
+    }
+
+    public void setDinero(Dinero dinero) {
+        this.dinero = dinero;
     }
 
     public void setFichas(ArrayList<Ficha> fichas) {
         this.fichas = fichas;
     }
 //Metodo to string
+
     @Override
     public String toString() {
         return "usuario{" + " nombre= " + nombre + ", color= " + color + '}';
