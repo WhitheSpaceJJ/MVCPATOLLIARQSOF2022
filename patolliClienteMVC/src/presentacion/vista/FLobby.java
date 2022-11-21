@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
  *
  * @author Equipo1
  */
-public class FLobby extends javax.swing.JFrame {
+public class FLobby extends FrameBase {
 
 
     /**

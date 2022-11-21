@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  *
  * @author Equipo1
  */
-public class FCrearPartida extends javax.swing.JFrame {
+public class FCrearPartida extends FrameBase{
 
 
     /**
@@ -230,7 +230,6 @@ public class FCrearPartida extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonComenzarActionPerformed
 
     private void resetDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetDatosActionPerformed
-        // TODO add your handling code here:
         this.nombreJugador.setText("");
         this.colorJugador.setSelectedIndex(0);
     }//GEN-LAST:event_resetDatosActionPerformed

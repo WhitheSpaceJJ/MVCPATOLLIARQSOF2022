@@ -6,7 +6,7 @@ package presentacion.vista;
  *
  * @author Equipo1
  */
-public class FValidacion extends javax.swing.JFrame {
+public class FValidacion extends FrameBase {
 
     /**
      * Creates new form FValidacion
@@ -35,6 +35,7 @@ public class FValidacion extends javax.swing.JFrame {
         setTitle("Salir");
         setFocusable(false);
         setMinimumSize(new java.awt.Dimension(400, 300));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
@@ -78,7 +79,7 @@ public class FValidacion extends javax.swing.JFrame {
         jButton2.setBounds(70, 180, 120, 40);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 400, 300);
+        jPanel1.setBounds(0, 0, 390, 280);
 
         pack();
         setLocationRelativeTo(null);

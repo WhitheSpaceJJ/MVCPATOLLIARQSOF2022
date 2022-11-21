@@ -8,6 +8,13 @@ public class FrameBase extends javax.swing.JFrame implements Observer {
 
     protected ControlBase control;
 
+    public FrameBase() {
+    }
+
+    public FrameBase(ControlBase control) {
+        this.control = control;
+    }
+
     public void establecerControl(ControlBase control) {
         this.control = control;
     }

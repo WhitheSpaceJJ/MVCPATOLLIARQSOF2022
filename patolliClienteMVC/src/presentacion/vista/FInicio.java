@@ -1,6 +1,12 @@
 package presentacion.vista;
 
+import control.CJugador;
+import control.CPartida;
+import control.ControlBase;
 import javax.swing.JOptionPane;
+import modelo.MJugador;
+import modelo.MPartida;
+import modelo.ModeloBase;
 
 /**
  * Frame de inicio del juego.
@@ -79,81 +85,48 @@ public class FInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
+        //Verificar que el servidor se haya levantado antes de ejecutar la siguient linea con el fin de 
+        //crear la instancia del objeto que manejara la conexion del jugador con el servidor
         this.mostrarPantallaCrear();
     }//GEN-LAST:event_crearActionPerformed
 //Mostrar pantalla de creacion de partida
 
     public void mostrarPantallaCrear() {
+        ModeloBase modeloPartida = new MPartida();
+        ControlBase controlPartida = new CPartida();
+        controlPartida.establecerModelo(modeloPartida);
+        FrameBase fCrearPartida = new FCrearPartida();
+        fCrearPartida.establecerControl(controlPartida);
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new FCrearPartida().setVisible(true);
+                fCrearPartida.setVisible(true);
             }
         });
     }
 
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-        this.recuperarPartidas();
+        this.mostrarPantallaUnirse();
     }//GEN-LAST:event_entrarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FInicio().setVisible(true);
-            }
-        });
-    }
-
-    //Metodo que valida si una partida a sido establecida o creada.
-    //Con el fin de realizar una adecuada simulacion
-    public void recuperarPartidas() {
-//        if (this.control.validarCreacion()) {
-//            this.mostrarMensajeError("No hay partidas creadas por el momento");
-//        } else {
-//            java.awt.EventQueue.invokeLater(new Runnable() {
-//                @Override
-//                public void run() {
-//                    new FUnirse().setVisible(true);
-//                }
-//            });
-//        }
-
-    }
+//
+//    //Metodo que valida si una partida a sido establecida o creada.
+//    //Con el fin de realizar una adecuada simulacion
+//    public void recuperarPartidas() {
+////        if (this.control.validarCreacion()) {
+////            this.mostrarMensajeError("No hay partidas creadas por el momento");
+////        } else {
+////            java.awt.EventQueue.invokeLater(new Runnable() {
+////                @Override
+////                public void run() {
+////                    new FUnirse().setVisible(true);
+////                }
+////            });
+////        }
+//
+//    }
 //Metodo que muestra mensaje de error. 
 
     public void mostrarMensajeError(String mensaje) {
@@ -162,12 +135,17 @@ public class FInicio extends javax.swing.JFrame {
 
     //Metodo que muestra la pantalla de unirse.
     public void mostrarPantallaUnirse() {
+        ModeloBase modeloJugador = new MJugador();
+        ControlBase controlJugador = new CJugador();
+        controlJugador.establecerModelo(modeloJugador);
+        FrameBase fUnirse = new FUnirse();
+        fUnirse.establecerControl(controlJugador);
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new FUnirse().setVisible(true);
+                fUnirse.setVisible(true);
             }
         });
-        setVisible(false);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton crear;

@@ -60,5 +60,5 @@ public class Servidor implements Observer, Runnable {
     public void setOutput(ObjectOutputStream output) {
         this.output = output;
     }
-    
+
 }

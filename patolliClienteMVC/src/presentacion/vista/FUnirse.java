@@ -1,13 +1,16 @@
 package presentacion.vista;
 
+import control.CJugador;
+import control.ControlBase;
 import javax.swing.JOptionPane;
+import modelo.MPartida;
+import modelo.ModeloBase;
 
 /**
  * Framde para la union de jugadores
  *
  */
-public class FUnirse extends javax.swing.JFrame {
-
+public class FUnirse extends FrameBase {
 
     /**
      * Creates new form FUnirse2
@@ -39,6 +42,7 @@ public class FUnirse extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(550, 300));
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         jLabel1.setText("Unirse a partida");
@@ -143,7 +147,6 @@ public class FUnirse extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMenuActionPerformed
-        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButtonMenuActionPerformed
 
@@ -155,7 +158,20 @@ public class FUnirse extends javax.swing.JFrame {
 //            this.mostrarPantallaLobby();
 //        }
 
-
+        //Verificar que el servidor se haya levantado antes de ejecutar la siguient linea con el fin de 
+        //crear la instancia del objeto que manejara la conexion del jugador con el servidor  y ademas
+        // que la partida contenga datos.
+        ModeloBase modeloPartida = new MPartida();
+        ControlBase controlJugador = new CJugador();
+        controlJugador.establecerModelo(modeloPartida);
+        FrameBase fUnirse = new FUnirse();
+        fUnirse.establecerControl(controlJugador);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                fUnirse.setVisible(true);
+            }
+        });
     }//GEN-LAST:event_jButtonUnirseActionPerformed
 
     /**

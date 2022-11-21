@@ -5,7 +5,7 @@ package presentacion.vista;
  * Clase que representa el juego.
  * @author Equipo1.
  */
-public class FJuego extends javax.swing.JFrame {
+public class FJuego extends FrameBase{
 
     private static FJuego instanceFJuego;
     private int tamaño;

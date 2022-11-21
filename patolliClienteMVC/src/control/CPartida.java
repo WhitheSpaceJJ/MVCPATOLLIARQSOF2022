@@ -1,8 +1,23 @@
 package control;
 
+import clientePatolli.Cliente;
 import dominio.Partida;
+import modelo.ModeloBase;
 
 public class CPartida extends ControlBase {
+
+    public CPartida() {
+    }
+
+    public CPartida(ModeloBase modelo, Cliente cliente) {
+        super(modelo, cliente);
+    }
+
+    public CPartida(ModeloBase modelo) {
+        super(modelo);
+    }
+
+
 
     public void crearPartida(Partida partida) {
     }
