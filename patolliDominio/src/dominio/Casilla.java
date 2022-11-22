@@ -1,12 +1,14 @@
 package dominio;
 
+import java.io.Serializable;
+
 /**
  * Clase que representa una casilla,del tablero.
  *
  * @author Equipo1
  */
 
-public class Casilla {
+public class Casilla implements Serializable{
 
     /**
      * Tipo de casilla

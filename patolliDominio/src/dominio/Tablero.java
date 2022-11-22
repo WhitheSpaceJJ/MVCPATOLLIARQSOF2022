@@ -1,6 +1,7 @@
 
 package dominio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * @author Equipo 1
  */
-public class Tablero {
+public class Tablero implements Serializable{
 //Numero de tablero.
 
     private String numeroTablero;

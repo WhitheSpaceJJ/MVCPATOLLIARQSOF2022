@@ -1,7 +1,9 @@
 
 package dominio;
 
-public class Dado {
+import java.io.Serializable;
+
+public class Dado implements Serializable{
     private String cara;
 
     public Dado() {

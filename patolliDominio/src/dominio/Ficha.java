@@ -1,11 +1,13 @@
 package dominio;
 
+import java.io.Serializable;
+
 /**
  * Clase que representa la ficha del jugador.
  *
  * @author Equipo 1
  */
-public class Ficha {
+public class Ficha implements Serializable{
 
     /**
      * Numero

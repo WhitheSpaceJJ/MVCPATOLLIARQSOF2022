@@ -1,11 +1,13 @@
 package dominio;
 
+import java.io.Serializable;
+
 /**
  * Clase que representa el dinero del jugador.
  *
  * @author Equipo 1
  */
-public class Dinero {
+public class Dinero implements Serializable{
 
     /**
      * Cantidad de dinero

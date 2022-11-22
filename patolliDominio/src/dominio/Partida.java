@@ -1,9 +1,10 @@
 
 package dominio;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Partida {
+public class Partida implements Serializable{
     private Jugador turno;
     private List<Jugador> jugadores;
     private Tablero tablero;

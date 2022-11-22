@@ -1,7 +1,10 @@
 package dominio;
 
 //Clase que representa la penalizacion.
-public class Penalizacion {
+
+import java.io.Serializable;
+
+public class Penalizacion implements Serializable{
 
     //Cantidad a restar
     private double cantidad;

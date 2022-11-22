@@ -6,6 +6,10 @@ public class ControlServidor {
 
     private ModeloServidor partidaLocal;
 
+    public ControlServidor(ModeloServidor partidaLocal) {
+        this.partidaLocal = partidaLocal;
+    }
+
     public void finalizarPartida() {
     }
 

@@ -1,14 +1,16 @@
 package dominio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Clase que representa un jugador.
  *
  * @author Equipo1 1
  */
-public class Jugador {
+public class Jugador implements Serializable{
 //Nombre color
 
     private String nombre;
@@ -61,6 +63,35 @@ public class Jugador {
     public void setFichas(ArrayList<Ficha> fichas) {
         this.fichas = fichas;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.nombre);
+        hash = 53 * hash + Objects.hashCode(this.color);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Jugador other = (Jugador) obj;
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        return Objects.equals(this.color, other.color);
+    }
+    
+    
+    
 //Metodo to string
 
     @Override
