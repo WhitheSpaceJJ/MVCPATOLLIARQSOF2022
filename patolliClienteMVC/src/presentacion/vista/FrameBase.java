@@ -4,7 +4,7 @@ import control.ControlBase;
 import java.util.Observable;
 import java.util.Observer;
 
-public class FrameBase extends javax.swing.JFrame implements Observer {
+public abstract class FrameBase extends javax.swing.JFrame implements Observer {
 
     protected ControlBase control;
 
@@ -19,10 +19,6 @@ public class FrameBase extends javax.swing.JFrame implements Observer {
         this.control = control;
     }
 
-    @Override
-    public void update(Observable o, Object o1) {
-    }
-
     public ControlBase getControl() {
         return control;
     }
@@ -30,5 +26,8 @@ public class FrameBase extends javax.swing.JFrame implements Observer {
     public void setControl(ControlBase control) {
         this.control = control;
     }
+
+    @Override
+    public abstract void update(Observable o, Object o1);
 
 }

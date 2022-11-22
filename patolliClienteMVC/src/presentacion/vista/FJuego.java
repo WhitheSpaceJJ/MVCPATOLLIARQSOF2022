@@ -1,6 +1,8 @@
 
 package presentacion.vista;
 
+import java.util.Observable;
+
 /**
  * Clase que representa el juego.
  * @author Equipo1.
@@ -343,4 +345,9 @@ public class FJuego extends FrameBase{
     public static javax.swing.JLabel nombre;
     private javax.swing.JPanel tablero;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object o1) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

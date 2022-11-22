@@ -7,7 +7,7 @@ public class MValidacion extends ModeloBase {
     private String confirmacion;
     private Jugador jugador;
 
-    public void establecerSalida() {
-        this.notifyObservers();
-    }
+//    public void establecerSalida() {
+//        this.actualizarModelo();
+//    }
 }

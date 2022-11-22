@@ -1,6 +1,8 @@
 
 package presentacion.vista;
 
+import java.util.Observable;
+
 /**
  * Clase que representa la validacion de la salida del juego.
  *
@@ -114,4 +116,9 @@ public class FValidacion extends FrameBase {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object o1) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -1,32 +1,47 @@
-
 package dominio;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Partida implements Serializable{
+public class Partida implements Serializable {
+
     private Jugador turno;
     private List<Jugador> jugadores;
     private Tablero tablero;
     private double montoJugador;
     private double montoApuesta;
     private List<Dado> dados;
+    private int totalJugadores;
+    private boolean activa;
 
-    public Partida(Jugador turno, List<Jugador> jugadores, Tablero tablero, double montoJugador, double montoApuesta, List<Dado> dados) {
+    public Partida(Jugador turno, Tablero tablero, double montoJugador, double montoApuesta, int totalJugadores) {
         this.turno = turno;
-        this.jugadores = jugadores;
         this.tablero = tablero;
         this.montoJugador = montoJugador;
         this.montoApuesta = montoApuesta;
-        this.dados = dados;
+        this.totalJugadores = totalJugadores;
+        this.dados = new ArrayList<>();
+        this.jugadores = new ArrayList<>();
+        this.jugadores.add(turno);
+        this.activa = true;
     }
 
-    public Partida(Jugador turno, List<Jugador> jugadores, Tablero tablero, double montoJugador, double montoApuesta) {
-        this.turno = turno;
-        this.jugadores = jugadores;
-        this.tablero = tablero;
-        this.montoJugador = montoJugador;
-        this.montoApuesta = montoApuesta;
+    public boolean isActiva() {
+        return activa;
+    }
+
+    public void setActiva(boolean activa) {
+        this.activa = activa;
+    }
+
+    public int getTotalJugadores() {
+        return totalJugadores;
+    }
+
+    public void setTotalJugadores(int totalJugadores) {
+        this.totalJugadores = totalJugadores;
     }
 
     public Jugador getTurno() {
@@ -81,7 +96,5 @@ public class Partida implements Serializable{
     public String toString() {
         return "Partida{" + "turno=" + turno + ", jugadores=" + jugadores + ", tablero=" + tablero + ", montoJugador=" + montoJugador + ", montoApuesta=" + montoApuesta + ", dados=" + dados + '}';
     }
-    
-    
-    
+
 }

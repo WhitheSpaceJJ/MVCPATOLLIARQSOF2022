@@ -1,8 +1,10 @@
 package presentacion.vista;
 
+import clientePatolli.Cliente;
 import control.CJugador;
 import control.CPartida;
 import control.ControlBase;
+import java.net.UnknownHostException;
 import javax.swing.JOptionPane;
 import modelo.MJugador;
 import modelo.MPartida;
@@ -20,6 +22,12 @@ public class FInicio extends javax.swing.JFrame {
      */
     public FInicio() {
         initComponents();
+        /*
+        Al ser un server el que debe de ejecutarse o levantarse primero, si este ya esta corriendo,
+        y alguien quiere unirse o crear partida no podra realizar nada hasta que esta finalice.
+        
+        Atentamente Notas para el futuro.
+         */
     }
 
     /**
@@ -58,7 +66,7 @@ public class FInicio extends javax.swing.JFrame {
             }
         });
         getContentPane().add(entrar);
-        entrar.setBounds(20, 200, 100, 50);
+        entrar.setBounds(20, 200, 150, 50);
 
         crear.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         crear.setText("Crear");
@@ -68,7 +76,7 @@ public class FInicio extends javax.swing.JFrame {
             }
         });
         getContentPane().add(crear);
-        crear.setBounds(450, 210, 100, 50);
+        crear.setBounds(410, 210, 160, 50);
 
         jPanel1.setBackground(new java.awt.Color(102, 204, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -85,31 +93,28 @@ public class FInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
-        //Verificar que el servidor se haya levantado antes de ejecutar la siguient linea con el fin de 
-        //crear la instancia del objeto que manejara la conexion del jugador con el servidor
         this.mostrarPantallaCrear();
     }//GEN-LAST:event_crearActionPerformed
 //Mostrar pantalla de creacion de partida
 
     public void mostrarPantallaCrear() {
+        this.dispose();
         ModeloBase modeloPartida = new MPartida();
         ControlBase controlPartida = new CPartida();
         controlPartida.establecerModelo(modeloPartida);
         FrameBase fCrearPartida = new FCrearPartida();
+        modeloPartida.addObserver(fCrearPartida);
         fCrearPartida.establecerControl(controlPartida);
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                fCrearPartida.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            fCrearPartida.setVisible(true);
         });
+
     }
 
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
         this.mostrarPantallaUnirse();
     }//GEN-LAST:event_entrarActionPerformed
-
 
 //
 //    //Metodo que valida si una partida a sido establecida o creada.
@@ -128,23 +133,21 @@ public class FInicio extends javax.swing.JFrame {
 //
 //    }
 //Metodo que muestra mensaje de error. 
-
     public void mostrarMensajeError(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
     }
 
     //Metodo que muestra la pantalla de unirse.
     public void mostrarPantallaUnirse() {
+        this.dispose();
         ModeloBase modeloJugador = new MJugador();
         ControlBase controlJugador = new CJugador();
         controlJugador.establecerModelo(modeloJugador);
         FrameBase fUnirse = new FUnirse();
         fUnirse.establecerControl(controlJugador);
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                fUnirse.setVisible(true);
-            }
+        modeloJugador.addObserver(fUnirse);
+        java.awt.EventQueue.invokeLater(() -> {
+            fUnirse.setVisible(true);
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

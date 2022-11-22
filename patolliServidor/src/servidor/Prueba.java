@@ -25,8 +25,12 @@ public class Prueba {
             ModeloServidor modeloServidor = new ModeloServidor();
             ControlServidor controlServidor = new ControlServidor(modeloServidor);
             Servidor servidor = new Servidor(controlServidor, 80);
-            Thread servidorPrincipal = new Thread(servidor);
-            servidorPrincipal.start();
+            modeloServidor.addObserver(servidor);
+            servidor.crear();
+            servidor.esperar();
+            servidor.start();
+//            Thread servidorPrincipal = new Thread(servidor);
+//            servidorPrincipal.start();
         } catch (Exception e) {
             System.out.println("Error; " + e.getMessage());
         }

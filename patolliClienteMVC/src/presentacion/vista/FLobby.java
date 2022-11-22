@@ -1,6 +1,7 @@
 
 package presentacion.vista;
 
+import java.util.Observable;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,18 +15,10 @@ public class FLobby extends FrameBase {
     /**
      * Creates new form FLobbyHost
      */
-    private FLobby() {
+    public FLobby() {
         initComponents();
     }
 
-    private static FLobby instanceFLobby;
-
-    public static FLobby getFLobby() {
-        if (instanceFLobby == null) {
-            instanceFLobby = new FLobby();
-        }
-        return instanceFLobby;
-    }
 
 //     
     /**
@@ -208,7 +201,9 @@ public class FLobby extends FrameBase {
 //        }
 
     }//GEN-LAST:event_jButtonInicarActionPerformed
-
+    public void apagarBoton(){
+    this.jButtonInicar.setEnabled(false);
+    }
     public void mostrarMensajeError(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
     }
@@ -288,4 +283,9 @@ public class FLobby extends FrameBase {
     private javax.swing.JLabel ljugador1;
     private javax.swing.JLabel tamano;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object o1) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

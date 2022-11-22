@@ -10,7 +10,7 @@ import java.util.Objects;
  *
  * @author Equipo1 1
  */
-public class Jugador implements Serializable{
+public class Jugador implements Serializable {
 //Nombre color
 
     private String nombre;
@@ -24,11 +24,23 @@ public class Jugador implements Serializable{
 //Constructores
 
     public Jugador() {
+        this.fichas = new ArrayList<>();
+        this.fichasAgregar();
+    }
+
+    public void fichasAgregar() {
+         this.fichas.add(new Ficha(0, new Jugador(nombre, color)));
+         this.fichas.add(new Ficha(1, new Jugador(nombre, color)));
+         this.fichas.add(new Ficha(2, new Jugador(nombre, color)));
+         this.fichas.add(new Ficha(3, new Jugador(nombre, color)));
+         this.fichas.add(new Ficha(4, new Jugador(nombre, color)));
+         this.fichas.add(new Ficha(5, new Jugador(nombre, color)));
     }
 
     public Jugador(String nombre, String color) {
         this.nombre = nombre;
         this.color = color;
+        this.fichas = new ArrayList<>();
     }
 
 //Metodos get y set   
@@ -89,11 +101,8 @@ public class Jugador implements Serializable{
         }
         return Objects.equals(this.color, other.color);
     }
-    
-    
-    
-//Metodo to string
 
+//Metodo to string
     @Override
     public String toString() {
         return "usuario{" + " nombre= " + nombre + ", color= " + color + '}';

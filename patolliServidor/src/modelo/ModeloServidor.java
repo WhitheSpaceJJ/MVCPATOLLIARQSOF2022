@@ -10,35 +10,37 @@ public class ModeloServidor extends Observable {
     //addObserver y notifyObervers
     private Partida partidaLocal;
 
+    public ModeloServidor() {
+    }
+
     public Partida getPartidaLocal() {
         return partidaLocal;
     }
-
-    public void setPartidaLocal(Partida partidaLocal) {
-        this.partidaLocal = partidaLocal;
-    }
+//
+//    public void setPartidaLocal(Partida partidaLocal) {
+//        this.partidaLocal = partidaLocal;
+//    }
 
     public void crearPartidaLocal(Partida partidaLocal) {
         this.partidaLocal = partidaLocal;
-        this.establecerCambiosNotificar();
+        this.setChanged();
+        this.notifyObservers("Creada");
     }
 
     public void actualizarTablero(Tablero tablero) {
         this.partidaLocal.setTablero(tablero);
-        this.establecerCambiosNotificar();
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void establecerTurno(Jugador jugador) {
         this.partidaLocal.setTurno(jugador);
-        this.establecerCambiosNotificar();
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void agregarJugador(Jugador jugador) {
         this.partidaLocal.getJugadores().add(jugador);
-        this.establecerCambiosNotificar();
-    }
-
-    public void establecerCambiosNotificar() {
         this.setChanged();
         this.notifyObservers();
     }

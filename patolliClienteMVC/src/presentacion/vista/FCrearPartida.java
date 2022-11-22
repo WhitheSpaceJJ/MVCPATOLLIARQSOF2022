@@ -1,17 +1,28 @@
-
 package presentacion.vista;
 
-
+import clientePatolli.Cliente;
+import control.CJugador;
+import control.CPartida;
+import control.ControlBase;
+import dominio.Dado;
+import dominio.Jugador;
+import dominio.Partida;
+import dominio.Tablero;
+import java.net.UnknownHostException;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Observable;
 import javax.swing.JOptionPane;
+import modelo.MJugador;
+import modelo.MPartida;
+import modelo.ModeloBase;
 
 /**
  * Frame de Creación de Partida.
  *
  * @author Equipo1
  */
-public class FCrearPartida extends FrameBase{
-
+public class FCrearPartida extends FrameBase {
 
     /**
      * Creates new form FCrearPartida
@@ -52,7 +63,7 @@ public class FCrearPartida extends FrameBase{
         jLabel10 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Creacion Partida");
         setMinimumSize(new java.awt.Dimension(629, 452));
         setResizable(false);
@@ -177,7 +188,7 @@ public class FCrearPartida extends FrameBase{
         tamanoTablero.setBounds(190, 50, 120, 30);
 
         jLabel7.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        jLabel7.setText("Esperando jugadores;");
+        jLabel7.setText("Total Jugadores");
         jPanel2.add(jLabel7);
         jLabel7.setBounds(0, 90, 180, 30);
 
@@ -205,6 +216,9 @@ public class FCrearPartida extends FrameBase{
 
     private void jButtonMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMenuActionPerformed
         this.dispose();
+        java.awt.EventQueue.invokeLater(() -> {
+            new FInicio().setVisible(true);
+        });
     }//GEN-LAST:event_jButtonMenuActionPerformed
 
     private void nombreJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreJugadorActionPerformed
@@ -218,15 +232,18 @@ public class FCrearPartida extends FrameBase{
 
 
     private void jButtonComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComenzarActionPerformed
-//        if (validarConfiguracion() == false) {
-//            int tamaño = Integer.valueOf(tamanoTablero.getSelectedItem().toString());
-//            int totalJugadores = Integer.valueOf(cantidadJugadores.getSelectedItem().toString());
-//            this.control.establecerJuego(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "" + Calendar.getInstance().get(Calendar.SECOND), totalJugadores, tamaño, Double.valueOf(this.montoApuesta.getText()), Double.valueOf(this.fondoJugador.getText()));
-////            this.control.agregarJugador(txtnomjugador.getText(), this.BoxColor.getSelectedItem().toString());
-//            Jugador jugador = new Jugador(nombreJugador.getText(), this.colorJugador.getSelectedItem().toString());
-//            this.control.agregarJugador(jugador);
-//            this.mostrarPantallaLobby();
-//        }
+        if (validarConfiguracion() == false) {
+
+            String color = colorJugador.getSelectedItem().toString();
+            int tamaño = Integer.valueOf(tamanoTablero.getSelectedItem().toString());
+            int totalJugadores = Integer.valueOf(cantidadJugadores.getSelectedItem().toString());
+            double montoApuestaD = Double.valueOf(this.montoApuesta.getText());
+            double montoJugadorD = Double.valueOf(this.fondoJugador.getText());
+            Tablero tablero = new Tablero(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "" + Calendar.getInstance().get(Calendar.SECOND), tamaño);
+            Partida partida = new Partida(new Jugador(this.nombreJugador.getText(), color), tablero, montoJugadorD, montoApuestaD, totalJugadores);
+            ((CPartida) this.control).preCreacion(partida);
+
+        }
     }//GEN-LAST:event_jButtonComenzarActionPerformed
 
     private void resetDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetDatosActionPerformed
@@ -262,36 +279,46 @@ public class FCrearPartida extends FrameBase{
 
 //Valida la configuracion de la creacion datos, nombre del jugador, montos,etc.
     public boolean validarConfiguracion() {
-        if (nombreJugador.getText().isEmpty()) {
-            this.mostrarMensajeErrorConfiguración("Establece el nombre del jugador");
+        if (this.nombreJugador.getText().isEmpty()) {
+            this.mostrarMensaje("Establece el nombre del jugador");
+            return true;
+        }
+
+        if (this.fondoJugador.getText().isEmpty()) {
+            this.mostrarMensaje("Necesita escribir el fondo por jugador");
+            return true;
+        }
+
+        if (this.montoApuesta.getText().isEmpty()) {
+            this.mostrarMensaje("Necesita escribir el monto de apuesta");
             return true;
         }
         Double m;
         try {
             m = Double.valueOf(this.fondoJugador.getText());
-        } catch (Exception e) {
-            this.mostrarMensajeErrorConfiguración("El monto de dinero contienen caracteres invalidos");
+        } catch (NumberFormatException e) {
+            this.mostrarMensaje("El monto de dinero contienen caracteres invalidos");
             return true;
         }
 
         if (m > 2000) {
-            this.mostrarMensajeErrorConfiguración("Por el momentto el monto de dinero debe de ser menor a 2000");
+            this.mostrarMensaje("Por el momentto el monto de dinero debe de ser menor a 2000");
             return true;
         } else if (m < 1000) {
-            this.mostrarMensajeErrorConfiguración("Por el momentto el monto de dinero debe de ser mayor a 1000");
+            this.mostrarMensaje("Por el momentto el monto de dinero debe de ser mayor a 1000");
             return true;
         } else {
             Double a;
             try {
                 a = Double.valueOf(this.montoApuesta.getText());
-            } catch (Exception e) {
-                this.mostrarMensajeErrorConfiguración("El monto de apuesta contienen caracteres invalidos");
+            } catch (NumberFormatException e) {
+                this.mostrarMensaje("El monto de apuesta contienen caracteres invalidos");
                 return true;
             }
 
             double diezP = m * 0.1;
             if (a > diezP) {
-                this.mostrarMensajeErrorConfiguración("Para un buen juego el monto por apuesta debe de ser menor a " + diezP);
+                this.mostrarMensaje("Para un buen juego el monto por apuesta debe de ser menor a " + diezP);
                 return true;
             }
         }
@@ -299,18 +326,43 @@ public class FCrearPartida extends FrameBase{
     }
 //mostrar mensaje de error 
 
-    public void mostrarMensajeErrorConfiguración(String mensaje) {
+    public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
     }
 //Muestra la pantalla de lobby
 
-    public void mostrarPantallaLobby() {
-        FLobby lobby = FLobby.getFLobby();
+    public void mostrarPantallaLobby(FLobby fLobby) {
         java.awt.EventQueue.invokeLater(() -> {
-            lobby.setVisible(true);
-            lobby.actualizaTablero();
+            fLobby.setVisible(true);
         });
-        setVisible(false);
+    }
+
+    @Override
+    public void update(Observable o, Object o1) {
+        Jugador jugador = ((MPartida) o).getPartida().getTurno();
+
+        try {
+            Cliente cliente = new Cliente();
+            cliente.setJugador(jugador);
+            boolean conexion = cliente.establecerCreacionPartida(((MPartida) o).getPartida());
+            if (conexion) {
+                this.mostrarMensaje("Se ha establecido la conexion correctamente");
+                //Validar que existan datos de la partida
+
+                ModeloBase modeloPartida = (MPartida) o;
+                ControlBase controlJugador = new CJugador();
+                controlJugador.establecerModelo(modeloPartida);
+                controlJugador.establecerCliente(cliente);
+                FrameBase fLobby = new FLobby();
+                fLobby.establecerControl(controlJugador);
+                modeloPartida.addObserver(fLobby);
+                this.mostrarPantallaLobby((FLobby) fLobby);
+            } else {
+                this.mostrarMensaje("El servidor no se ha levantado correctamente.");
+            }
+        } catch (UnknownHostException e) {
+            System.out.println("Error; " + e.getMessage());
+        }
 
     }
 }

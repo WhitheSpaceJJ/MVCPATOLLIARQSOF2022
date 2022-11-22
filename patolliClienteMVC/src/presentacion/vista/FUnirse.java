@@ -1,8 +1,14 @@
 package presentacion.vista;
 
+import clientePatolli.Cliente;
 import control.CJugador;
+import control.CPartida;
 import control.ControlBase;
+import dominio.Jugador;
+import java.net.UnknownHostException;
+import java.util.Observable;
 import javax.swing.JOptionPane;
+import modelo.MJugador;
 import modelo.MPartida;
 import modelo.ModeloBase;
 
@@ -40,7 +46,8 @@ public class FUnirse extends FrameBase {
         jButtonUnirse = new javax.swing.JButton();
         txtnomjugador = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Unirse a Partida");
         setMinimumSize(new java.awt.Dimension(550, 300));
         setResizable(false);
 
@@ -144,10 +151,14 @@ public class FUnirse extends FrameBase {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMenuActionPerformed
         this.dispose();
+        java.awt.EventQueue.invokeLater(() -> {
+            new FInicio().setVisible(true);
+        });
     }//GEN-LAST:event_jButtonMenuActionPerformed
 
     private void jButtonUnirseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUnirseActionPerformed
@@ -157,27 +168,42 @@ public class FUnirse extends FrameBase {
 //            this.control.agregarJugador(jugador);
 //            this.mostrarPantallaLobby();
 //        }
+        if (!this.validarCampos()) {
+            String color = BoxColor.getSelectedItem().toString();
+            ((CJugador) this.control).preUnion(new Jugador(this.txtnomjugador.getText(), color));
+        }
 
         //Verificar que el servidor se haya levantado antes de ejecutar la siguient linea con el fin de 
         //crear la instancia del objeto que manejara la conexion del jugador con el servidor  y ademas
         // que la partida contenga datos.
-        ModeloBase modeloPartida = new MPartida();
-        ControlBase controlJugador = new CJugador();
-        controlJugador.establecerModelo(modeloPartida);
-        FrameBase fUnirse = new FUnirse();
-        fUnirse.establecerControl(controlJugador);
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                fUnirse.setVisible(true);
-            }
-        });
+//        boolean creacion = false;
+//        Cliente jugadorConexion = null;
+//        try {
+//            jugadorConexion = new Cliente();
+//            creacion = jugadorConexion.establecerConexion();
+//        } catch (UnknownHostException e) {
+//        }
+//        if (!creacion) {
+//            this.mostrarMensajeError("No se ha creado la partida");
+//        } else {
+//
+//            ModeloBase modeloPartida = new MPartida();
+//            ControlBase controlJugador = new CJugador();
+//            controlJugador.establecerModelo(modeloPartida);
+//            FrameBase fUnirse = new FUnirse();
+//            fUnirse.establecerControl(controlJugador);
+//            java.awt.EventQueue.invokeLater(new Runnable() {
+//                @Override
+//                public void run() {
+//                    fUnirse.setVisible(true);
+//                }
+//            });
+//        }
     }//GEN-LAST:event_jButtonUnirseActionPerformed
 
     /**
      * @param args the command line arguments
      */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> BoxColor;
     private javax.swing.JButton jButtonMenu;
@@ -191,31 +217,54 @@ public class FUnirse extends FrameBase {
     private javax.swing.JTextField txtnomjugador;
     // End of variables declaration//GEN-END:variables
 
-    //Metodo que muestra mensaje de error
-    public void mostrarMensajeError(String mensaje) {
+    //Metodo que muestra mensaje 
+    public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
     }
 //Metodo que muestra la pantallla de llobby
 
-    public void mostrarPantallaLobby() {
-        FLobby lobby = FLobby.getFLobby();
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                lobby.setVisible(true);
-                lobby.actualizaTablero();
-            }
+    public void mostrarPantallaLobby(FLobby fLobby) {
+
+        java.awt.EventQueue.invokeLater(() -> {
+            fLobby.setVisible(true);
         });
-        setVisible(false);
     }
 
-//Metodo que valida la configuración  datos del jugador, si la partida tiene espacios, etc.
-    public boolean validarConfiguración() {
+    @Override
+    public void update(Observable o, Object o1) {
+        String a = (String) o1;
+        this.mostrarMensaje(a);
+        Jugador jugador = ((MJugador) o).getJugador();
+        boolean conexion = false;
+        try {
+            Cliente cliente = new Cliente();
+            cliente.setJugador(jugador);
+            conexion = cliente.unirsePartida(jugador);
+        } catch (UnknownHostException e) {
+            System.out.println("Error; " + e.getMessage());
+        }
+        if (conexion) {
+            this.mostrarMensaje("Se ha establecido la conexion correctamente");
+            //Validar que existan datos de la partida
 
-//        if (this.txtnomjugador.getText().isEmpty()) {
-//            this.mostrarMensajeError("Establece el nombre del jugador");
-//            return true;
-//        }
+            ModeloBase modeloPartida = new MPartida();
+            ControlBase controlPartida = ((CJugador) this.control);
+            controlPartida.establecerModelo(modeloPartida);
+            FrameBase fLobby = new FLobby();
+            fLobby.establecerControl(controlPartida);
+            ((FLobby) fLobby).apagarBoton();
+            this.mostrarPantallaLobby((FLobby) fLobby);
+        } else {
+            this.mostrarMensaje("El servidor no se ha levantado correctamente.");
+        }
+    }
+//Metodo que valida la configuración  datos del jugador, si la partida tiene espacios, etc.
+
+    public boolean validarCampos() {
+        if (this.txtnomjugador.getText().isEmpty()) {
+            this.mostrarMensaje("Establece el nombre del jugador, este no debe de estar vacio");
+            return true;
+        }
 //        if (this.control.validarJugadores()) {
 //            this.mostrarMensajeError("Ya no hay espacios para la partida actual.Espera a que termine.");
 //            return true;
@@ -228,7 +277,7 @@ public class FUnirse extends FrameBase {
 //            this.mostrarMensajeError("Color ya ocupado");
 //            return true;
 //        }
-//
+
         return false;
     }
 
