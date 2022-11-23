@@ -23,10 +23,11 @@ public class CJugador extends ControlBase {
     }
 
     public void preUnion(Jugador jugador) {
-        ((MJugador) this.modelo).preUnion(jugador);
+        if ((this.cliente.unirsePartida(jugador))) {
+            ((MJugador) this.modelo).preUnion(jugador);
+        }
     }
 
 //    public void lanzarDados() {
 //    }
-
 }

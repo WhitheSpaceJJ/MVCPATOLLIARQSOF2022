@@ -232,31 +232,16 @@ public class FUnirse extends FrameBase {
 
     @Override
     public void update(Observable o, Object o1) {
-        String a = (String) o1;
-        this.mostrarMensaje(a);
         Jugador jugador = ((MJugador) o).getJugador();
-        boolean conexion = false;
-        try {
-            Cliente cliente = new Cliente();
-            cliente.setJugador(jugador);
-            conexion = cliente.unirsePartida(jugador);
-        } catch (UnknownHostException e) {
-            System.out.println("Error; " + e.getMessage());
-        }
-        if (conexion) {
-            this.mostrarMensaje("Se ha establecido la conexion correctamente");
-            //Validar que existan datos de la partida
-
-            ModeloBase modeloPartida = new MPartida();
-            ControlBase controlPartida = ((CJugador) this.control);
-            controlPartida.establecerModelo(modeloPartida);
-            FrameBase fLobby = new FLobby();
-            fLobby.establecerControl(controlPartida);
-            ((FLobby) fLobby).apagarBoton();
-            this.mostrarPantallaLobby((FLobby) fLobby);
-        } else {
-            this.mostrarMensaje("El servidor no se ha levantado correctamente.");
-        }
+        JOptionPane.showMessageDialog(this, "Se ha unido a una partida; Nombre Escogigo=" + jugador.getNombre() + " Color; " + jugador.getColor());
+//            MostrarLobby
+//            ModeloBase modeloPartida = new MPartida();
+//            ControlBase controlPartida = ((CJugador) this.control);
+//            controlPartida.establecerModelo(modeloPartida);
+//            FrameBase fLobby = new FLobby();
+//            fLobby.establecerControl(controlPartida);
+//            ((FLobby) fLobby).apagarBoton();
+//            this.mostrarPantallaLobby((FLobby) fLobby);
     }
 //Metodo que valida la configuración  datos del jugador, si la partida tiene espacios, etc.
 

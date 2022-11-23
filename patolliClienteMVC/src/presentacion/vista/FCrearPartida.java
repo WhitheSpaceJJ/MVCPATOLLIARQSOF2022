@@ -339,30 +339,18 @@ public class FCrearPartida extends FrameBase {
 
     @Override
     public void update(Observable o, Object o1) {
-        Jugador jugador = ((MPartida) o).getPartida().getTurno();
-
-        try {
-            Cliente cliente = new Cliente();
-            cliente.setJugador(jugador);
-            boolean conexion = cliente.establecerCreacionPartida(((MPartida) o).getPartida());
-            if (conexion) {
-                this.mostrarMensaje("Se ha establecido la conexion correctamente");
-                //Validar que existan datos de la partida
-
-                ModeloBase modeloPartida = (MPartida) o;
-                ControlBase controlJugador = new CJugador();
-                controlJugador.establecerModelo(modeloPartida);
-                controlJugador.establecerCliente(cliente);
-                FrameBase fLobby = new FLobby();
-                fLobby.establecerControl(controlJugador);
-                modeloPartida.addObserver(fLobby);
-                this.mostrarPantallaLobby((FLobby) fLobby);
-            } else {
-                this.mostrarMensaje("El servidor no se ha levantado correctamente.");
-            }
-        } catch (UnknownHostException e) {
-            System.out.println("Error; " + e.getMessage());
-        }
+        Partida partida = ((MPartida) o).getPartida();
+        JOptionPane.showMessageDialog(this, "Usted ha creado una partida; Nombre Escogigo=" + partida.getTurno().getNombre() + " Color; " + partida.getTurno().getColor());
+//                 Mostrar Lobby
+//                ModeloBase modeloPartida = (MPartida) o;
+//                ControlBase controlJugador = new CJugador();
+//                controlJugador.establecerModelo(modeloPartida);
+//                controlJugador.establecerCliente(cliente);
+//                FrameBase fLobby = new FLobby();
+//                fLobby.establecerControl(controlJugador);
+//                modeloPartida.addObserver(fLobby);
+//                this.mostrarPantallaLobby((FLobby) fLobby);
+//
 
     }
 }

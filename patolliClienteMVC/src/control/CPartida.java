@@ -19,7 +19,9 @@ public class CPartida extends ControlBase {
     }
 
     public void preCreacion(Partida partida) {
-        ((MPartida)this.modelo).preCreacion(partida);
+        if (this.cliente.establecerCreacionPartida(partida)) {
+            ((MPartida) this.modelo).preCreacion(partida);
+        }
     }
 //
 //    public void crearPartida(Partida partida) {

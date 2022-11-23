@@ -101,7 +101,9 @@ public class FInicio extends javax.swing.JFrame {
         this.dispose();
         ModeloBase modeloPartida = new MPartida();
         ControlBase controlPartida = new CPartida();
+                Cliente cliente=new Cliente();
         controlPartida.establecerModelo(modeloPartida);
+        controlPartida.establecerCliente(cliente);
         FrameBase fCrearPartida = new FCrearPartida();
         modeloPartida.addObserver(fCrearPartida);
         fCrearPartida.establecerControl(controlPartida);
@@ -142,7 +144,9 @@ public class FInicio extends javax.swing.JFrame {
         this.dispose();
         ModeloBase modeloJugador = new MJugador();
         ControlBase controlJugador = new CJugador();
+        Cliente cliente=new Cliente();
         controlJugador.establecerModelo(modeloJugador);
+        controlJugador.establecerCliente(cliente);
         FrameBase fUnirse = new FUnirse();
         fUnirse.establecerControl(controlJugador);
         modeloJugador.addObserver(fUnirse);

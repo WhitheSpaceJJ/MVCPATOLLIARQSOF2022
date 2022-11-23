@@ -3,38 +3,23 @@ package modelo;
 import dominio.Jugador;
 import dominio.Partida;
 import dominio.Tablero;
+import java.util.List;
 import java.util.Observable;
+import jugador.JugadorLocal;
 
-public class ModeloServidor extends Observable {
+public class PartidaServidor extends Observable {
 
-    //addObserver y notifyObervers
     private Partida partidaLocal;
 
-    public ModeloServidor() {
+    public PartidaServidor() {
     }
 
     public Partida getPartidaLocal() {
         return partidaLocal;
     }
-//
-//    public void setPartidaLocal(Partida partidaLocal) {
-//        this.partidaLocal = partidaLocal;
-//    }
 
-    public void crearPartidaLocal(Partida partidaLocal) {
-        this.partidaLocal = partidaLocal;
-        this.setChanged();
-        this.notifyObservers("Creada");
-    }
-
-    public void actualizarTablero(Tablero tablero) {
-        this.partidaLocal.setTablero(tablero);
-        this.setChanged();
-        this.notifyObservers();
-    }
-
-    public void establecerTurno(Jugador jugador) {
-        this.partidaLocal.setTurno(jugador);
+    public void establecerPartida(Partida partida) {
+        this.partidaLocal = partida;
         this.setChanged();
         this.notifyObservers();
     }

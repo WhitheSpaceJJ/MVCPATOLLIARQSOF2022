@@ -3,8 +3,10 @@ package modelo;
 import dominio.Jugador;
 import dominio.Partida;
 import dominio.Tablero;
+import java.util.Observable;
+import java.util.Observer;
 
-public class MPartida extends ModeloBase {
+public class MPartida extends ModeloBase implements Observer{
 
     private Partida partida;
     public void preCreacion(Partida partida) {
@@ -33,6 +35,10 @@ public class MPartida extends ModeloBase {
 
     public Partida getPartida() {
         return partida;
+    }
+
+    @Override
+    public void update(Observable o, Object o1) {
     }
 
 }

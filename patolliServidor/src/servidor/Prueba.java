@@ -6,9 +6,9 @@
  */
 package servidor;
 
-import control.ControlServidor;
+import control.ProtocoloPartida;
 import java.net.InetAddress;
-import modelo.ModeloServidor;
+import modelo.PartidaServidor;
 
 /**
  *
@@ -22,12 +22,12 @@ public class Prueba {
     public static void main(String[] args) {
         // TODO code application logic here
         try {
-            ModeloServidor modeloServidor = new ModeloServidor();
-            ControlServidor controlServidor = new ControlServidor(modeloServidor);
+            PartidaServidor modeloServidor = new PartidaServidor();
+            ProtocoloPartida controlServidor = new ProtocoloPartida(modeloServidor);
             Servidor servidor = new Servidor(controlServidor, 80);
             modeloServidor.addObserver(servidor);
-            servidor.crear();
-            servidor.esperar();
+//            servidor.crear();
+//            servidor.esperar();
             servidor.start();
 //            Thread servidorPrincipal = new Thread(servidor);
 //            servidorPrincipal.start();

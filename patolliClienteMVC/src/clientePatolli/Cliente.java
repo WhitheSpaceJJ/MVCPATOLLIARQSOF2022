@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jugador.JugadorPartida;
+import jugador.JugadorLocal;
 
 public class Cliente extends Thread {
 
@@ -24,11 +24,14 @@ public class Cliente extends Thread {
     private Jugador jugador;
     private boolean conexionEstablecida;
 
-    public Cliente() throws UnknownHostException {
+    public Cliente() {
         this.conexionEstablecida = true;
-        InetAddress ip = InetAddress.getLocalHost();
-        String hostLocal = ip.getHostAddress();
-        this.host = hostLocal;
+        try {
+            InetAddress ip = InetAddress.getLocalHost();
+            String hostLocal = ip.getHostAddress();
+            this.host = hostLocal;
+        } catch (UnknownHostException e) {
+        }
         this.puerto = 80;
     }
 
@@ -84,11 +87,7 @@ public class Cliente extends Thread {
 
     @Override
     public void run() {
-//        if (unirsePartida(jugador)) {
-//            while (conexionEstablecida) {
-//                escuchando();
-//            }
-//        }
+        System.out.println("Cliente esperando");
         while (conexionEstablecida) {
             try {
                 this.input = new ObjectInputStream(socket.getInputStream());
@@ -105,9 +104,37 @@ public class Cliente extends Thread {
     public void procesarPartida(Partida partida) {
         if (partida.isActiva()) {
             //Actualizar respectivos datos
-            
         } else {
             this.conexionEstablecida = false;
+        }
+    }
+
+    public void enviarDatos() {
+    }
+
+    public void escuchando() {
+    }
+
+    public boolean establecerCreacionPartida(Partida partida) {
+        try {
+            this.socket = new Socket(host, puerto);
+            System.out.println("Se ha establecido la conexion correctamente");
+        } catch (IOException e) {
+            System.out.println("El servidor no se ha levantado correctamente.");
+            return false;
+        }
+        try {
+//            this.socket = new Socket(host, puerto);
+//            System.out.println("Se ha establecido la conexion correctamente");
+            this.output = new ObjectOutputStream(socket.getOutputStream());
+            this.output.writeObject(partida);
+            System.out.println("Se ha creado la partida satisfactoriamente");
+            this.conexionEstablecida = true;
+            this.start();
+            return true;
+        } catch (IOException e) {
+            System.out.println("No se ha enviado el jugador.");
+            return false;
         }
     }
 
@@ -133,11 +160,12 @@ public class Cliente extends Thread {
             this.input = new ObjectInputStream(socket.getInputStream());
             Jugador jugadorPrueba = (Jugador) input.readObject();
             if (jugadorPrueba != null) {
-                            System.out.println("Ya existe un jugador con el mismo nombre y color.");
+                System.out.println("Ya existe un jugador con el mismo nombre y color.");
                 return false;
             } else {
                 this.jugador = jugador;
-                this.conexionEstablecida=true;
+                this.conexionEstablecida = true;
+                this.start();
                 return true;
             }
         } catch (IOException | ClassNotFoundException e) {
@@ -146,26 +174,49 @@ public class Cliente extends Thread {
 
     }
 
-    public boolean establecerCreacionPartida(Partida partida) {
-
-        try {
-            this.socket = new Socket(host, puerto);
-            System.out.println("Se ha establecido la conexion correctamente");
-            this.output = new ObjectOutputStream(socket.getOutputStream());
-            this.output.writeObject(partida);
-            System.out.println("Se ha creado la partida satisfactoriamente");
-                            this.conexionEstablecida=true;
-            return true;
-        } catch (IOException e) {
-            System.out.println("No se ha enviado el jugador.");
-            return false;
-        }
-//    
-    }
-
-    public void enviarDatos() {
-    }
-
-    public void escuchando() {
-    }
 }
+
+//
+//    public boolean unirsePartida(Jugador jugador) {
+//        //Estas verificaciones se realizaran  antes de realizar la conexion
+//
+//        try {
+//            this.output = new ObjectOutputStream(socket.getOutputStream());
+//            this.output.writeObject(jugador);
+//            System.out.println("Se ha enviado el jugador para validacion.");
+//        } catch (IOException e) {
+//            System.out.println("No se ha enviado el jugador.");
+//            return false;
+//        }
+//        //Con el fin de verificar la conexion si esta el mismo jugador
+//        try {
+//            this.input = new ObjectInputStream(socket.getInputStream());
+//            Jugador jugadorPrueba = (Jugador) input.readObject();
+//            if (jugadorPrueba != null) {
+//                System.out.println("Ya existe un jugador con el mismo nombre y color.");
+//                return false;
+//            } else {
+//                this.jugador = jugador;
+//                this.conexionEstablecida = true;
+//                return true;
+//            }
+//        } catch (IOException | ClassNotFoundException e) {
+//            return false;
+//        }
+//
+//    }
+//    public boolean establecerCreacionPartida(Partida partida) {
+//        try {
+////            this.socket = new Socket(host, puerto);
+////            System.out.println("Se ha establecido la conexion correctamente");
+//            this.output = new ObjectOutputStream(socket.getOutputStream());
+//            this.output.writeObject(partida);
+//            System.out.println("Se ha creado la partida satisfactoriamente");
+////            this.conexionEstablecida = true;
+//            return true;
+//        } catch (IOException e) {
+//            System.out.println("No se ha enviado el jugador.");
+//            return false;
+//        }
+//    }
+
