@@ -233,7 +233,7 @@ public class FCrearPartida extends FrameBase {
 
     private void jButtonComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComenzarActionPerformed
         if (validarConfiguracion() == false) {
-
+            
             String color = colorJugador.getSelectedItem().toString();
             int tamaño = Integer.valueOf(tamanoTablero.getSelectedItem().toString());
             int totalJugadores = Integer.valueOf(cantidadJugadores.getSelectedItem().toString());
@@ -242,7 +242,7 @@ public class FCrearPartida extends FrameBase {
             Tablero tablero = new Tablero(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "" + Calendar.getInstance().get(Calendar.SECOND), tamaño);
             Partida partida = new Partida(new Jugador(this.nombreJugador.getText(), color), tablero, montoJugadorD, montoApuestaD, totalJugadores);
             ((CPartida) this.control).preCreacion(partida);
-
+            
         }
     }//GEN-LAST:event_jButtonComenzarActionPerformed
 
@@ -283,12 +283,12 @@ public class FCrearPartida extends FrameBase {
             this.mostrarMensaje("Establece el nombre del jugador");
             return true;
         }
-
+        
         if (this.fondoJugador.getText().isEmpty()) {
             this.mostrarMensaje("Necesita escribir el fondo por jugador");
             return true;
         }
-
+        
         if (this.montoApuesta.getText().isEmpty()) {
             this.mostrarMensaje("Necesita escribir el monto de apuesta");
             return true;
@@ -300,7 +300,7 @@ public class FCrearPartida extends FrameBase {
             this.mostrarMensaje("El monto de dinero contienen caracteres invalidos");
             return true;
         }
-
+        
         if (m > 2000) {
             this.mostrarMensaje("Por el momentto el monto de dinero debe de ser menor a 2000");
             return true;
@@ -315,7 +315,7 @@ public class FCrearPartida extends FrameBase {
                 this.mostrarMensaje("El monto de apuesta contienen caracteres invalidos");
                 return true;
             }
-
+            
             double diezP = m * 0.1;
             if (a > diezP) {
                 this.mostrarMensaje("Para un buen juego el monto por apuesta debe de ser menor a " + diezP);
@@ -336,20 +336,20 @@ public class FCrearPartida extends FrameBase {
             fLobby.setVisible(true);
         });
     }
-
+    
     @Override
     public void update(Observable o, Object o1) {
         Partida partida = ((MPartida) o).getPartida();
         JOptionPane.showMessageDialog(this, "Usted ha creado una partida; Nombre Escogigo=" + partida.getTurno().getNombre() + " Color; " + partida.getTurno().getColor());
-//                 Mostrar Lobby
-//                ModeloBase modeloPartida = (MPartida) o;
-//                ControlBase controlJugador = new CJugador();
-//                controlJugador.establecerModelo(modeloPartida);
-//                controlJugador.establecerCliente(cliente);
-//                FrameBase fLobby = new FLobby();
-//                fLobby.establecerControl(controlJugador);
-//                modeloPartida.addObserver(fLobby);
-//                this.mostrarPantallaLobby((FLobby) fLobby);
+//        ModeloBase modeloPartida = (MPartida) o;
+//        ControlBase controlJugador = new CJugador();
+//        controlJugador.establecerModelo(modeloPartida);
+//        controlJugador.establecerCliente(cliente);
+        FrameBase fLobby = new FLobby();
+        ((FLobby) fLobby).actualizarLobby(partida.getJugadores());
+//        fLobby.establecerControl(controlJugador);
+//        modeloPartida.addObserver(fLobby);
+        this.mostrarPantallaLobby((FLobby) fLobby);
 //
 
     }

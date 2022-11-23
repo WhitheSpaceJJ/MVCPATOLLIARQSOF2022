@@ -14,8 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jugador.JugadorLocal;
 
-public class Cliente extends Thread {
-
+public class Cliente extends Observable implements Runnable {
+    
     private String host;
     private Socket socket;
     private int puerto;
@@ -23,7 +23,7 @@ public class Cliente extends Thread {
     private ObjectOutputStream output;
     private Jugador jugador;
     private boolean conexionEstablecida;
-
+    
     public Cliente() {
         this.conexionEstablecida = true;
         try {
@@ -34,13 +34,13 @@ public class Cliente extends Thread {
         }
         this.puerto = 80;
     }
-
+    
     public Cliente(String host, int puerto) {
         this.conexionEstablecida = true;
         this.host = host;
         this.puerto = puerto;
     }
-
+    
     public Cliente(String host, Socket socket, int puerto, ObjectInputStream input) {
         this.conexionEstablecida = true;
         this.host = host;
@@ -48,43 +48,43 @@ public class Cliente extends Thread {
         this.puerto = puerto;
         this.input = input;
     }
-
+    
     public String getHost() {
         return host;
     }
-
+    
     public void setHost(String host) {
         this.host = host;
     }
-
+    
     public Socket getSocket() {
         return socket;
     }
-
+    
     public void setSocket(Socket socket) {
         this.socket = socket;
     }
-
+    
     public int getPuerto() {
         return puerto;
     }
-
+    
     public void setPuerto(int puerto) {
         this.puerto = puerto;
     }
-
+    
     public ObjectInputStream getInput() {
         return input;
     }
-
+    
     public void setInput(ObjectInputStream input) {
         this.input = input;
     }
-
+    
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
     }
-
+    
     @Override
     public void run() {
         System.out.println("Cliente esperando");
@@ -98,23 +98,25 @@ public class Cliente extends Thread {
             } catch (IOException | ClassNotFoundException e) {
             }
         }
-
+        
     }
-
+    
     public void procesarPartida(Partida partida) {
         if (partida.isActiva()) {
             //Actualizar respectivos datos
+            this.setChanged();
+            this.notifyObservers(partida);
         } else {
             this.conexionEstablecida = false;
         }
     }
-
+    
     public void enviarDatos() {
     }
-
+    
     public void escuchando() {
     }
-
+    
     public boolean establecerCreacionPartida(Partida partida) {
         try {
             this.socket = new Socket(host, puerto);
@@ -124,20 +126,18 @@ public class Cliente extends Thread {
             return false;
         }
         try {
-//            this.socket = new Socket(host, puerto);
-//            System.out.println("Se ha establecido la conexion correctamente");
             this.output = new ObjectOutputStream(socket.getOutputStream());
             this.output.writeObject(partida);
             System.out.println("Se ha creado la partida satisfactoriamente");
             this.conexionEstablecida = true;
-            this.start();
+//            this.run();
             return true;
         } catch (IOException e) {
             System.out.println("No se ha enviado el jugador.");
             return false;
         }
     }
-
+    
     public boolean unirsePartida(Jugador jugador) {
         //Estas verificaciones se realizaran  antes de realizar la conexion
         try {
@@ -158,22 +158,23 @@ public class Cliente extends Thread {
         //Con el fin de verificar la conexion si esta el mismo jugador
         try {
             this.input = new ObjectInputStream(socket.getInputStream());
+            Object o = input.readObject();
             Jugador jugadorPrueba = (Jugador) input.readObject();
             if (jugadorPrueba != null) {
-                System.out.println("Ya existe un jugador con el mismo nombre y color.");
+                System.out.println("Ya existe un jugador con el mismo nombre y color, o partida no ha sido creada+");
                 return false;
             } else {
                 this.jugador = jugador;
                 this.conexionEstablecida = true;
-                this.start();
+//                this.run();
                 return true;
             }
         } catch (IOException | ClassNotFoundException e) {
             return false;
         }
-
+        
     }
-
+    
 }
 
 //

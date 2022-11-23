@@ -38,6 +38,8 @@ public class ProtocoloPartida {
                 System.out.println("La partida ha sido creada");
                 jugadores.add(new JugadorLocal(jugador, sc));
             } else {
+                ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());
+                output.writeObject((Jugador) aux);
                 System.out.println("La partida debe de ser creada antes de unirse");
             }
         } catch (IOException | ClassNotFoundException e) {

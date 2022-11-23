@@ -6,15 +6,17 @@ import dominio.Tablero;
 import java.util.Observable;
 import java.util.Observer;
 
-public class MPartida extends ModeloBase implements Observer{
-
+public class MPartida extends ModeloBase implements Observer {
+    
     private Partida partida;
+
     public void preCreacion(Partida partida) {
-        this.partida=partida;
+        this.partida = partida;
         this.actualizarModelo();
     }
-    public void actualizarPartida(Partida partida){
-        this.partida=partida;
+
+    public void actualizarPartida(Partida partida) {
+        this.partida = partida;
         this.actualizarModelo();
     }
 //    public void crearPartida(Partida partida) {
@@ -36,9 +38,10 @@ public class MPartida extends ModeloBase implements Observer{
     public Partida getPartida() {
         return partida;
     }
-
+    
     @Override
     public void update(Observable o, Object o1) {
+        this.actualizarPartida((Partida) o1);
     }
-
+    
 }

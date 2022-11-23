@@ -1,8 +1,10 @@
-
 package presentacion.vista;
 
+import dominio.Jugador;
+import java.util.List;
 import java.util.Observable;
 import javax.swing.JOptionPane;
+import modelo.MPartida;
 
 /**
  * Frame para la espera de jugadores.
@@ -11,14 +13,12 @@ import javax.swing.JOptionPane;
  */
 public class FLobby extends FrameBase {
 
-
     /**
      * Creates new form FLobbyHost
      */
     public FLobby() {
         initComponents();
     }
-
 
 //     
     /**
@@ -201,61 +201,62 @@ public class FLobby extends FrameBase {
 //        }
 
     }//GEN-LAST:event_jButtonInicarActionPerformed
-    public void apagarBoton(){
-    this.jButtonInicar.setEnabled(false);
+    public void apagarBoton() {
+        this.jButtonInicar.setEnabled(false);
     }
+
     public void mostrarMensajeError(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
     }
-//Sctualiza lista de jugadores.
 
-    public void actualizaTablero() {
-//        int totalJugadores = this.control.getTablero().getJugadores().size();
-//        jPanelJugador1.setVisible(true);
-//        jPanelJugador2.setVisible(true);
-//        jPanelJugador3.setVisible(true);
-//        jPanelJugador4.setVisible(true);
+    @Override
+    public void update(Observable o, Object o1) {
+        List<Jugador> jugadores = ((MPartida) o1).getPartida().getJugadores();
+        this.actualizarLobby(jugadores);
+    }
+
+    public void actualizarLobby(List<Jugador> jugadores) {
+        int totalJugadores = jugadores.size();
+        if (totalJugadores == 1) {
+            Jugador jugador1 = jugadores.get(0);
+            ljugador1.setText(jugador1.getNombre());
+            lcolor1.setText(jugador1.getColor());
+        }
+        if (totalJugadores == 2) {
+            Jugador jugador1 = jugadores.get(0);
+            ljugador1.setText(jugador1.getNombre());
+            lcolor1.setText(jugador1.getColor());
+            Jugador jugador2 = jugadores.get(1);
+            Ljugador2.setText(jugador2.getNombre());
+            Lcolor2.setText(jugador2.getColor());
+        }
 //
-//        if (totalJugadores == 1) {
-//            Jugador jugador1 = this.control.getTablero().getJugadores().get(0);
-//            ljugador1.setText(jugador1.getNombre());
-//            lcolor1.setText(jugador1.getColor());
-//        }
-//        if (totalJugadores == 2) {
-//            Jugador jugador1 = this.control.getTablero().getJugadores().get(0);
-//            ljugador1.setText(jugador1.getNombre());
-//            lcolor1.setText(jugador1.getColor());
-//            Jugador jugador2 = this.control.getTablero().getJugadores().get(1);
-//            Ljugador2.setText(jugador2.getNombre());
-//            Lcolor2.setText(jugador2.getColor());
-//        }
+        if (totalJugadores == 3) {
+            Jugador jugador1 = jugadores.get(0);
+            ljugador1.setText(jugador1.getNombre());
+            lcolor1.setText(jugador1.getColor());
+            Jugador jugador2 = jugadores.get(1);
+            Ljugador2.setText(jugador2.getNombre());
+            Lcolor2.setText(jugador2.getColor());
+            Jugador jugador3 = jugadores.get(2);
+            Ljugador3.setText(jugador3.getNombre());
+            Lcolor3.setText(jugador3.getColor());
+        }
 //
-//        if (totalJugadores == 3) {
-//            Jugador jugador1 = this.control.getTablero().getJugadores().get(0);
-//            ljugador1.setText(jugador1.getNombre());
-//            lcolor1.setText(jugador1.getColor());
-//            Jugador jugador2 = this.control.getTablero().getJugadores().get(1);
-//            Ljugador2.setText(jugador2.getNombre());
-//            Lcolor2.setText(jugador2.getColor());
-//            Jugador jugador3 = this.control.getTablero().getJugadores().get(2);
-//            Ljugador2.setText(jugador3.getNombre());
-//            Lcolor2.setText(jugador3.getColor());
-//        }
-//
-//        if (totalJugadores == 4) {
-//            Jugador jugador1 = this.control.getTablero().getJugadores().get(0);
-//            ljugador1.setText(jugador1.getNombre());
-//            lcolor1.setText(jugador1.getColor());
-//            Jugador jugador2 = this.control.getTablero().getJugadores().get(1);
-//            Ljugador2.setText(jugador2.getNombre());
-//            Lcolor2.setText(jugador2.getColor());
-//            Jugador jugador3 = this.control.getTablero().getJugadores().get(2);
-//            Ljugador2.setText(jugador3.getNombre());
-//            Lcolor2.setText(jugador3.getColor());
-//            Jugador jugador4 = this.control.getTablero().getJugadores().get(3);
-//            Ljugador2.setText(jugador4.getNombre());
-//            Lcolor2.setText(jugador4.getColor());
-//        }
+        if (totalJugadores == 4) {
+            Jugador jugador1 = jugadores.get(0);
+            ljugador1.setText(jugador1.getNombre());
+            lcolor1.setText(jugador1.getColor());
+            Jugador jugador2 = jugadores.get(1);
+            Ljugador2.setText(jugador2.getNombre());
+            Lcolor2.setText(jugador2.getColor());
+            Jugador jugador3 = jugadores.get(2);
+            Ljugador3.setText(jugador3.getNombre());
+            Lcolor3.setText(jugador3.getColor());
+            Jugador jugador4 = jugadores.get(3);
+            Ljugador4.setText(jugador4.getNombre());
+            Lcolor4.setText(jugador4.getColor());
+        }
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -284,8 +285,4 @@ public class FLobby extends FrameBase {
     private javax.swing.JLabel tamano;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void update(Observable o, Object o1) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

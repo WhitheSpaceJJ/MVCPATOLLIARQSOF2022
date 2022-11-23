@@ -25,6 +25,8 @@ public class CJugador extends ControlBase {
     public void preUnion(Jugador jugador) {
         if ((this.cliente.unirsePartida(jugador))) {
             ((MJugador) this.modelo).preUnion(jugador);
+            Thread thradCliente=new Thread(this.cliente);
+            thradCliente.start();
         }
     }
 
