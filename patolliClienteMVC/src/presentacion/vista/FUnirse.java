@@ -5,8 +5,10 @@ import control.CJugador;
 import control.CPartida;
 import control.ControlBase;
 import dominio.Jugador;
+import dominio.Partida;
 import java.net.UnknownHostException;
 import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JOptionPane;
 import modelo.MJugador;
 import modelo.MPartida;
@@ -175,7 +177,7 @@ public class FUnirse extends FrameBase {
 
         if (!this.validarCampos()) {
             String color = BoxColor.getSelectedItem().toString();
-            ((CJugador) this.control).preUnion(new Jugador(this.txtnomjugador.getText(), color));
+            ((CJugador) this.control).unirsePartida(new Jugador(this.txtnomjugador.getText(), color));
         }
 
 
@@ -219,10 +221,12 @@ public class FUnirse extends FrameBase {
         this.dispose();
         Jugador jugador = ((MJugador) o).getJugador();
         JOptionPane.showMessageDialog(this, "Se ha unido a una partida; Nombre Escogigo=" + jugador.getNombre() + " Color; " + jugador.getColor());
-        ModeloBase modeloPartida = new MPartida();
+        ModeloBase modeloPartida = new MPartida(((Partida) o1));
         ((CJugador) this.control).establecerModelo(modeloPartida);
+        this.control.getCliente().addObserver((Observer) modeloPartida);
         FrameBase fLobby = new FLobby();
         fLobby.establecerControl(((CJugador) this.control));
+        modeloPartida.addObserver(fLobby);
         ((FLobby) fLobby).apagarBoton();
         this.mostrarPantallaLobby((FLobby) fLobby);
     }
@@ -233,19 +237,6 @@ public class FUnirse extends FrameBase {
             this.mostrarMensaje("Establece el nombre del jugador, este no debe de estar vacio");
             return true;
         }
-//        if (this.control.validarJugadores()) {
-//            this.mostrarMensajeError("Ya no hay espacios para la partida actual.Espera a que termine.");
-//            return true;
-//        }
-//        if (this.control.verificarNombre(this.txtnomjugador.getText())) {
-//            this.mostrarMensajeError("Nombre ya ocupado");
-//            return true;
-//        }
-//        if (this.control.verificarColor(this.BoxColor.getSelectedItem().toString())) {
-//            this.mostrarMensajeError("Color ya ocupado");
-//            return true;
-//        }
-
         return false;
     }
 

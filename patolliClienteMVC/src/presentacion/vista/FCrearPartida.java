@@ -341,12 +341,15 @@ public class FCrearPartida extends FrameBase {
         ModeloBase modeloPartida = (MPartida) o;
         ControlBase controlJugador = new CJugador();
         controlJugador.establecerModelo(modeloPartida);
-        this.control.getCliente().addObserver((Observer) (ModeloBase) modeloPartida);
+        this.control.getCliente().addObserver((Observer) modeloPartida);
         controlJugador.establecerCliente(this.control.getCliente());
-        FrameBase fLobby = new FLobby();
-        ((FLobby) fLobby).actualizarLobby(partida.getJugadores());
+        FrameBase fLobby = new FLobby(((MPartida) o).getPartida().getMontoJugador(),
+                ((MPartida) o).getPartida().getMontoApuesta(), ((MPartida) o).getPartida().getTablero().getTamano());
+        modeloPartida.deleteObserver(this);
+        fLobby.establecerControl(control);
+        modeloPartida.addObserver(fLobby);
+        ((FLobby) fLobby).actualizarLobby(((MPartida) o).getPartida().getJugadores());
         this.mostrarPantallaLobby((FLobby) fLobby);
-//
 
     }
 }

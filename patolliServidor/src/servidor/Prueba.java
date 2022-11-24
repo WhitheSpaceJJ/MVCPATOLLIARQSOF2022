@@ -26,11 +26,7 @@ public class Prueba {
             ProtocoloPartida controlServidor = new ProtocoloPartida(modeloServidor);
             Servidor servidor = new Servidor(controlServidor, 80);
             modeloServidor.addObserver(servidor);
-//            servidor.crear();
-//            servidor.esperar();
             servidor.start();
-//            Thread servidorPrincipal = new Thread(servidor);
-//            servidorPrincipal.start();
         } catch (Exception e) {
             System.out.println("Error; " + e.getMessage());
         }

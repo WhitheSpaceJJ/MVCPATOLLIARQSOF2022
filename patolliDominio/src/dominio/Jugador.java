@@ -29,12 +29,12 @@ public class Jugador implements Serializable {
     }
 
     public void fichasAgregar() {
-         this.fichas.add(new Ficha(0, new Jugador(nombre, color)));
-         this.fichas.add(new Ficha(1, new Jugador(nombre, color)));
-         this.fichas.add(new Ficha(2, new Jugador(nombre, color)));
-         this.fichas.add(new Ficha(3, new Jugador(nombre, color)));
-         this.fichas.add(new Ficha(4, new Jugador(nombre, color)));
-         this.fichas.add(new Ficha(5, new Jugador(nombre, color)));
+        this.fichas.add(new Ficha(0, new Jugador(nombre, color)));
+        this.fichas.add(new Ficha(1, new Jugador(nombre, color)));
+        this.fichas.add(new Ficha(2, new Jugador(nombre, color)));
+        this.fichas.add(new Ficha(3, new Jugador(nombre, color)));
+        this.fichas.add(new Ficha(4, new Jugador(nombre, color)));
+        this.fichas.add(new Ficha(5, new Jugador(nombre, color)));
     }
 
     public Jugador(String nombre, String color) {

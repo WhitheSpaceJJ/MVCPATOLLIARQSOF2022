@@ -30,12 +30,10 @@ public class Servidor extends Thread implements Observer {
     private ProtocoloPartida protocoloPartidaLocal;
     private int puerto;
     private int maximoPermitido;
-//este auxiliar es para escuhar las peticiones de conexiones
     private boolean escuchando1 = true;
 
     //este auxiliar es para escuhar si el juego aun esta activo
     private boolean escuchando2 = true;
-
     //Se inicializaran cuando se ejecute Run
     private ServerSocket servidor;
     private ObjectOutputStream output;
@@ -57,7 +55,11 @@ public class Servidor extends Thread implements Observer {
         if (maximoPermitido == 0) {
             this.maximoPermitido = ((PartidaServidor) o).getPartidaLocal().getTotalJugadores();
         } else {
-            notificarClientes(((PartidaServidor) o).getPartidaLocal());
+            if (o1 instanceof Integer) {
+//                if (((Integer) o1) > -1) {
+                notificarClientes(((PartidaServidor) o).getPartidaLocal(), ((Integer) o1));
+//                }
+            }
         }
     }
 
@@ -80,15 +82,14 @@ public class Servidor extends Thread implements Observer {
             while (true) {
                 sc = servidor.accept();
                 List<JugadorLocal> jugadoresEspera = this.protocoloPartidaLocal.procesandoEspera(sc, jugadores);
-//                if (jugadoresEspera.size() != this.jugadores.size()) {
-//                    this.jugadores = jugadoresEspera;
-//                } 
                 if (jugadoresEspera == null) {
                     System.out.println("Ya existe un jugador con los mismos datos");
                     sc.close();
-                }
-                if (jugadores.size() == maximoPermitido) {
-                    break;
+                } else {
+                    this.jugadores = jugadoresEspera;
+                    if (jugadoresEspera.size() == maximoPermitido) {
+                        break;
+                    }
                 }
             }
             System.out.println("El juego ha iniciado, ha alcanzado el maximo de jugadores");
@@ -99,17 +100,37 @@ public class Servidor extends Thread implements Observer {
         }
     }
 
-    public void notificarClientes(Partida partida) {
-        for (int i = 0; i < jugadores.size(); i++) {
-            JugadorLocal jugador = jugadores.get(i);
-            try {
-                this.output = new ObjectOutputStream(jugador.getSocket().getOutputStream());
-                this.output.writeObject(partida);
-                this.output.close();
-            } catch (IOException ex) {
-                System.err.println("Error; " + ex.getMessage());
+    public void notificarClientes(Partida partida, int indice) {
+        //si indice es un valor diferente de-1 que sea positivo es que el juego esta procesando a los jugadores faltantes 
+        //Y por ende se noticia a todos de cada excepto al jugador que ente para actualizacion de sus datos de  partida
+        if (indice > -1 && indice < 5) {
+            for (int i = 0; i < jugadores.size(); i++) {
+                JugadorLocal jugador = jugadores.get(i);
+                try {
+                    this.output = new ObjectOutputStream(jugador.getSocket().getOutputStream());
+                    this.output.writeObject(partida);
+                    this.output.close();
+                } catch (IOException ex) {
+                    System.err.println("Error; " + ex.getMessage());
+                }
             }
+        } //-1 indica que el juego esta en marcha y se tiene que notificar de los datos actualizados
+        else if (indice == -1) {
+            for (int i = 0; i < jugadores.size(); i++) {
+                JugadorLocal jugador = jugadores.get(i);
+                try {
+                    this.output = new ObjectOutputStream(jugador.getSocket().getOutputStream());
+                    this.output.writeObject(partida);
+                    this.output.close();
+                } catch (IOException ex) {
+                    System.err.println("Error; " + ex.getMessage());
+                }
+            }
+        } //Si indice es igual a 100 indica que la partida ha finalizado cierra la lista de sockets , termina
+        //el flujo del run estableciendo su variable a false, y se envian los datos de la partida, a los sockets restantes
+        else if (indice == 100) {
         }
+
     }
 
 }

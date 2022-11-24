@@ -10,7 +10,14 @@ public class MPartida extends ModeloBase implements Observer {
     
     private Partida partida;
 
-    public void preCreacion(Partida partida) {
+    public MPartida() {
+    }
+
+    public MPartida(Partida partida) {
+        this.partida = partida;
+    }
+
+    public void crearPartida(Partida partida) {
         this.partida = partida;
         this.actualizarModelo();
     }

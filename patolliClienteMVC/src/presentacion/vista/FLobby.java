@@ -14,7 +14,6 @@ import modelo.MPartida;
  */
 public class FLobby extends FrameBase {
 
-
     /**
      * Creates new form FLobbyHost
      */
@@ -22,6 +21,18 @@ public class FLobby extends FrameBase {
         initComponents();
     }
 
+    /**
+     * Creates new form FLobbyHost
+     * @param montoJugador
+     * @param tamañoTablero
+     * @param montoApuesta
+     */
+    public FLobby(double montoJugador,double montoApuesta , int tamañoTablero) {
+        initComponents();
+        this.Monto.setText(String.valueOf(montoJugador));
+        this.apuesta.setText(String.valueOf(montoApuesta));
+        this.tamano.setText(String.valueOf(tamañoTablero));
+    }
 
 //     
     /**
@@ -46,7 +57,6 @@ public class FLobby extends FrameBase {
         jPanelJugador1 = new javax.swing.JPanel();
         ljugador1 = new javax.swing.JLabel();
         lcolor1 = new javax.swing.JLabel();
-        jButtonInicar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
@@ -56,6 +66,7 @@ public class FLobby extends FrameBase {
         apuesta = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         tamano = new javax.swing.JLabel();
+        jButtonInicar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lobby");
@@ -80,7 +91,7 @@ public class FLobby extends FrameBase {
         Lcolor4.setBounds(10, 70, 0, 30);
 
         jPanel2.add(jPanelJugador4);
-        jPanelJugador4.setBounds(430, 90, 130, 180);
+        jPanelJugador4.setBounds(430, 70, 130, 180);
 
         jPanelJugador3.setBackground(new java.awt.Color(204, 255, 255));
         jPanelJugador3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -96,7 +107,7 @@ public class FLobby extends FrameBase {
         Lcolor3.setBounds(10, 70, 110, 30);
 
         jPanel2.add(jPanelJugador3);
-        jPanelJugador3.setBounds(290, 90, 130, 180);
+        jPanelJugador3.setBounds(290, 70, 130, 180);
 
         jPanelJugador2.setBackground(new java.awt.Color(204, 255, 255));
         jPanelJugador2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -112,7 +123,7 @@ public class FLobby extends FrameBase {
         Lcolor2.setBounds(10, 70, 110, 30);
 
         jPanel2.add(jPanelJugador2);
-        jPanelJugador2.setBounds(150, 90, 130, 180);
+        jPanelJugador2.setBounds(150, 70, 130, 180);
 
         jPanelJugador1.setBackground(new java.awt.Color(204, 255, 255));
         jPanelJugador1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -129,7 +140,46 @@ public class FLobby extends FrameBase {
         lcolor1.setBounds(10, 70, 110, 30);
 
         jPanel2.add(jPanelJugador1);
-        jPanelJugador1.setBounds(10, 90, 130, 180);
+        jPanelJugador1.setBounds(10, 70, 130, 180);
+
+        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        jLabel1.setText("Lobby de Espera Jugadores");
+        jPanel2.add(jLabel1);
+        jLabel1.setBounds(90, 10, 400, 50);
+        jPanel2.add(jSeparator3);
+        jSeparator3.setBounds(0, 260, 580, 10);
+        jPanel2.add(jSeparator4);
+        jSeparator4.setBounds(0, 60, 580, 10);
+
+        jLabel2.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        jLabel2.setText("Tamaño  Tablero;");
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(420, 270, 150, 30);
+
+        Monto.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        Monto.setText("0");
+        jPanel2.add(Monto);
+        Monto.setBounds(160, 270, 60, 30);
+
+        jLabel3.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        jLabel3.setText("Monto por Apuesta;");
+        jPanel2.add(jLabel3);
+        jLabel3.setBounds(10, 300, 150, 30);
+
+        apuesta.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        apuesta.setText("0");
+        jPanel2.add(apuesta);
+        apuesta.setBounds(160, 300, 100, 30);
+
+        jLabel4.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        jLabel4.setText("Monto Por Jugador;");
+        jPanel2.add(jLabel4);
+        jLabel4.setBounds(10, 270, 150, 30);
+
+        tamano.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        tamano.setText("0");
+        jPanel2.add(tamano);
+        tamano.setBounds(480, 300, 60, 30);
 
         jButtonInicar.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jButtonInicar.setForeground(new java.awt.Color(0, 255, 0));
@@ -140,46 +190,7 @@ public class FLobby extends FrameBase {
             }
         });
         jPanel2.add(jButtonInicar);
-        jButtonInicar.setBounds(220, 290, 110, 40);
-
-        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        jLabel1.setText("Lobby de Espera Jugadores");
-        jPanel2.add(jLabel1);
-        jLabel1.setBounds(90, 20, 400, 50);
-        jPanel2.add(jSeparator3);
-        jSeparator3.setBounds(0, 280, 580, 10);
-        jPanel2.add(jSeparator4);
-        jSeparator4.setBounds(0, 80, 580, 10);
-
-        jLabel2.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
-        jLabel2.setText("Tamaño  Tablero;");
-        jPanel2.add(jLabel2);
-        jLabel2.setBounds(10, 320, 150, 30);
-
-        Monto.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
-        Monto.setText("0");
-        jPanel2.add(Monto);
-        Monto.setBounds(160, 290, 60, 30);
-
-        jLabel3.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
-        jLabel3.setText("Monto por Apuesta");
-        jPanel2.add(jLabel3);
-        jLabel3.setBounds(340, 290, 140, 30);
-
-        apuesta.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
-        apuesta.setText("0");
-        jPanel2.add(apuesta);
-        apuesta.setBounds(480, 290, 100, 30);
-
-        jLabel4.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
-        jLabel4.setText("Monto Por Jugador;");
-        jPanel2.add(jLabel4);
-        jLabel4.setBounds(10, 290, 150, 30);
-
-        tamano.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
-        tamano.setText("0");
-        jPanel2.add(tamano);
-        tamano.setBounds(160, 320, 60, 30);
+        jButtonInicar.setBounds(290, 280, 110, 40);
 
         getContentPane().add(jPanel2);
         jPanel2.setBounds(0, 0, 600, 370);
@@ -214,7 +225,7 @@ public class FLobby extends FrameBase {
 
     @Override
     public void update(Observable o, Object o1) {
-        List<Jugador> jugadores = ((MPartida) o1).getPartida().getJugadores();
+        List<Jugador> jugadores = ((MPartida) o).getPartida().getJugadores();
         this.actualizarLobby(jugadores);
     }
 

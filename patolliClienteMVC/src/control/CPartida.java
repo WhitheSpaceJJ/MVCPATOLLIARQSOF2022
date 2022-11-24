@@ -20,7 +20,7 @@ public class CPartida extends ControlBase {
 
     public void preCreacion(Partida partida) {
         if (this.cliente.establecerCreacionPartida(partida)) {
-            ((MPartida) this.modelo).preCreacion(partida);
+            ((MPartida) this.modelo).crearPartida(partida);
             Thread thradCliente = new Thread(this.cliente);
             thradCliente.start();
         }

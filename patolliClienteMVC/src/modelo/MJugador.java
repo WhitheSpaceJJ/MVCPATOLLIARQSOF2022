@@ -1,17 +1,18 @@
 package modelo;
 
 import dominio.Jugador;
+import dominio.Partida;
 
 public class MJugador extends ModeloBase {
-
+    
     private Jugador jugador;
-
-    public void preUnion(Jugador jugador) {
+    
+    public void unirsePartida(Jugador jugador, Partida partida) {
         this.jugador = jugador;
         this.setChanged();
-        this.actualizarModelo();
+        this.notifyObservers(partida);
     }
-
+    
     public Jugador getJugador() {
         return jugador;
     }

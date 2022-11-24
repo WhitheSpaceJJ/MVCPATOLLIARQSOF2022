@@ -17,7 +17,6 @@ import modelo.PartidaServidor;
 public class ProtocoloPartida {
 
     private PartidaServidor partidaLocal;
-    private int totalJugadores;
 
     public ProtocoloPartida() {
     }
@@ -58,11 +57,11 @@ public class ProtocoloPartida {
                 Jugador jugador = (Jugador) object;
                 JugadorLocal jugadorLocal = new JugadorLocal(jugador, sc);
                 int jugadorEsta = jugadores.indexOf(jugadorLocal);
-                                    ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());
+                ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());
                 if (jugadorEsta == -1) {
                     jugadores.add(jugadorLocal);
                     jugadoresNuevos = jugadores;
-                    output.writeObject(jugador);
+                    output.writeObject(this.partidaLocal.getPartidaLocal());
                     System.out.println("Jugador conectado; Nombre=" + jugador.getNombre() + " Color=" + jugador.getColor());
                     this.partidaLocal.agregarJugador(jugador);
                 } else {
@@ -75,25 +74,6 @@ public class ProtocoloPartida {
         return jugadoresNuevos;
     }
 
-    public boolean procesandoJugador(Object object) {
-        if (object instanceof Jugador) {
-            Jugador jugador = (Jugador) object;
-//            int totalJugadoresMaximo = this.partidaLocal.getPartidaLocal().getTotalJugadores();
-//            int totalJugadoresActuales = this.partidaLocal.getPartidaLocal().getJugadores().size();
-//            if (totalJugadoresActuales <= totalJugadoresMaximo) {
-            int jugadorEsta = this.partidaLocal.getPartidaLocal().getJugadores().indexOf(jugador);
-            if (jugadorEsta == -1) {
-                System.out.println("Jugador conectado; Nombre=" + jugador.getNombre() + " Color=" + jugador.getColor());
-                this.partidaLocal.agregarJugador(jugador);
-                return true;
-            } else {
-                return false;
-            }
-//            }
-        }
-        return false;
-    }
-
     public void procesarDados(Object object) {
         if (object instanceof List) {
             this.lanzarDados((List<Dado>) object);
@@ -102,58 +82,6 @@ public class ProtocoloPartida {
 
     public void lanzarDados(List<Dado> lista) {
     }
-
-    public boolean procesarEntrada(Object object) {
-        if (this.partidaLocal.getPartidaLocal() == null) {
-            if (object instanceof Partida) {
-                this.partidaLocal.establecerPartida((Partida) object);
-                return true;
-            }
-            return false;
-        } else {
-            if (this.partidaLocal.getPartidaLocal().getTotalJugadores() == this.partidaLocal.getPartidaLocal().getJugadores().size()) {
-                if (object instanceof List) {
-                    this.lanzarDados((List<Dado>) object);
-                }
-            } else {
-                if (object instanceof Jugador) {
-                    Jugador jugador = (Jugador) object;
-//            int totalJugadoresMaximo = this.partidaLocal.getPartidaLocal().getTotalJugadores();
-//            int totalJugadoresActuales = this.partidaLocal.getPartidaLocal().getJugadores().size();
-//            if (totalJugadoresActuales <= totalJugadoresMaximo) {
-                    int jugadorEsta = this.partidaLocal.getPartidaLocal().getJugadores().indexOf(jugador);
-                    if (jugadorEsta == -1) {
-                        System.out.println("Jugador conectado; Nombre=" + jugador.getNombre() + " Color=" + jugador.getColor());
-                        this.partidaLocal.agregarJugador(jugador);
-                        return true;
-                    } else {
-                        return false;
-                    }
-//            }
-                }
-            }
-            return false;
-        }
-    }
-
-    public int getTotalJugadores() {
-        return totalJugadores;
-    }
-
-    public void setTotalJugadores(int totalJugadores) {
-        this.totalJugadores = totalJugadores;
-    }
-
-    public boolean establecerPartidaLocal(Partida partida, JugadorLocal jugador) {
-        return true;
-    }
-//    public void crearPartidaLocal(Partida partida) {
-//        this.partidaLocal.crearPartidaLocal(partida);
-//    }
-//
-//    public void agregarJugadorPartida(Jugador jugador) {
-//        this.partidaLocal.agregarJugador(jugador);
-//    }
 
     public void finalizarPartida() {
     }
