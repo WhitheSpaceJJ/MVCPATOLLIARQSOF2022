@@ -26,4 +26,6 @@ public class CPartida extends ControlBase {
         }
     }
 
+    public void inicarPArtida() {
+    }
 }
