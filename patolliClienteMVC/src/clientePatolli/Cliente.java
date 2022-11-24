@@ -9,7 +9,6 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Observable;
-import modelo.MPartida;
 
 public class Cliente extends Observable implements Runnable {
 
@@ -111,8 +110,7 @@ public class Cliente extends Observable implements Runnable {
 
     public boolean establecerCreacionPartida(Partida partida) {
         try {
-            //            this.socket = new Socket(host, puerto);
-            this.socket = new Socket("192.168.100.6", 80);
+            this.socket = new Socket("10.178.3.13", 80);
             System.out.println("Se ha establecido la conexion correctamente");
         } catch (IOException e) {
             System.out.println("El servidor no se ha levantado correctamente.");
@@ -131,19 +129,13 @@ public class Cliente extends Observable implements Runnable {
         }
     }
 
-    //Metodo que sera llamado cuando un jugador quiera lanzar los dados pero validara que sea su turno
-    //Siempre se estaran lanzando dados pero si no se puede enviar nada es simbolo de que no es su turno
     public boolean lanzarDados() {
         return false;
     }
 
-//Version 2 del meto con el fin probar que un jugador debera de recibir los datos de una partida para ver que esta si lo acepto
-//Retornara null en caso de que el jugador no se aceptado, no haiga datos, este el mismo nombre etc
     public Partida unirsePartida(Jugador jugador) {
-        //Estas verificaciones se realizaran  antes de realizar la conexion
         try {
-//            this.socket = new Socket(host, puerto);
-            this.socket = new Socket("192.168.100.6", 80);
+            this.socket = new Socket("10.178.3.13", 80);
             System.out.println("Se ha establecido la conexion correctamente");
         } catch (IOException e) {
             System.out.println("El servidor no se ha levantado correctamente.");
@@ -157,15 +149,10 @@ public class Cliente extends Observable implements Runnable {
             System.out.println("No se ha enviado el jugador.");
             return null;
         }
-        //Con el fin de verificar la conexion si esta el mismo jugador
         try {
             this.input = new ObjectInputStream(socket.getInputStream());
-//            Object o = input.readObject();
             Partida partida = (Partida) input.readObject();
-//            Jugador jugadorPrueba = (Jugador) input.readObject();
             if (partida != null) {
-//                MPartida mPartida = new MPartida(partida);
-//                this.addObserver(mPartida);
                 this.jugador = (partida.getJugadores().get(partida.getJugadores().size() - 1));
                 this.conexionEstablecida = true;
                 return partida;
@@ -180,44 +167,4 @@ public class Cliente extends Observable implements Runnable {
         }
     }
 
-//    public boolean unirsePartida(Jugador jugador) {
-//        //Estas verificaciones se realizaran  antes de realizar la conexion
-//        try {
-////            this.socket = new Socket(host, puerto);
-//            this.socket = new Socket("192.168.100.6", 80);
-//            System.out.println("Se ha establecido la conexion correctamente");
-//        } catch (IOException e) {
-//            System.out.println("El servidor no se ha levantado correctamente.");
-//            return false;
-//        }
-//        try {
-//            this.output = new ObjectOutputStream(socket.getOutputStream());
-//            this.output.writeObject(jugador);
-//            System.out.println("Se ha enviado el jugador para validacion.");
-//        } catch (IOException e) {
-//            System.out.println("No se ha enviado el jugador.");
-//            return false;
-//        }
-//        //Con el fin de verificar la conexion si esta el mismo jugador
-//        try {
-//            this.input = new ObjectInputStream(socket.getInputStream());
-////            Object o = input.readObject();
-//            Partida partida = (Partida) input.readObject();
-////            Jugador jugadorPrueba = (Jugador) input.readObject();
-//            if (partida != null) {
-//                MPartida mPartida = new MPartida(partida);
-//                this.addObserver(mPartida);
-//                this.jugador = (partida.getJugadores().get(partida.getJugadores().size() - 1));
-//                this.conexionEstablecida = true;
-//                return true;
-//            } else {
-//                System.out.println("Ya existe un jugador con el mismo nombre y color");
-//                System.out.println("O el servidor se ha levantado pero no se ha establecido la creacion de una partida.");
-//                return false;
-//            }
-//        } catch (IOException | ClassNotFoundException e) {
-//            System.out.println("El servidor se ha levantado pero no se ha establecido la creacion de una partida.");
-//            return false;
-//        }
-//    }
 }

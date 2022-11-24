@@ -1,12 +1,8 @@
 package presentacion.vista;
 
-import clientePatolli.Cliente;
 import control.CJugador;
-import control.CPartida;
-import control.ControlBase;
 import dominio.Jugador;
 import dominio.Partida;
-import java.net.UnknownHostException;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
@@ -25,7 +21,6 @@ public class FUnirse extends FrameBase {
      */
     public FUnirse() {
         initComponents();
-//        this.partida = Partida.getPartida();
     }
 
     /**

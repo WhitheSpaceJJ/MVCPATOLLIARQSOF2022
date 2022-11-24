@@ -2,8 +2,6 @@ package presentacion.dibujo;
 
 import dominio.Tablero;
 import java.awt.Graphics;
-import java.awt.Polygon;
-import javax.swing.JPanel;
 import javax.swing.JPanel;
 
 /**

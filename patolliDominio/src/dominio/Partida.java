@@ -5,8 +5,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Partida implements Serializable {
-
+public class Partida{
     private Jugador turno;
     private List<Jugador> jugadores;
     private Tablero tablero;

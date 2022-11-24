@@ -17,6 +17,6 @@ public class CValidacion extends ControlBase{
     public CValidacion(ModeloBase modelo) {
         super(modelo);
     }
-//        public void salirPartida(){
-//    }
+    public void salirPartida() {
+    }
 }

@@ -1,20 +1,15 @@
 package presentacion.vista;
 
-import clientePatolli.Cliente;
 import control.CJugador;
 import control.CPartida;
 import control.ControlBase;
-import dominio.Dado;
 import dominio.Jugador;
 import dominio.Partida;
 import dominio.Tablero;
-import java.net.UnknownHostException;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
-import modelo.MJugador;
 import modelo.MPartida;
 import modelo.ModeloBase;
 
@@ -237,7 +232,7 @@ public class FCrearPartida extends FrameBase {
             double montoJugadorD = Double.valueOf(this.fondoJugador.getText());
             Tablero tablero = new Tablero(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "" + Calendar.getInstance().get(Calendar.SECOND), tamaño);
             Partida partida = new Partida(new Jugador(this.nombreJugador.getText(), color), tablero, montoJugadorD, montoApuestaD, totalJugadores);
-            ((CPartida) this.control).preCreacion(partida);
+            ((CPartida) this.control).crearPartida(partida);
 
         }
     }//GEN-LAST:event_jButtonComenzarActionPerformed

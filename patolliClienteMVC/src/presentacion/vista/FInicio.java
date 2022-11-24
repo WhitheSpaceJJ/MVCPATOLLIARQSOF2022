@@ -4,7 +4,6 @@ import clientePatolli.Cliente;
 import control.CJugador;
 import control.CPartida;
 import control.ControlBase;
-import java.net.UnknownHostException;
 import javax.swing.JOptionPane;
 import modelo.MJugador;
 import modelo.MPartida;
@@ -118,22 +117,6 @@ public class FInicio extends javax.swing.JFrame {
         this.mostrarPantallaUnirse();
     }//GEN-LAST:event_entrarActionPerformed
 
-//
-//    //Metodo que valida si una partida a sido establecida o creada.
-//    //Con el fin de realizar una adecuada simulacion
-//    public void recuperarPartidas() {
-////        if (this.control.validarCreacion()) {
-////            this.mostrarMensajeError("No hay partidas creadas por el momento");
-////        } else {
-////            java.awt.EventQueue.invokeLater(new Runnable() {
-////                @Override
-////                public void run() {
-////                    new FUnirse().setVisible(true);
-////                }
-////            });
-////        }
-//
-//    }
 //Metodo que muestra mensaje de error. 
     public void mostrarMensajeError(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);

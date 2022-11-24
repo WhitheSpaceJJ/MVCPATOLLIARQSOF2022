@@ -17,13 +17,6 @@ public class FJuego extends FrameBase{
      */
     private FJuego() {
         initComponents();
-//        this.control = Control.getControl();
-//        this.tamaño = this.control.getTamañoTablero();
-//        TableroGrafico tablero2 = new TableroGrafico(tamaño);
-//        getContentPane().add(tablero2);
-//        tablero2.setBounds(0, 0, 600, 600);
-//        Jugador jugador=this.control.getTurno();
-//        nombre.setText(jugador.getNombre());
     }
 
     public static FJuego getFJuego() {
@@ -348,6 +341,6 @@ public class FJuego extends FrameBase{
 
     @Override
     public void update(Observable o, Object o1) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 }

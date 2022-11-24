@@ -110,7 +110,7 @@ public class Servidor extends Thread implements Observer {
                     try {
                         this.output = new ObjectOutputStream(jugador.getSocket().getOutputStream());
                         this.output.writeObject(partida);
-                        this.output.close();
+//                        this.output.close();
                     } catch (IOException ex) {
                         System.err.println("Error; " + ex.getMessage());
                     }
@@ -123,7 +123,7 @@ public class Servidor extends Thread implements Observer {
                 try {
                     this.output = new ObjectOutputStream(jugador.getSocket().getOutputStream());
                     this.output.writeObject(partida);
-                    this.output.close();
+//                    this.output.close();
                 } catch (IOException ex) {
                     System.err.println("Error; " + ex.getMessage());
                 }

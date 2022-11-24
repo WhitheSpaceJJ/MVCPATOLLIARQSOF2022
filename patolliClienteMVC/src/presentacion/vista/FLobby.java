@@ -1,7 +1,6 @@
 package presentacion.vista;
 
 import dominio.Jugador;
-import dominio.Partida;
 import java.util.List;
 import java.util.Observable;
 import javax.swing.JOptionPane;
@@ -34,7 +33,6 @@ public class FLobby extends FrameBase {
         this.tamano.setText(String.valueOf(tamañoTablero));
     }
 
-//     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -200,21 +198,9 @@ public class FLobby extends FrameBase {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonInicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInicarActionPerformed
-//
-//        if (this.control.validarJugadores()) {
-//            FJuego juego = FJuego.getFJuego();
-//            java.awt.EventQueue.invokeLater(new Runnable() {
-//                @Override
-//                public void run() {
-//                    juego.setVisible(true);
-//                }
-//            });
-//            setVisible(false);
-//        } else {
-//            this.mostrarMensajeError("Nadie puede iniciar el juego hasta que este el total de jugadores." + "Total; " + this.control.getTotalJugadores());
-//        }
-
+     
     }//GEN-LAST:event_jButtonInicarActionPerformed
+ 
     public void apagarBoton() {
         this.jButtonInicar.setEnabled(false);
     }
@@ -271,8 +257,8 @@ public class FLobby extends FrameBase {
             Ljugador4.setText(jugador4.getNombre());
             Lcolor4.setText(jugador4.getColor());
         }
-
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Lcolor2;
     private javax.swing.JLabel Lcolor3;
