@@ -22,8 +22,16 @@ public class Prueba {
     public static void main(String[] args) {
         // TODO code application logic here
         try {
+            /*Si se ejecuta el siguiente codigo, recuerde cliente en el proyecto patolliClienteMVC debe de actualizar
+            la direccion del servidor. Esta direccion es la de la direccion IP de la maquina donde se ejecute
+            el servidor, ademas recuerda desmilitarizar  en tu modem hacia la direccion IP de esta la maquina que
+            ejecute el servidor .
+            */
             PartidaServidor modeloServidor = new PartidaServidor();
             ProtocoloPartida controlServidor = new ProtocoloPartida(modeloServidor);
+            /*Si desesa cambiar el puerto 80 adelante, solo que tambien cambiela en el cliente del proyecto
+              patolliMVC con el fin de evitar problemas
+            */
             Servidor servidor = new Servidor(controlServidor, 80);
             modeloServidor.addObserver(servidor);
             servidor.start();

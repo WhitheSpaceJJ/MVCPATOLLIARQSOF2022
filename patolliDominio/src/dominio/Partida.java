@@ -1,11 +1,11 @@
 package dominio;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Partida{
+public class Partida implements Serializable {
+
     private Jugador turno;
     private List<Jugador> jugadores;
     private Tablero tablero;
@@ -14,6 +14,7 @@ public class Partida{
     private List<Dado> dados;
     private int totalJugadores;
     private boolean activa;
+    private int cantidadFichas;
 
     public Partida(Jugador turno, Tablero tablero, double montoJugador, double montoApuesta, int totalJugadores) {
         this.turno = turno;
@@ -25,6 +26,14 @@ public class Partida{
         this.jugadores = new ArrayList<>();
         this.jugadores.add(turno);
         this.activa = true;
+    }
+
+    public int getCantidadFichas() {
+        return cantidadFichas;
+    }
+
+    public void setCantidadFichas(int cantidadFichas) {
+        this.cantidadFichas = cantidadFichas;
     }
 
     public boolean isActiva() {

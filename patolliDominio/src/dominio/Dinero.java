@@ -37,5 +37,10 @@ public class Dinero implements Serializable{
     public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
+//Metodo ToString
+    @Override
+    public String toString() {
+        return "Dinero{" + "cantidad=" + cantidad + '}';
+    }
 
 }

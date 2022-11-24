@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  * @author Equipo 1
  */
-public class Ficha implements Serializable{
+public class Ficha implements Serializable {
 
     /**
      * Numero
@@ -18,18 +18,16 @@ public class Ficha implements Serializable{
      */
     private Jugador jugador;
     private boolean enJuego;
-    private boolean eliminada;
 
 //Constructores
     public Ficha() {
         this.enJuego = true;
     }
 
-    public Ficha(int numeroPosicion, Jugador jugador, boolean enJuego, boolean eliminada) {
+    public Ficha(int numeroPosicion, Jugador jugador, boolean enJuego) {
         this.numeroPosicion = numeroPosicion;
         this.jugador = jugador;
         this.enJuego = enJuego;
-        this.eliminada = eliminada;
     }
 
     public Ficha(int numeroPosicion, Jugador jugador) {
@@ -45,14 +43,6 @@ public class Ficha implements Serializable{
 
     public void setNumeroPosicion(int numeroPosicion) {
         this.numeroPosicion = numeroPosicion;
-    }
-
-    public boolean isEliminada() {
-        return eliminada;
-    }
-
-    public void setEliminada(boolean eliminada) {
-        this.eliminada = eliminada;
     }
 
     public int getNumero() {

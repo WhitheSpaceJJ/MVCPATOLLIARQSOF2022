@@ -1,21 +1,26 @@
-
 package dominio;
 
 import java.io.Serializable;
+//Clase que representa un dado que es utilizado por una partida
 
-public class Dado implements Serializable{
-    private String cara;
-
-    public Dado() {
+public class Dado implements Serializable {
+    private boolean cara;
+//Constructor
+    public Dado(boolean cara) {
+        this.cara = cara;
     }
-
-    public String getCara() {
+//Metodos Get y Set 
+    public boolean isCara() {
         return cara;
     }
 
-    public void setCara(String cara) {
+    public void setCara(boolean cara) {
         this.cara = cara;
     }
-    public void cambiarCara(){
+
+    @Override
+    public String toString() {
+        return "Dado{" + "cara=" + cara + '}';
     }
+  
 }

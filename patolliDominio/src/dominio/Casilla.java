@@ -43,10 +43,7 @@ public class Casilla implements Serializable{
     public void setFicha(Ficha ficha) {
         this.ficha = ficha;
     }
-   /**
-    * Metodo to string
-    * @return  Retorna los datos de casilla.
-    */
+   // Metodo to string
     @Override
     public String toString() {
         return "Casilla{" + "tipo=" + tipo + ", ficha=" + ficha + '}';

@@ -13,10 +13,8 @@ public class Penalizacion implements Serializable{
     //Tipo de penalizacion
     private TipoPenalizacion tipo;
 //Constructores 
-
     public Penalizacion() {
     }
-
     public Penalizacion(double cantidad, Jugador jugador, TipoPenalizacion tipo) {
         this.cantidad = cantidad;
         this.jugador = jugador;

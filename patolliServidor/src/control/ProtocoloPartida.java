@@ -6,11 +6,9 @@ import dominio.Partida;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import jugador.JugadorLocal;
 import modelo.PartidaServidor;
 
@@ -25,65 +23,99 @@ public class ProtocoloPartida {
         this.partidaLocal = partidaLocal;
     }
 
-    public List<JugadorLocal> procesandoCreacion(Socket sc) {
-        List<JugadorLocal> jugadores = null;
+    /*
+ Protocolo para procesar la creacion de la partida,recibe el socket y objeto correspondiente del cliente que se haya conectado.
+El metodo retorna un JugadorLocal si es que este envia los datos de la partida, en cambio regresa null, si solo esta tratando de
+    conectarse a la partida que no tiene datos aun.
+     */
+    public JugadorLocal procesandoCreacion(Socket sc,Object aux) {
+        JugadorLocal jugadorCreador = null;
         try {
-            ObjectInputStream input = new ObjectInputStream(sc.getInputStream());
-            Object aux = input.readObject();
+            /*
+            Con el fin de conocer los datos de una partida, se establece un flujo de entrada con el respectivo cliente, 
+            se espera que el cliente envia los datos de una partida, en caso contrario se rechaza la conexion.
+            Condicion que determina si el objeto es de instancia de partida
+             */
             if (aux instanceof Partida) {
+                //Se crea jugador deacuerdo al turno, ya que el jugador, creador de una partida, siempre tendra el primer turno
                 Jugador jugador = ((Partida) aux).getTurno();
-                jugadores = new ArrayList<>();
                 System.out.println("La partida ha sido creada");
                 System.out.println("Jugador creador; Nombre=" + jugador.getNombre() + " Color=" + jugador.getColor());
-                jugadores.add(new JugadorLocal(jugador, sc));
+                jugadorCreador = new JugadorLocal(jugador, sc);
+                //Se envia la partida con el fin de que el cliente verifique que la partida se ha creado.
+                ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());
+                output.writeObject((Partida) aux);
+                //Se establece la partida
                 this.partidaLocal.establecerPartida((Partida) aux);
             } else {
+                //En cambio si la instancia no es de partida se establece un flujo de salida de datos
+                //con el fin de enviar algo null, que este sera verificado por cliente y ejecutara sus respectivos comandos.
                 ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());
                 output.writeObject(null);
                 System.out.println("La partida debe de ser creada antes de unirse");
             }
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
             System.out.println("Error; " + e.getMessage());
         }
-        return jugadores;
+        //Se retorna al jugador creador
+        return jugadorCreador;
     }
 
-    public List<JugadorLocal> procesandoEspera(Socket sc, List<JugadorLocal> jugadores) {
+    /*
+    Metodo encargado de procesar la espera de los jugadores, este recibe la lista de
+    jugadores actuales, y el socket correspondiente.
+    De igual manera se realiza una evaluacion del tipo de objeto, que se recibe si este envia una partida
+    aunque esta ya este creada, se rechaza la conexion en cambio si es un jugador se establece la conexion con el socket
+    y se añade el juego. Sin embargo, este paso por un filtro con el fin de verificar que
+    los datos de su nombre y color, se encuentren disponibles, en caso de que ya exista alguien similar se rechaza la conexion.
+    Retonr la lista de jugadores actuales + el jugador aceptado si este fue paso las condiciones.
+     */
+    public List<JugadorLocal> procesandoEspera(Socket sc, List<JugadorLocal> jugadores, Object object) {
         List<JugadorLocal> jugadoresNuevos = null;
         try {
-            ObjectInputStream input = new ObjectInputStream(sc.getInputStream());
-            Object object = input.readObject();
+            //condicion que determina si el objeto leido es una instancia de jugador
+            //Si es asi pasa pasa por el filtro de aceptacion si este no se encuentra en la lista de jugadores Locales
             if (object instanceof Jugador) {
                 Jugador jugador = (Jugador) object;
                 JugadorLocal jugadorLocal = new JugadorLocal(jugador, sc);
                 int jugadorEsta = jugadores.indexOf(jugadorLocal);
                 ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());
+                //Se determina si el jugador se encuentra en la lista con el apoyo del metodo indexOf
                 if (jugadorEsta == -1) {
                     jugadores.add(jugadorLocal);
                     jugadoresNuevos = jugadores;
-                    this.partidaLocal.agregarJugador(jugador);
                     output.writeObject(this.partidaLocal.getPartidaLocal());
                     System.out.println("Jugador conectado; Nombre=" + jugador.getNombre() + " Color=" + jugador.getColor());
+                    this.partidaLocal.agregarJugador(jugador);
                 } else {
+                    //Si el jugador ya existe se encia un dato null, con el fin de que el cliente lo procese
                     output.writeObject(null);
                 }
+            } else {
+                //En cambio si es otra partida la que se recibe este envia algo null con el de que rechaze la conexion
+                ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());
+                output.writeObject(null);
             }
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
             System.out.println("Error; " + e.getMessage());
         }
         return jugadoresNuevos;
     }
 
+    /*
+    Metodo que procesa la entrada de listas de dados,que son recibidas pro el jugador en turno.
+     */
     public void procesarDados(Object object) {
         if (object instanceof List) {
             this.lanzarDados((List<Dado>) object);
         }
     }
 
+    /*
+    Metodos que actualizaran la respectiva partida, moveran la ficha, realizaran pagos,etc.
+    Estos metodos seran la logica del juego, y la clave para que se finalice una partida, o se elimine un jugador    
+     */
     public void lanzarDados(List<Dado> lista) {
-    }
-
-    public void finalizarPartida() {
     }
 
     public boolean realizarPago() {

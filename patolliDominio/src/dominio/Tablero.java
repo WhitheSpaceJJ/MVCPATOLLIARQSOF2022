@@ -1,4 +1,3 @@
-
 package dominio;
 
 import java.io.Serializable;
@@ -10,33 +9,28 @@ import java.util.List;
  *
  * @author Equipo 1
  */
-public class Tablero implements Serializable{
+public class Tablero implements Serializable {
 //Numero de tablero.
 
     private String numeroTablero;
     //Casillas del tablero
-    private List<Casilla> casillas ;
+    private List<Casilla> casillas;
     private int tamano;
-    
+
     //Jugadores del tablero.
 //Constructores 
-
     public Tablero() {
     }
 
     public Tablero(String numeroTablero, int tamano) {
         this.numeroTablero = numeroTablero;
         this.tamano = tamano;
-        this.casillas= new ArrayList();
+        this.casillas = new ArrayList();
         //Inicializar casillas orden
-        if(tamano==10){
-        }else if(tamano==12){
-        }else if(tamano==14){
-        }
+
     }
 
 //Metodos get y set
-
     public String getNumeroTablero() {
         return numeroTablero;
     }
@@ -61,12 +55,26 @@ public class Tablero implements Serializable{
         this.tamano = tamano;
     }
 
- 
 //Metodo to string.    
-
     @Override
     public String toString() {
-        return "Tablero{" + "numeroTablero=" + numeroTablero + ", casillas=" + casillas +'}';
+        return "Tablero{" + "numeroTablero=" + numeroTablero + ", casillas=" + casillas + '}';
+    }
+
+    public void inicializarCasillas(int tamano) {
+        switch (tamano) {
+            case 10:
+                //Ciclo que inicializa las casillas del tablero tamaño 10
+                break;
+            case 12:
+                //Ciclo que inicializa las casillas del tablero tamaño 12
+                break;
+            case 14:
+                //Ciclo que inicializa las casillas del tablero tamaño 14
+                break;
+            default:
+                break;
+        }
     }
 
 }

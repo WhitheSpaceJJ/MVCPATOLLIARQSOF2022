@@ -1,6 +1,7 @@
 package dominio;
 
 import java.io.Serializable;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -22,20 +23,6 @@ public class Jugador implements Serializable {
      */
     private List<Ficha> fichas;
 //Constructores
-
-    public Jugador() {
-        this.fichas = new ArrayList<>();
-        this.fichasAgregar();
-    }
-
-    public void fichasAgregar() {
-        this.fichas.add(new Ficha(0, new Jugador(nombre, color)));
-        this.fichas.add(new Ficha(1, new Jugador(nombre, color)));
-        this.fichas.add(new Ficha(2, new Jugador(nombre, color)));
-        this.fichas.add(new Ficha(3, new Jugador(nombre, color)));
-        this.fichas.add(new Ficha(4, new Jugador(nombre, color)));
-        this.fichas.add(new Ficha(5, new Jugador(nombre, color)));
-    }
 
     public Jugador(String nombre, String color) {
         this.nombre = nombre;
@@ -107,5 +94,12 @@ public class Jugador implements Serializable {
     public String toString() {
         return "usuario{" + " nombre= " + nombre + ", color= " + color + '}';
     }
+//Metodo que agrega las fichas al jugador
 
+    public void inicializarFichas(int cantidad) {
+        this.fichas = new ArrayList<>();
+        for (int i = 0; i < cantidad; i++) {
+            this.fichas.add(new Ficha(i, this));
+        }
+    }
 }

@@ -1,13 +1,13 @@
-
 package jugador;
 
 import dominio.Jugador;
 import java.net.Socket;
 import java.util.Objects;
 
-
+//Clase que representa un jugador local, los datos de su respectivo socket, y datos escogidos para jugar nombre y color
 public class JugadorLocal {
-    private Jugador jugador; 
+
+    private Jugador jugador;
     private Socket socket;
 
     public JugadorLocal(Socket socket) {
@@ -56,5 +56,5 @@ public class JugadorLocal {
         final JugadorLocal other = (JugadorLocal) obj;
         return Objects.equals(this.jugador, other.jugador);
     }
-    
+
 }
