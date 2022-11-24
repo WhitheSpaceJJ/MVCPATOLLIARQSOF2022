@@ -224,10 +224,12 @@ public class FUnirse extends FrameBase {
         ModeloBase modeloPartida = new MPartida(((Partida) o1));
         ((CJugador) this.control).establecerModelo(modeloPartida);
         this.control.getCliente().addObserver((Observer) modeloPartida);
-        FrameBase fLobby = new FLobby();
+        FrameBase fLobby = new FLobby(((Partida) o1).getMontoJugador(),
+                ((Partida) o1).getMontoApuesta(), ((Partida) o1).getTablero().getTamano());
         fLobby.establecerControl(((CJugador) this.control));
         modeloPartida.addObserver(fLobby);
         ((FLobby) fLobby).apagarBoton();
+        ((FLobby) fLobby).actualizarLobby(((Partida) o1).getJugadores());
         this.mostrarPantallaLobby((FLobby) fLobby);
     }
 //Metodo que valida la configuración  datos del jugador, si la partida tiene espacios, etc.

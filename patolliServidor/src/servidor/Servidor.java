@@ -105,13 +105,15 @@ public class Servidor extends Thread implements Observer {
         //Y por ende se noticia a todos de cada excepto al jugador que ente para actualizacion de sus datos de  partida
         if (indice > -1 && indice < 5) {
             for (int i = 0; i < jugadores.size(); i++) {
-                JugadorLocal jugador = jugadores.get(i);
-                try {
-                    this.output = new ObjectOutputStream(jugador.getSocket().getOutputStream());
-                    this.output.writeObject(partida);
-                    this.output.close();
-                } catch (IOException ex) {
-                    System.err.println("Error; " + ex.getMessage());
+                if (indice != i) {
+                    JugadorLocal jugador = jugadores.get(i);
+                    try {
+                        this.output = new ObjectOutputStream(jugador.getSocket().getOutputStream());
+                        this.output.writeObject(partida);
+                        this.output.close();
+                    } catch (IOException ex) {
+                        System.err.println("Error; " + ex.getMessage());
+                    }
                 }
             }
         } //-1 indica que el juego esta en marcha y se tiene que notificar de los datos actualizados

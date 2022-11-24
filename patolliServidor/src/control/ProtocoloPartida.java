@@ -31,12 +31,12 @@ public class ProtocoloPartida {
             ObjectInputStream input = new ObjectInputStream(sc.getInputStream());
             Object aux = input.readObject();
             if (aux instanceof Partida) {
-                this.partidaLocal.establecerPartida((Partida) aux);
                 Jugador jugador = ((Partida) aux).getTurno();
                 jugadores = new ArrayList<>();
                 System.out.println("La partida ha sido creada");
                 System.out.println("Jugador creador; Nombre=" + jugador.getNombre() + " Color=" + jugador.getColor());
                 jugadores.add(new JugadorLocal(jugador, sc));
+                this.partidaLocal.establecerPartida((Partida) aux);
             } else {
                 ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());
                 output.writeObject(null);
@@ -61,9 +61,9 @@ public class ProtocoloPartida {
                 if (jugadorEsta == -1) {
                     jugadores.add(jugadorLocal);
                     jugadoresNuevos = jugadores;
+                    this.partidaLocal.agregarJugador(jugador);
                     output.writeObject(this.partidaLocal.getPartidaLocal());
                     System.out.println("Jugador conectado; Nombre=" + jugador.getNombre() + " Color=" + jugador.getColor());
-                    this.partidaLocal.agregarJugador(jugador);
                 } else {
                     output.writeObject(null);
                 }
