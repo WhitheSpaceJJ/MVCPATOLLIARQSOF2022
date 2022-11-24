@@ -27,5 +27,13 @@ public class ControlBase {
     public void establecerCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public ModeloBase getModelo() {
+        return modelo;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
     
 }

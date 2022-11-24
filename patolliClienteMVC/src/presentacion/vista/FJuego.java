@@ -78,7 +78,7 @@ public class FJuego extends FrameBase{
         LPena1 = new javax.swing.JLabel();
         lTamañoTableroi = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Juego");
         setMinimumSize(new java.awt.Dimension(1268, 640));
         getContentPane().setLayout(null);

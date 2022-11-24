@@ -36,10 +36,11 @@ public class ProtocoloPartida {
                 Jugador jugador = ((Partida) aux).getTurno();
                 jugadores = new ArrayList<>();
                 System.out.println("La partida ha sido creada");
+                System.out.println("Jugador creador; Nombre=" + jugador.getNombre() + " Color=" + jugador.getColor());
                 jugadores.add(new JugadorLocal(jugador, sc));
             } else {
                 ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());
-                output.writeObject((Jugador) aux);
+                output.writeObject(null);
                 System.out.println("La partida debe de ser creada antes de unirse");
             }
         } catch (IOException | ClassNotFoundException e) {
@@ -49,26 +50,29 @@ public class ProtocoloPartida {
     }
 
     public List<JugadorLocal> procesandoEspera(Socket sc, List<JugadorLocal> jugadores) {
+        List<JugadorLocal> jugadoresNuevos = null;
         try {
             ObjectInputStream input = new ObjectInputStream(sc.getInputStream());
             Object object = input.readObject();
             if (object instanceof Jugador) {
                 Jugador jugador = (Jugador) object;
-                int jugadorEsta = this.partidaLocal.getPartidaLocal().getJugadores().indexOf(jugador);
+                JugadorLocal jugadorLocal = new JugadorLocal(jugador, sc);
+                int jugadorEsta = jugadores.indexOf(jugadorLocal);
+                                    ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());
                 if (jugadorEsta == -1) {
-                    JugadorLocal jugadorLocal = new JugadorLocal(jugador, sc);
                     jugadores.add(jugadorLocal);
+                    jugadoresNuevos = jugadores;
+                    output.writeObject(jugador);
                     System.out.println("Jugador conectado; Nombre=" + jugador.getNombre() + " Color=" + jugador.getColor());
                     this.partidaLocal.agregarJugador(jugador);
                 } else {
-                    ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());
-                    output.writeObject(jugador);
+                    output.writeObject(null);
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error; " + e.getMessage());
         }
-        return jugadores;
+        return jugadoresNuevos;
     }
 
     public boolean procesandoJugador(Object object) {

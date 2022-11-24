@@ -26,12 +26,21 @@ public class FValidacion extends FrameBase {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         BOXseleccion = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+
+        jButton1.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 51, 51));
+        jButton1.setText("Cancelar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Salir");
@@ -51,23 +60,12 @@ public class FValidacion extends FrameBase {
         jLabel2.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLabel2.setText("Selecciona la opcion:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 100, 230, 20);
+        jLabel2.setBounds(10, 100, 250, 20);
 
         BOXseleccion.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         BOXseleccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Si" }));
         jPanel1.add(BOXseleccion);
-        BOXseleccion.setBounds(240, 90, 130, 40);
-
-        jButton1.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 51, 51));
-        jButton1.setText("Cancelar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(210, 180, 110, 40);
+        BOXseleccion.setBounds(250, 90, 130, 40);
 
         jButton2.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(102, 255, 102));
@@ -78,7 +76,7 @@ public class FValidacion extends FrameBase {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(70, 180, 120, 40);
+        jButton2.setBounds(130, 170, 120, 40);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 390, 280);

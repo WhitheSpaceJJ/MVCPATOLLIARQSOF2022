@@ -12,6 +12,7 @@ import java.net.UnknownHostException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JOptionPane;
 import modelo.MJugador;
 import modelo.MPartida;
@@ -40,12 +41,13 @@ public class FCrearPartida extends FrameBase {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        resetDatos = new javax.swing.JButton();
+        jButtonMenu = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        resetDatos = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel8 = new javax.swing.JLabel();
         colorJugador = new javax.swing.JComboBox<>();
@@ -55,7 +57,6 @@ public class FCrearPartida extends FrameBase {
         fondoJugador = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jButtonMenu = new javax.swing.JButton();
         jButtonComenzar = new javax.swing.JButton();
         cantidadJugadores = new javax.swing.JComboBox<>();
         tamanoTablero = new javax.swing.JComboBox<>();
@@ -63,7 +64,26 @@ public class FCrearPartida extends FrameBase {
         jLabel10 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        resetDatos.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        resetDatos.setForeground(new java.awt.Color(204, 0, 0));
+        resetDatos.setText("Borrar");
+        resetDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetDatosActionPerformed(evt);
+            }
+        });
+        resetDatos.getAccessibleContext().setAccessibleDescription("");
+
+        jButtonMenu.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        jButtonMenu.setForeground(new java.awt.Color(255, 0, 0));
+        jButtonMenu.setText("Menu");
+        jButtonMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMenuActionPerformed(evt);
+            }
+        });
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Creacion Partida");
         setMinimumSize(new java.awt.Dimension(629, 452));
         setResizable(false);
@@ -89,21 +109,8 @@ public class FCrearPartida extends FrameBase {
         jLabel3.setBounds(10, 50, 210, 20);
         jPanel1.add(jSeparator1);
         jSeparator1.setBounds(0, 40, 700, 10);
-
-        resetDatos.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        resetDatos.setForeground(new java.awt.Color(204, 0, 0));
-        resetDatos.setText("Borrar");
-        resetDatos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetDatosActionPerformed(evt);
-            }
-        });
-        jPanel1.add(resetDatos);
-        resetDatos.setBounds(100, 170, 110, 40);
-        resetDatos.getAccessibleContext().setAccessibleDescription("");
-
         jPanel1.add(jSeparator2);
-        jSeparator2.setBounds(0, 220, 700, 10);
+        jSeparator2.setBounds(0, 200, 700, 10);
 
         jLabel8.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel8.setText("Escriba su apodo;");
@@ -135,7 +142,7 @@ public class FCrearPartida extends FrameBase {
             }
         });
         jPanel2.add(montoApuesta);
-        montoApuesta.setBounds(480, 100, 130, 30);
+        montoApuesta.setBounds(490, 100, 130, 30);
 
         fondoJugador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,7 +150,7 @@ public class FCrearPartida extends FrameBase {
             }
         });
         jPanel2.add(fondoJugador);
-        fondoJugador.setBounds(480, 50, 130, 30);
+        fondoJugador.setBounds(490, 50, 130, 30);
 
         jLabel9.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel9.setText("Monto apuesta");
@@ -155,17 +162,6 @@ public class FCrearPartida extends FrameBase {
         jPanel2.add(jLabel11);
         jLabel11.setBounds(320, 50, 170, 30);
 
-        jButtonMenu.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        jButtonMenu.setForeground(new java.awt.Color(255, 0, 0));
-        jButtonMenu.setText("Menu");
-        jButtonMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonMenuActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButtonMenu);
-        jButtonMenu.setBounds(180, 150, 110, 40);
-
         jButtonComenzar.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jButtonComenzar.setForeground(new java.awt.Color(0, 153, 0));
         jButtonComenzar.setText("Comenzar");
@@ -175,7 +171,7 @@ public class FCrearPartida extends FrameBase {
             }
         });
         jPanel2.add(jButtonComenzar);
-        jButtonComenzar.setBounds(320, 150, 120, 40);
+        jButtonComenzar.setBounds(250, 130, 120, 40);
 
         cantidadJugadores.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         cantidadJugadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "4" }));
@@ -233,7 +229,7 @@ public class FCrearPartida extends FrameBase {
 
     private void jButtonComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComenzarActionPerformed
         if (validarConfiguracion() == false) {
-            
+
             String color = colorJugador.getSelectedItem().toString();
             int tamaño = Integer.valueOf(tamanoTablero.getSelectedItem().toString());
             int totalJugadores = Integer.valueOf(cantidadJugadores.getSelectedItem().toString());
@@ -242,7 +238,7 @@ public class FCrearPartida extends FrameBase {
             Tablero tablero = new Tablero(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "" + Calendar.getInstance().get(Calendar.SECOND), tamaño);
             Partida partida = new Partida(new Jugador(this.nombreJugador.getText(), color), tablero, montoJugadorD, montoApuestaD, totalJugadores);
             ((CPartida) this.control).preCreacion(partida);
-            
+
         }
     }//GEN-LAST:event_jButtonComenzarActionPerformed
 
@@ -283,12 +279,12 @@ public class FCrearPartida extends FrameBase {
             this.mostrarMensaje("Establece el nombre del jugador");
             return true;
         }
-        
+
         if (this.fondoJugador.getText().isEmpty()) {
             this.mostrarMensaje("Necesita escribir el fondo por jugador");
             return true;
         }
-        
+
         if (this.montoApuesta.getText().isEmpty()) {
             this.mostrarMensaje("Necesita escribir el monto de apuesta");
             return true;
@@ -300,7 +296,7 @@ public class FCrearPartida extends FrameBase {
             this.mostrarMensaje("El monto de dinero contienen caracteres invalidos");
             return true;
         }
-        
+
         if (m > 2000) {
             this.mostrarMensaje("Por el momentto el monto de dinero debe de ser menor a 2000");
             return true;
@@ -315,7 +311,7 @@ public class FCrearPartida extends FrameBase {
                 this.mostrarMensaje("El monto de apuesta contienen caracteres invalidos");
                 return true;
             }
-            
+
             double diezP = m * 0.1;
             if (a > diezP) {
                 this.mostrarMensaje("Para un buen juego el monto por apuesta debe de ser menor a " + diezP);
@@ -336,19 +332,19 @@ public class FCrearPartida extends FrameBase {
             fLobby.setVisible(true);
         });
     }
-    
+
     @Override
     public void update(Observable o, Object o1) {
+        this.dispose();
         Partida partida = ((MPartida) o).getPartida();
         JOptionPane.showMessageDialog(this, "Usted ha creado una partida; Nombre Escogigo=" + partida.getTurno().getNombre() + " Color; " + partida.getTurno().getColor());
-//        ModeloBase modeloPartida = (MPartida) o;
-//        ControlBase controlJugador = new CJugador();
-//        controlJugador.establecerModelo(modeloPartida);
-//        controlJugador.establecerCliente(cliente);
+        ModeloBase modeloPartida = (MPartida) o;
+        ControlBase controlJugador = new CJugador();
+        controlJugador.establecerModelo(modeloPartida);
+        this.control.getCliente().addObserver((Observer) (ModeloBase) modeloPartida);
+        controlJugador.establecerCliente(this.control.getCliente());
         FrameBase fLobby = new FLobby();
         ((FLobby) fLobby).actualizarLobby(partida.getJugadores());
-//        fLobby.establecerControl(controlJugador);
-//        modeloPartida.addObserver(fLobby);
         this.mostrarPantallaLobby((FLobby) fLobby);
 //
 

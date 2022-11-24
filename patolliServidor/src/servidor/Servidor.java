@@ -77,14 +77,18 @@ public class Servidor extends Thread implements Observer {
                     sc.close();
                 }
             }
-            while (jugadores.size() <= maximoPermitido) {
+            while (true) {
                 sc = servidor.accept();
                 List<JugadorLocal> jugadoresEspera = this.protocoloPartidaLocal.procesandoEspera(sc, jugadores);
-                if (jugadoresEspera.size() != this.jugadores.size()) {
-                    this.jugadores = jugadoresEspera;
-                } else {
+//                if (jugadoresEspera.size() != this.jugadores.size()) {
+//                    this.jugadores = jugadoresEspera;
+//                } 
+                if (jugadoresEspera == null) {
                     System.out.println("Ya existe un jugador con los mismos datos");
                     sc.close();
+                }
+                if (jugadores.size() == maximoPermitido) {
+                    break;
                 }
             }
             System.out.println("El juego ha iniciado, ha alcanzado el maximo de jugadores");

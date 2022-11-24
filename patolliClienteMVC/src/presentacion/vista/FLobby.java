@@ -1,6 +1,7 @@
 package presentacion.vista;
 
 import dominio.Jugador;
+import dominio.Partida;
 import java.util.List;
 import java.util.Observable;
 import javax.swing.JOptionPane;
@@ -13,12 +14,14 @@ import modelo.MPartida;
  */
 public class FLobby extends FrameBase {
 
+
     /**
      * Creates new form FLobbyHost
      */
     public FLobby() {
         initComponents();
     }
+
 
 //     
     /**
