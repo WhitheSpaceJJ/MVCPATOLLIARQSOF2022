@@ -162,10 +162,11 @@ public class Cliente extends Observable implements Runnable {
             return false;
         }
     }
-/*
+
+    /*
     Metodo que es jecutado cuando se necesita o se requiere enviar una lista de dados al servidor, si el envio tiene exito 
     es que se procesaron los dados, ya que era el turno actual de este cliente, en cambios no se procesara nada
-    */
+     */
     public boolean lanzarDados(List<Dado> dados) {
         try {
             this.output = new ObjectOutputStream(socket.getOutputStream());
@@ -178,10 +179,13 @@ public class Cliente extends Observable implements Runnable {
         }
         return true;
     }
-/*
-    Metodo que cliente ejecuta cuando un jugador requiere unirse a una partida, 
- */
+
+    /*
+    Metodo que cliente ejecuta cuando un jugador requiere unirse a una partida,  si se procesa 
+    correctamente, este retorna los datos de la partida.
+     */
     public Partida unirsePartida(Jugador jugador) {
+        //Primer try catch para verificar que el servidor este levantado
         try {
             this.socket = new Socket(host, 80);
             System.out.println("Se ha establecido la conexion correctamente");
@@ -189,6 +193,7 @@ public class Cliente extends Observable implements Runnable {
             System.out.println("El servidor no se ha levantado correctamente.");
             return null;
         }
+        //Segundo try catch que establece o envia los datos del jugador para la verificacion correspondiente
         try {
             this.output = new ObjectOutputStream(socket.getOutputStream());
             this.output.writeObject(jugador);
@@ -197,6 +202,8 @@ public class Cliente extends Observable implements Runnable {
             System.out.println("No se ha enviado el jugador.");
             return null;
         }
+        //Tercer try catch que analiza si la se recibio una partida con datos, si es el caso es que 
+        //el jugador se pudo unir con exito en cambio si retorna null,  es que ya existia un jugador con los mismos datos
         try {
             this.input = new ObjectInputStream(socket.getInputStream());
             Partida partida = (Partida) input.readObject();
@@ -215,4 +222,29 @@ public class Cliente extends Observable implements Runnable {
         }
     }
 
+    /*Metodo que el jugador creador ejecutara cuando desea que la partida inicie
+    prototipo
+     */
+    public boolean iniciarPartida() {
+        try {
+            this.output = new ObjectOutputStream(socket.getOutputStream());
+            this.output.writeObject(true);
+            System.out.println("Se ha enviado la peticion de iniciar la partida");
+            //Por lo tanto se regresa true ya que se enviaron los dados
+        } catch (IOException e) {
+            System.out.println("no se ha enviado la peticion de iniciar la partida");
+            return false;
+        }
+        try {
+            this.input = new ObjectInputStream(socket.getInputStream());
+            Boolean peticion = (Boolean) input.readObject();
+            if (peticion != null) {
+               return true;
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("No se ha procesado la respuesta.");
+            return false;
+        }
+        return false;
+    }
 }

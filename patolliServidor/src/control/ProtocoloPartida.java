@@ -101,7 +101,9 @@ El metodo retorna un JugadorLocal si es que este envia los datos de la partida, 
         }
         return jugadoresNuevos;
     }
-
+    //Metodo que recibirael total de jugadores
+    public void iniciarPartida(int jugadoresUnidos){
+    }
     /*
     Metodo que procesa la entrada de listas de dados,que son recibidas pro el jugador en turno.
      */

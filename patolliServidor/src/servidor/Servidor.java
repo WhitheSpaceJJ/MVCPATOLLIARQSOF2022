@@ -111,6 +111,12 @@ public class Servidor extends Thread implements Observer {
             }
             //Segundo ciclo  del servidor
             while (true) {
+                //Aqui se establcera una entrada de datos
+                //para recibir la repuesta de el creador si ya quiere iniciar la partida
+                //iniciar la partida y comenzarla
+                //se actualizar el total de jugadores totales y se notificara los usuarios actuales del cambio.
+                
+                
                 //Se acepta la conexion de un cliente.
                 sc = servidor.accept();
                 Object object = null;
@@ -184,6 +190,7 @@ public class Servidor extends Thread implements Observer {
         //false, y se envian los datos de la partida, a los sockets restantes
         else if (indice == 100) {
         }
+        //nueva condicion cuando se quiere iniciar la partida
 
     }
 
