@@ -115,8 +115,7 @@ public class Servidor extends Thread implements Observer {
                 //para recibir la repuesta de el creador si ya quiere iniciar la partida
                 //iniciar la partida y comenzarla
                 //se actualizar el total de jugadores totales y se notificara los usuarios actuales del cambio.
-                
-                
+
                 //Se acepta la conexion de un cliente.
                 sc = servidor.accept();
                 Object object = null;
@@ -184,11 +183,20 @@ public class Servidor extends Thread implements Observer {
                     System.err.println("Error; " + ex.getMessage());
                 }
             }
-        } 
-        //Si indice es igual a 100 indica que la partida ha finalizado cierra la lista de sockets , termina el 
+        } //Si indice es igual a 100 indica que la partida ha finalizado cierra la lista de sockets , termina el 
         //el flujo del run estableciendo el atributo enServicio a 
         //false, y se envian los datos de la partida, a los sockets restantes
         else if (indice == 100) {
+            for (int i = 0; i < jugadores.size(); i++) {
+                JugadorLocal jugador = jugadores.get(i);
+                try {
+                    this.output = new ObjectOutputStream(jugador.getSocket().getOutputStream());
+                    this.output.writeObject(partida);
+//                    this.output.close();
+                } catch (IOException ex) {
+                    System.err.println("Error; " + ex.getMessage());
+                }
+            }
         }
         //nueva condicion cuando se quiere iniciar la partida
 
