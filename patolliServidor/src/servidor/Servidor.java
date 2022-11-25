@@ -145,15 +145,30 @@ public class Servidor extends Thread implements Observer {
                 }
             }
             System.out.println("El juego ha iniciado, ha alcanzado el maximo de jugadores");
-//             Ciclo que procesara la entrada de los datos o dados
-//              while (enServicio) {
-//            }
+            int procesarIndice = 0;
+//            Ciclo que procesara la entrada de los datos o dados
+            while (enServicio) {
+                Object object = null;
+                try {
+                    ObjectInputStream inputd = new ObjectInputStream(jugadores.get(procesarIndice).getSocket().getInputStream());
+                    object = inputd.readObject();
+                } catch (IOException | ClassNotFoundException e) {
+                    System.out.println("Error; " + e.getMessage());
+                }
+                procesarIndice = this.protocoloPartidaLocal.procesarDados(object);
+                if (procesarIndice == 100) {
+                    System.out.println("La partida ha finalizado");
+                }
+            }
         } catch (IOException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+//Este metodo tambien analizara si el jugador todavia esta en juego y si tiene ficha, y se le enviara los datos de la
+//partida pero que se establecera el atributo activa a false, y automaticamente el cliente finaliza la conexion
 
     public void notificarClientes(Partida partida, int indice) {
+
         //Si indice es un valor diferente de-1 que sea positivo es que el juego esta procesando a los jugadores faltantes 
         //Y por ende se noticia a todos de cada excepto al jugador que entro se le notifica 
         // de la nueva actualizacion de los datos de  partida

@@ -200,22 +200,46 @@ public class FUnirse extends FrameBase {
         });
     }
 //metodo que valida o ejecutado cuando un jugador ha sido aceptado en una partida, y este a su vez abre el lobby
+
     @Override
     public void update(Observable o, Object o1) {
         this.dispose();
         Jugador jugador = ((MJugador) o).getJugador();
         JOptionPane.showMessageDialog(this, "Se ha unido a una partida; Nombre Escogigo=" + jugador.getNombre() + " Color; " + jugador.getColor());
+////        ModeloBase modeloPartida = new MPartida(((Partida) o1));
 //        ModeloBase modeloPartida = new MPartida(((Partida) o1));
-        ModeloBase modeloPartida = new MPartida(((Partida) o1));
-        ((CJugador) this.control).establecerModelo(modeloPartida);
-        this.control.getCliente().addObserver((Observer) modeloPartida);
-        FrameBase fLobby = new FLobby(((Partida) o1).getMontoJugador(),
-                ((Partida) o1).getMontoApuesta(), ((Partida) o1).getTablero().getTamano());
-        fLobby.establecerControl(((CJugador) this.control));
-        modeloPartida.addObserver(fLobby);
-        ((FLobby) fLobby).apagarBoton();
-        ((FLobby) fLobby).actualizarLobby(((Partida) o1).getJugadores());
-        this.mostrarPantallaLobby((FLobby) fLobby);
+//        ((CJugador) this.control).establecerModelo(modeloPartida);
+//        this.control.getCliente().addObserver((Observer) modeloPartida);
+//        FrameBase fLobby = new FLobby(((Partida) o1).getMontoJugador(),
+//                ((Partida) o1).getMontoApuesta(), ((Partida) o1).getTablero().getTamano());
+//        fLobby.establecerControl(((CJugador) this.control));
+//        modeloPartida.addObserver(fLobby);
+//        ((FLobby) fLobby).apagarBoton();
+//        ((FLobby) fLobby).actualizarLobby(((Partida) o1).getJugadores());
+//        this.mostrarPantallaLobby((FLobby) fLobby);
+//        
+        if (((Partida) o1).getTotalJugadores() == ((Partida) o1).getJugadores().size()) {
+            ModeloBase modeloPartida = new MPartida(((Partida) o1));
+            ((CJugador) this.control).establecerModelo(modeloPartida);
+            this.control.getCliente().addObserver((Observer) modeloPartida);
+            FrameBase frameJuego = new FJuego();
+            frameJuego.establecerControl(this.control);
+            java.awt.EventQueue.invokeLater(() -> {
+                frameJuego.setVisible(true);
+            });
+        } else {
+            ModeloBase modeloPartida = new MPartida(((Partida) o1));
+            ((CJugador) this.control).establecerModelo(modeloPartida);
+            this.control.getCliente().addObserver((Observer) modeloPartida);
+            FrameBase fLobby = new FLobby(((Partida) o1).getMontoJugador(),
+                    ((Partida) o1).getMontoApuesta(), ((Partida) o1).getTablero().getTamano());
+            fLobby.establecerControl(((CJugador) this.control));
+            modeloPartida.addObserver(fLobby);
+            ((FLobby) fLobby).apagarBoton();
+            ((FLobby) fLobby).actualizarLobby(((Partida) o1).getJugadores());
+            this.mostrarPantallaLobby((FLobby) fLobby);
+        }
+
     }
 //Metodo que valida la configuración  datos del jugador, si la partida tiene espacios, etc.
 

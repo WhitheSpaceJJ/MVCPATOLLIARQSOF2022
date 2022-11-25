@@ -110,10 +110,15 @@ El metodo retorna un JugadorLocal si es que este envia los datos de la partida, 
     /*
     Metodo que procesa la entrada de listas de dados,que son recibidas pro el jugador en turno.
      */
-    public void procesarDados(Object object) {
+    public int procesarDados(Object object) {
+        //Regresara el indice del jugador que esta en turno, si la partida ya esta esta acaba retorna 
+        //100 de que la partida ya acabo , este actualizara la partida en la PartidaServidor, y este metodo noticara los ultimos 
+        //datos de la partida y se cierra el ciclo
         if (object instanceof List) {
             this.lanzarDados((List<Dado>) object);
+            return 0;
         }
+        return 0;
     }
 
     /*

@@ -1,10 +1,12 @@
 package presentacion.vista;
 
+import control.ControlBase;
 import dominio.Jugador;
 import java.util.List;
 import java.util.Observable;
 import javax.swing.JOptionPane;
 import modelo.MPartida;
+import modelo.ModeloBase;
 
 /**
  * Frame para la espera de jugadores.
@@ -218,8 +220,18 @@ public class FLobby extends FrameBase {
     @Override
     public void update(Observable o, Object o1) {
         //Aqui se verificara si la partida tiene el total de jugadores requeridos se inicie el juego
-        List<Jugador> jugadores = ((MPartida) o).getPartida().getJugadores();
-        this.actualizarLobby(jugadores);
+        if (((MPartida) o).getPartida().getTotalJugadores() == ((MPartida) o).getPartida().getJugadores().size()) {
+            this.dispose();
+            ((MPartida) o).deleteObserver(this);
+            FrameBase frameJuego = new FJuego();
+            frameJuego.establecerControl(this.control);
+            java.awt.EventQueue.invokeLater(() -> {
+                frameJuego.setVisible(true);
+            });
+        } else {
+            List<Jugador> jugadores = ((MPartida) o).getPartida().getJugadores();
+            this.actualizarLobby(jugadores);
+        }
     }
 //Metodo que acualiza el lobby con respecto a los datos de los jugadores
 
