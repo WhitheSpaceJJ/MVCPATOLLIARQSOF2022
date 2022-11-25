@@ -28,7 +28,7 @@ public class ProtocoloPartida {
 El metodo retorna un JugadorLocal si es que este envia los datos de la partida, en cambio regresa null, si solo esta tratando de
     conectarse a la partida que no tiene datos aun.
      */
-    public JugadorLocal procesandoCreacion(Socket sc,Object aux) {
+    public JugadorLocal procesandoCreacion(Socket sc, Object aux) {
         JugadorLocal jugadorCreador = null;
         try {
             /*
@@ -84,9 +84,10 @@ El metodo retorna un JugadorLocal si es que este envia los datos de la partida, 
                 if (jugadorEsta == -1) {
                     jugadores.add(jugadorLocal);
                     jugadoresNuevos = jugadores;
+                    this.partidaLocal.agregarJugador(jugador);
                     output.writeObject(this.partidaLocal.getPartidaLocal());
                     System.out.println("Jugador conectado; Nombre=" + jugador.getNombre() + " Color=" + jugador.getColor());
-                    this.partidaLocal.agregarJugador(jugador);
+//                    this.partidaLocal.agregarJugador(jugador);
                 } else {
                     //Si el jugador ya existe se encia un dato null, con el fin de que el cliente lo procese
                     output.writeObject(null);
@@ -101,9 +102,11 @@ El metodo retorna un JugadorLocal si es que este envia los datos de la partida, 
         }
         return jugadoresNuevos;
     }
+
     //Metodo que recibirael total de jugadores
-    public void iniciarPartida(int jugadoresUnidos){
+    public void iniciarPartida(int jugadoresUnidos) {
     }
+
     /*
     Metodo que procesa la entrada de listas de dados,que son recibidas pro el jugador en turno.
      */

@@ -195,7 +195,6 @@ public class FUnirse extends FrameBase {
 //Metodo que muestra la pantallla de llobby
 
     public void mostrarPantallaLobby(FLobby fLobby) {
-
         java.awt.EventQueue.invokeLater(() -> {
             fLobby.setVisible(true);
         });
@@ -206,6 +205,7 @@ public class FUnirse extends FrameBase {
         this.dispose();
         Jugador jugador = ((MJugador) o).getJugador();
         JOptionPane.showMessageDialog(this, "Se ha unido a una partida; Nombre Escogigo=" + jugador.getNombre() + " Color; " + jugador.getColor());
+//        ModeloBase modeloPartida = new MPartida(((Partida) o1));
         ModeloBase modeloPartida = new MPartida(((Partida) o1));
         ((CJugador) this.control).establecerModelo(modeloPartida);
         this.control.getCliente().addObserver((Observer) modeloPartida);
