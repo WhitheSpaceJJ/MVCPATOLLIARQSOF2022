@@ -22,11 +22,12 @@ public class FLobby extends FrameBase {
 
     /**
      * Creates new form FLobbyHost
+     *
      * @param montoJugador
      * @param tamañoTablero
      * @param montoApuesta
      */
-    public FLobby(double montoJugador,double montoApuesta , int tamañoTablero) {
+    public FLobby(double montoJugador, double montoApuesta, int tamañoTablero) {
         initComponents();
         this.Monto.setText(String.valueOf(montoJugador));
         this.apuesta.setText(String.valueOf(montoApuesta));
@@ -198,22 +199,29 @@ public class FLobby extends FrameBase {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonInicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInicarActionPerformed
-     
+        //Se mandara a llamar al metodo de iniciar partida de control
+
     }//GEN-LAST:event_jButtonInicarActionPerformed
- 
+
+    //metodo utilizado para apagar el boton de un jugador que solo se une
     public void apagarBoton() {
         this.jButtonInicar.setEnabled(false);
+        this.jButtonInicar.setVisible(false);
     }
+//metodo que muestra un mensaje de pantalla
 
-    public void mostrarMensajeError(String mensaje) {
+    public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
     }
+//ejecutado cuando se reciben datos para actualizacion
 
     @Override
     public void update(Observable o, Object o1) {
+        //Aqui se verificara si la partida tiene el total de jugadores requeridos se inicie el juego
         List<Jugador> jugadores = ((MPartida) o).getPartida().getJugadores();
         this.actualizarLobby(jugadores);
     }
+//Metodo que acualiza el lobby con respecto a los datos de los jugadores
 
     public void actualizarLobby(List<Jugador> jugadores) {
         int totalJugadores = jugadores.size();
@@ -258,7 +266,7 @@ public class FLobby extends FrameBase {
             Lcolor4.setText(jugador4.getColor());
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Lcolor2;
     private javax.swing.JLabel Lcolor3;

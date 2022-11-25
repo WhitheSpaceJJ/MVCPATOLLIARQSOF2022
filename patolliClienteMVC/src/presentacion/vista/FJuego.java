@@ -1,31 +1,28 @@
-
 package presentacion.vista;
 
+import dominio.Partida;
 import java.util.Observable;
 
 /**
  * Clase que representa el juego.
+ *
  * @author Equipo1.
  */
-public class FJuego extends FrameBase{
+public class FJuego extends FrameBase {
 
-    private static FJuego instanceFJuego;
-    private int tamaño;
-//Comentario Prueba
     /**
      * Creates new form FLobbyHost
      */
-    private FJuego() {
+    public FJuego() {
         initComponents();
     }
+    // se recibe una partida con el fin de dibujar los datos iniciales de la partida
 
-    public static FJuego getFJuego() {
-        if (instanceFJuego == null) {
-            instanceFJuego = new FJuego();
-        }
-        return instanceFJuego;
+    public FJuego(Partida partida) {
+        initComponents();
+        //Se manda a inicializar un jPanel de tablero grafico y de dados con el fin
+        //de que estos dibujen los datos correspondiendes
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -284,21 +281,22 @@ public class FJuego extends FrameBase{
     }// </editor-fold>//GEN-END:initComponents
 
 
-
     private void lanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lanzarActionPerformed
-
-        //Aun no implementado se prente realizar cuando tengamos en claro la arquitectura.
-        
+//Se manda a llamar al metodo del control correspondientes y este a su vez al cliente que envia datos,
+//sin embargo, no se actualizara o se realizara algo si este jugador no es su turno actual
+    
     }//GEN-LAST:event_lanzarActionPerformed
 
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FValidacion().setVisible(true);
-            }
-        });
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new FValidacion().setVisible(true);
+//            }
+//        });
+        // aqui se establece el nuevo control para el frame de validacion y se establecen los datos 
+        //para salir o entrar
     }//GEN-LAST:event_jButtonSalirActionPerformed
 
 
@@ -339,8 +337,11 @@ public class FJuego extends FrameBase{
     private javax.swing.JPanel tablero;
     // End of variables declaration//GEN-END:variables
 
+    //Al ejecutar este metodo recibe los nuevos datos de la partida
+    //por lo tanto se actualizaran los jpanel y estos redibujaran los datos actuales y ademas se actualizaron los datos de la 
+    //pantalla como el turno actual, fchas en juevo etc.
     @Override
     public void update(Observable o, Object o1) {
-        
+
     }
 }

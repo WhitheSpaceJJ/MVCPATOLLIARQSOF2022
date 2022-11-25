@@ -30,7 +30,7 @@ public class CasillaEntradaSalida extends Figura {
     public void setMarcador(int marcador) {
         this.marcador = marcador;
     }
-
+//metodo que dibuja la casilla de entrada y del tablero
     @Override
     public void dibujar() {
         g.setColor(Color.yellow);

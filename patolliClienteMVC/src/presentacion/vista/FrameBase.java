@@ -26,7 +26,7 @@ public abstract class FrameBase extends javax.swing.JFrame implements Observer {
     public void setControl(ControlBase control) {
         this.control = control;
     }
-
+//Metodo update abtracto
     @Override
     public abstract void update(Observable o, Object o1);
 

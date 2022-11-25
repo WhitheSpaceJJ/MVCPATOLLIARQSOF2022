@@ -114,7 +114,8 @@ public class FValidacion extends FrameBase {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
-
+  
+    //aqui se verifica que el jugador ha salido y se elimina el jugador del juego Nota no se elimina en si se da de baja
     @Override
     public void update(Observable o, Object o1) {
 

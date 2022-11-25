@@ -28,7 +28,9 @@ public class CasillaBordeada extends Figura {
     public void setColor(Color color) {
         this.color = color;
     }
-
+/*
+    Metodo dibuja la casilla bordeada
+    */
     @Override
     public void dibujar() {
         g.setColor(color);

@@ -21,7 +21,8 @@ public class CasillaEspecial extends Figura {
         this.y = y;
         this.p = p;
     }
-
+//Metodo que se encarga de dibujar las casillas que poseen triangulos
+    
     @Override
     public void dibujar() {
         g.setColor(Color.red);

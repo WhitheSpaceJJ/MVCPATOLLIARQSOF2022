@@ -33,10 +33,11 @@ public class DadoGrafico extends JPanel {
     public void actualizarDados(List<Dado> dados) {
         this.dados = dados;
     }
-
+//Metodo que dibujar la seccion de las fichas donde sera colocadas
     @Override
     public void paintComponent(Graphics g) {
     }
+    //Metodo que reactuliza o pinta de nuevo los dados si su respectivo turno
     @Override
     public void repaint() {
     }

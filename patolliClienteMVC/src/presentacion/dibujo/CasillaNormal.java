@@ -18,7 +18,7 @@ public class CasillaNormal extends Figura {
         this.x = x;
         this.y = y;
     }
-
+//Metodo que se encarga de dibujar la casilla del tipo normal
     @Override
     public void dibujar() {
         g.setColor(Color.black);

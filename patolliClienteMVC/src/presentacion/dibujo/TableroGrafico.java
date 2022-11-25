@@ -38,6 +38,7 @@ public class TableroGrafico extends JPanel {
     public void setTablero(Tablero tablero) {
         this.tablero = tablero;
     }
+//Metodo que pinta el tablero, en base al tablero este se reactualizara
 
     @Override
     public void paintComponent(Graphics g) {

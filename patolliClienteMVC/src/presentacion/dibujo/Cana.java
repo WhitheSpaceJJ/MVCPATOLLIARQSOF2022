@@ -1,4 +1,3 @@
-
 package presentacion.dibujo;
 
 import java.awt.Color;
@@ -14,7 +13,7 @@ public class Cana extends Figura {
     private int heigth;
     private boolean cara;
 
-    public Cana(int x, int y, int width, int heigth, boolean cara,int  posicion) {
+    public Cana(int x, int y, int width, int heigth, boolean cara, int posicion) {
         super(posicion);
         this.x = x;
         this.y = y;
@@ -22,7 +21,9 @@ public class Cana extends Figura {
         this.heigth = heigth;
         this.cara = cara;
     }
-
+/*
+    Metodo que se encargar de dibujar la caña de acuerdo a lo que se solicite la clase de dado grafico
+ */
     @Override
     public void dibujar() {
         if (cara) {

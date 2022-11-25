@@ -204,9 +204,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtnomjugador">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtnomjugadorActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

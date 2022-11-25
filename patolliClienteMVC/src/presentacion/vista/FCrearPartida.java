@@ -130,20 +130,8 @@ public class FCrearPartida extends FrameBase {
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setLayout(null);
-
-        montoApuesta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                montoApuestaActionPerformed(evt);
-            }
-        });
         jPanel2.add(montoApuesta);
         montoApuesta.setBounds(490, 100, 130, 30);
-
-        fondoJugador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fondoJugadorActionPerformed(evt);
-            }
-        });
         jPanel2.add(fondoJugador);
         fondoJugador.setBounds(490, 50, 130, 30);
 
@@ -199,11 +187,6 @@ public class FCrearPartida extends FrameBase {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-//Inicio.
-    //Se nos ha pasado quitar 
-    private void fondoJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fondoJugadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fondoJugadorActionPerformed
 
     private void jButtonMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMenuActionPerformed
         this.dispose();
@@ -216,12 +199,6 @@ public class FCrearPartida extends FrameBase {
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreJugadorActionPerformed
 
-    private void montoApuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_montoApuestaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_montoApuestaActionPerformed
-//Hasta aqui.
-
-
     private void jButtonComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComenzarActionPerformed
         if (validarConfiguracion() == false) {
 
@@ -233,7 +210,6 @@ public class FCrearPartida extends FrameBase {
             Tablero tablero = new Tablero(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "" + Calendar.getInstance().get(Calendar.SECOND), tamaño);
             Partida partida = new Partida(new Jugador(this.nombreJugador.getText(), color), tablero, montoJugadorD, montoApuestaD, totalJugadores);
             ((CPartida) this.control).crearPartida(partida);
-
         }
     }//GEN-LAST:event_jButtonComenzarActionPerformed
 
@@ -315,7 +291,7 @@ public class FCrearPartida extends FrameBase {
         }
         return false;
     }
-//mostrar mensaje de error 
+//mostrar mensaje 
 
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
@@ -327,6 +303,7 @@ public class FCrearPartida extends FrameBase {
             fLobby.setVisible(true);
         });
     }
+//Metodo que abre el lobby del creador con los datos de la partida
 
     @Override
     public void update(Observable o, Object o1) {

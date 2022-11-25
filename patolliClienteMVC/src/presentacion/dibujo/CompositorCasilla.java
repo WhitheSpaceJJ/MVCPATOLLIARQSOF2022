@@ -14,7 +14,7 @@ public class CompositorCasilla extends Figura {
     public CompositorCasilla(int posicion) {
         super(posicion);
     }
-
+//Metodo que se encarga de dibujar las figuras
     @Override
     public void dibujar() {
         for (int i = 0; i < lista.size(); i++) {

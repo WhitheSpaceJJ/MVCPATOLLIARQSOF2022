@@ -95,7 +95,6 @@ public class FInicio extends javax.swing.JFrame {
         this.mostrarPantallaCrear();
     }//GEN-LAST:event_crearActionPerformed
 //Mostrar pantalla de creacion de partida
-
     public void mostrarPantallaCrear() {
         this.dispose();
         ModeloBase modeloPartida = new MPartida();
@@ -117,10 +116,6 @@ public class FInicio extends javax.swing.JFrame {
         this.mostrarPantallaUnirse();
     }//GEN-LAST:event_entrarActionPerformed
 
-//Metodo que muestra mensaje de error. 
-    public void mostrarMensajeError(String mensaje) {
-        JOptionPane.showMessageDialog(null, mensaje);
-    }
 
     //Metodo que muestra la pantalla de unirse.
     public void mostrarPantallaUnirse() {

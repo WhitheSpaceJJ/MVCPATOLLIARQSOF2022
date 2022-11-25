@@ -81,12 +81,6 @@ public class FUnirse extends FrameBase {
             }
         });
 
-        txtnomjugador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnomjugadorActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -178,10 +172,6 @@ public class FUnirse extends FrameBase {
 
     }//GEN-LAST:event_jButtonUnirseActionPerformed
 
-    private void txtnomjugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnomjugadorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtnomjugadorActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -210,7 +200,7 @@ public class FUnirse extends FrameBase {
             fLobby.setVisible(true);
         });
     }
-
+//metodo que valida o ejecutado cuando un jugador ha sido aceptado en una partida, y este a su vez abre el lobby
     @Override
     public void update(Observable o, Object o1) {
         this.dispose();
