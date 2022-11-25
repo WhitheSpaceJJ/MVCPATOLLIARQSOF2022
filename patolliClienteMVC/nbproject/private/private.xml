@@ -2,21 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Judi/Desktop/patolliMVC/patolliClienteMVC/src/presentacion/vista/FCrearPartida.java</file>
-            <file>file:/C:/Users/Judi/Desktop/patolliMVC/patolliClienteMVC/src/presentacion/vista/FUnirse.java</file>
-            <file>file:/C:/Users/Judi/Desktop/patolliMVC/patolliClienteMVC/src/control/CJugador.java</file>
-            <file>file:/C:/Users/Judi/Desktop/patolliMVC/patolliClienteMVC/src/control/ControlBase.java</file>
-            <file>file:/C:/Users/Judi/Desktop/patolliMVC/patolliClienteMVC/src/presentacion/vista/FJuego.java</file>
-            <file>file:/C:/Users/Judi/Desktop/patolliMVC/patolliClienteMVC/src/modelo/MJugador.java</file>
-            <file>file:/C:/Users/Judi/Desktop/patolliMVC/patolliClienteMVC/src/presentacion/vista/FrameBase.java</file>
-            <file>file:/C:/Users/Judi/Desktop/patolliMVC/patolliClienteMVC/src/presentacion/vista/FValidacion.java</file>
-            <file>file:/C:/Users/Judi/Desktop/patolliMVC/patolliClienteMVC/src/presentacion/vista/FLobby.java</file>
-            <file>file:/C:/Users/Judi/Desktop/patolliMVC/patolliClienteMVC/src/control/CValidacion.java</file>
-            <file>file:/C:/Users/Judi/Desktop/patolliMVC/patolliClienteMVC/src/presentacion/vista/Principal.java</file>
-            <file>file:/C:/Users/Judi/Desktop/patolliMVC/patolliClienteMVC/src/control/CPartida.java</file>
-            <file>file:/C:/Users/Judi/Desktop/patolliMVC/patolliClienteMVC/src/presentacion/vista/FInicio.java</file>
-            <file>file:/C:/Users/Judi/Desktop/patolliMVC/patolliClienteMVC/src/clientePatolli/Cliente.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -247,4 +247,6 @@ public class Cliente extends Observable implements Runnable {
         }
         return false;
     }
+    public void salirPartida(){
+    }
 }
