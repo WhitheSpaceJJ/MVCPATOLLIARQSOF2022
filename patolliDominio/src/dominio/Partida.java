@@ -25,7 +25,7 @@ public class Partida implements Serializable {
         this.dados = new ArrayList<>();
         this.jugadores = new ArrayList<>();
         this.jugadores.add(turno);
-        this.activa = false;
+        this.activa = true;
     }
 
     public int getCantidadFichas() {
