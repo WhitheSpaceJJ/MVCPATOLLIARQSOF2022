@@ -14,9 +14,10 @@ public class MValidacion extends ModeloBase {
     public String getConfirmacion() {
         return confirmacion;
     }
-
     public void setConfirmacion(String confirmacion) {
         this.confirmacion = confirmacion;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public Jugador getJugador() {

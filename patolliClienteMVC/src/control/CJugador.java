@@ -32,5 +32,4 @@ public class CJugador extends ControlBase {
 
     public void lanzarDados() {
     }
-  
 }
