@@ -27,7 +27,7 @@ public class Tablero implements Serializable {
         this.tamano = tamano;
         this.casillas = new ArrayList();
         //Inicializar casillas orden
-
+        this.inicializarCasillas(tamano);
     }
 
 //Metodos get y set
@@ -62,15 +62,75 @@ public class Tablero implements Serializable {
     }
 
     public void inicializarCasillas(int tamano) {
+        List<Casilla> casillaAla = new ArrayList<>();
+        int alas = 0;
         switch (tamano) {
             case 10:
-                //Ciclo que inicializa las casillas del tablero tamaño 10
+                casillaAla.add(new Casilla(TipoCasilla.EntradaSalida));
+                casillaAla.add(new Casilla(TipoCasilla.Normal));
+                casillaAla.add(new Casilla(TipoCasilla.Penalizacion));
+                casillaAla.add(new Casilla(TipoCasilla.Penalizacion));
+                casillaAla.add(new Casilla(TipoCasilla.Bordeada));
+                casillaAla.add(new Casilla(TipoCasilla.Bordeada));
+                casillaAla.add(new Casilla(TipoCasilla.Penalizacion));
+                casillaAla.add(new Casilla(TipoCasilla.Penalizacion));
+                casillaAla.add(new Casilla(TipoCasilla.Normal));
+                casillaAla.add(new Casilla(TipoCasilla.Normal));
+                casillaAla.add(new Casilla(TipoCasilla.Central));
+                while (alas < 4) {
+                    for (int i = 0; i < casillaAla.size(); i++) {
+                        Casilla get = casillaAla.get(i);
+                        this.casillas.add(get);
+                    }
+                    alas += 1;
+                }
                 break;
             case 12:
-                //Ciclo que inicializa las casillas del tablero tamaño 12
+                casillaAla.add(new Casilla(TipoCasilla.EntradaSalida));
+                casillaAla.add(new Casilla(TipoCasilla.Normal));
+                casillaAla.add(new Casilla(TipoCasilla.Normal));
+                casillaAla.add(new Casilla(TipoCasilla.Penalizacion));
+                casillaAla.add(new Casilla(TipoCasilla.Penalizacion));
+                casillaAla.add(new Casilla(TipoCasilla.Bordeada));
+                casillaAla.add(new Casilla(TipoCasilla.Bordeada));
+                casillaAla.add(new Casilla(TipoCasilla.Penalizacion));
+                casillaAla.add(new Casilla(TipoCasilla.Penalizacion));
+                casillaAla.add(new Casilla(TipoCasilla.Normal));
+                casillaAla.add(new Casilla(TipoCasilla.Normal));
+                casillaAla.add(new Casilla(TipoCasilla.Normal));
+                casillaAla.add(new Casilla(TipoCasilla.Central));
+                while (alas < 4) {
+                    for (int i = 0; i < casillaAla.size(); i++) {
+                        Casilla get = casillaAla.get(i);
+                        this.casillas.add(get);
+                    }
+                    alas += 1;
+                }
                 break;
             case 14:
                 //Ciclo que inicializa las casillas del tablero tamaño 14
+                casillaAla.add(new Casilla(TipoCasilla.EntradaSalida));
+                casillaAla.add(new Casilla(TipoCasilla.Normal));
+                casillaAla.add(new Casilla(TipoCasilla.Normal));
+                casillaAla.add(new Casilla(TipoCasilla.Normal));
+                casillaAla.add(new Casilla(TipoCasilla.Penalizacion));
+                casillaAla.add(new Casilla(TipoCasilla.Penalizacion));
+                casillaAla.add(new Casilla(TipoCasilla.Bordeada));
+                casillaAla.add(new Casilla(TipoCasilla.Bordeada));
+                casillaAla.add(new Casilla(TipoCasilla.Penalizacion));
+                casillaAla.add(new Casilla(TipoCasilla.Penalizacion));
+                casillaAla.add(new Casilla(TipoCasilla.Normal));
+                casillaAla.add(new Casilla(TipoCasilla.Normal));
+                casillaAla.add(new Casilla(TipoCasilla.Normal));
+                casillaAla.add(new Casilla(TipoCasilla.Normal));
+                casillaAla.add(new Casilla(TipoCasilla.Central));
+                while (alas < 4) {
+                    for (int i = 0; i < casillaAla.size(); i++) {
+                        Casilla get = casillaAla.get(i);
+                        this.casillas.add(get);
+                    }
+                    alas += 1;
+                }
                 break;
             default:
                 break;
