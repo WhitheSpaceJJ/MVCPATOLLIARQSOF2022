@@ -1,5 +1,7 @@
 package presentacion.vista;
 
+import control.CJugador;
+import control.CPartida;
 import control.ControlBase;
 import entidades.Jugador;
 import java.util.List;
@@ -202,6 +204,7 @@ public class FLobby extends FrameBase {
 
     private void jButtonInicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInicarActionPerformed
         //Se mandara a llamar al metodo de iniciar partida de control
+        ((CPartida)this.control).inicarPartida();
 
     }//GEN-LAST:event_jButtonInicarActionPerformed
 

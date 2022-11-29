@@ -115,32 +115,43 @@ public class Servidor extends Thread implements Observer {
                 //para recibir la repuesta de el creador si ya quiere iniciar la partida
                 //iniciar la partida y comenzarla
                 //se actualizar el total de jugadores totales y se notificara los usuarios actuales del cambio.
-
-                //Se acepta la conexion de un cliente.
-                sc = servidor.accept();
-                Object object = null;
+                List<JugadorLocal> jugadoresEspera = null;
                 try {
-                    ObjectInputStream inputd = new ObjectInputStream(sc.getInputStream());
-                    object = inputd.readObject();
+                    ObjectInputStream inputd = new ObjectInputStream(jugadores.get(0).getSocket().getInputStream());
+                    Object objectIniciar = inputd.readObject();
+                    jugadoresEspera = this.protocoloPartidaLocal.procesandoEspera(jugadores.get(0).getSocket(), jugadores, objectIniciar);
                 } catch (IOException | ClassNotFoundException e) {
                     System.out.println("Error; " + e.getMessage());
                 }
-
-                //Se manda a llamar al metodo del protocolo, con el fin de procesar la entrada del cliente
-                List<JugadorLocal> jugadoresEspera = this.protocoloPartidaLocal.procesandoEspera(sc, jugadores, object);
-                //Si jugadores es igual a null es que la lista de jugadores actuales no sufrio algun cambio en memoria.
-                //y que el jugador que queria conectar mando, datos de la creacion de una partida, o que ya habia un jugador
-                //con los mismos datos. por lo tanto se cierra la conexion
                 if (jugadoresEspera == null) {
-                    System.out.println("Ya existe un jugador con los mismos datos");
-                    sc.close();
+                    break;
                 } else {
-                    //si la lista es diferente de nulo se actualiza la lista.
-                    this.jugadores = jugadoresEspera;
-                    //sin embargo se pasa por un ultimo friltro, el cual utiliza el atributo de maximoPermitod
-                    //que fue establecido al momento de el servidor recibio los datos de la partida
-                    if (this.jugadores.size() == this.maximoPermitido) {
-                        break;
+                    //Se acepta la conexion de un cliente.
+                    sc = servidor.accept();
+                    Object object = null;
+                    try {
+                        ObjectInputStream inputd = new ObjectInputStream(sc.getInputStream());
+                        object = inputd.readObject();
+                    } catch (IOException | ClassNotFoundException e) {
+                        System.out.println("Error; " + e.getMessage());
+                    }
+
+                    //Se manda a llamar al metodo del protocolo, con el fin de procesar la entrada del cliente
+                     jugadoresEspera = this.protocoloPartidaLocal.procesandoEspera(sc, jugadores, object);
+                    //Si jugadores es igual a null es que la lista de jugadores actuales no sufrio algun cambio en memoria.
+                    //y que el jugador que queria conectar mando, datos de la creacion de una partida, o que ya habia un jugador
+                    //con los mismos datos. por lo tanto se cierra la conexion
+                    if (jugadoresEspera == null) {
+                        System.out.println("Ya existe un jugador con los mismos datos");
+                        sc.close();
+                    } else {
+                        //si la lista es diferente de nulo se actualiza la lista.
+                        this.jugadores = jugadoresEspera;
+                        //sin embargo se pasa por un ultimo friltro, el cual utiliza el atributo de maximoPermitod
+                        //que fue establecido al momento de el servidor recibio los datos de la partida
+                        if (this.jugadores.size() == this.maximoPermitido) {
+                            break;
+                        }
                     }
                 }
             }

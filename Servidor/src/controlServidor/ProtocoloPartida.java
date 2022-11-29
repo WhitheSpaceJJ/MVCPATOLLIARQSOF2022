@@ -92,6 +92,10 @@ El metodo retorna un JugadorLocal si es que este envia los datos de la partida, 
                     //Si el jugador ya existe se encia un dato null, con el fin de que el cliente lo procese
                     output.writeObject(null);
                 }
+            } else if (object instanceof Boolean) {
+                //Evaluar Creacion de la partida
+                this.iniciarPartida(jugadores.size());
+                return jugadores;
             } else {
                 //En cambio si es otra partida la que se recibe este envia algo null con el de que rechaze la conexion
                 ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());

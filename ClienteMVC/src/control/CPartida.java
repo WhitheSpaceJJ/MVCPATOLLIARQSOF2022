@@ -26,6 +26,8 @@ public class CPartida extends ControlBase {
         }
     }
 
-    public void inicarPArtida() {
+    public void inicarPartida() {
+        if(this.cliente.iniciarPartida()){
+        }
     }
 }

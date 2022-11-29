@@ -26,10 +26,15 @@ public class PartidaServidor extends Observable {
         this.setChanged();
         this.notifyObservers();
     }
-  public void iniciarPartida(int totalJugadoresNuevos){
-      //Se actualizara la partia, se establcer un nuevo en este caso el 50, de que la partida ya comezo 
-      //y se ejecuta el update de servidor con este nuevo numero
-  }
+
+    public void iniciarPartida(int totalJugadoresNuevos) {
+        //Se actualizara la partia, se establcer un nuevo en este caso el -1, de que la partida ya comezo 
+        //y se ejecuta el update de servidor con este nuevo numero
+        this.partidaLocal.setTotalJugadores(totalJugadoresNuevos);
+        this.setChanged();
+        this.notifyObservers(-1);
+    }
+
     /*
     Ejecutado para la respectiva actualizacion de los datos de la partida
      */
