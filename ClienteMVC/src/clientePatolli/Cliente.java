@@ -6,9 +6,7 @@ import entidades.Partida;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Observable;
 
@@ -27,7 +25,7 @@ public class Cliente extends Observable implements Runnable {
         this.conexionEstablecida = true;
 //Si desea levantar un servidor como se menciono en el proyecto del patolliServidor, este es el dato que se 
 //necesita cambiar con respecto a la computadora a la que se desmilitarizo, y su correspiende ip y puerto que se establecio.
-        this.host = "192.168.100.6";
+        this.host = "187.137.21.117";
         this.puerto = 80;
     }
 
@@ -239,7 +237,7 @@ public class Cliente extends Observable implements Runnable {
             this.input = new ObjectInputStream(socket.getInputStream());
             Boolean peticion = (Boolean) input.readObject();
             if (peticion != null) {
-               return true;
+                return true;
             }
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("No se ha procesado la respuesta.");
@@ -247,6 +245,7 @@ public class Cliente extends Observable implements Runnable {
         }
         return false;
     }
-    public void salirPartida(){
+
+    public void salirPartida() {
     }
 }
