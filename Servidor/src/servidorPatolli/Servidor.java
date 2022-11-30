@@ -67,6 +67,9 @@ public class Servidor extends Thread implements Observer {
             //Como se abaran dado cuenta el o1, se castea a una instancia de Integer, ya que este recibe un entero por parte de 
             //PartidaServidor, y los datos de una partida.
             notificarClientes(((PartidaServidor) o).getPartidaLocal(), ((Integer) o1));
+            if(((Integer)o1)==-1){
+                this.maximoPermitido=jugadores.size();
+            }
         }
     }
 
@@ -109,51 +112,52 @@ public class Servidor extends Thread implements Observer {
                     this.jugadores.add(jugadorLocal);
                 }
             }
-            //Segundo ciclo  del servidor
+//            int 
             while (true) {
                 //Aqui se establcera una entrada de datos
                 //para recibir la repuesta de el creador si ya quiere iniciar la partida
                 //iniciar la partida y comenzarla
                 //se actualizar el total de jugadores totales y se notificara los usuarios actuales del cambio.
+
                 List<JugadorLocal> jugadoresEspera = null;
+//                try {
+//                    ObjectInputStream inputd = new ObjectInputStream(jugadores.get(0).getSocket().getInputStream());
+//                    Object objectIniciar = inputd.readObject();
+//                    jugadoresEspera = this.protocoloPartidaLocal.procesandoEspera(jugadores.get(0).getSocket(), jugadores, objectIniciar);
+//                } catch (IOException | ClassNotFoundException e) {
+//                    System.out.println("Error; " + e.getMessage());
+//                }
+//                if (jugadoresEspera == null) {
+//                    break;
+//                } else {
+                //Se acepta la conexion de un cliente.
+                sc = servidor.accept();
+                Object object = null;
                 try {
-                    ObjectInputStream inputd = new ObjectInputStream(jugadores.get(0).getSocket().getInputStream());
-                    Object objectIniciar = inputd.readObject();
-                    jugadoresEspera = this.protocoloPartidaLocal.procesandoEspera(jugadores.get(0).getSocket(), jugadores, objectIniciar);
+                    ObjectInputStream inputd = new ObjectInputStream(sc.getInputStream());
+                    object = inputd.readObject();
                 } catch (IOException | ClassNotFoundException e) {
                     System.out.println("Error; " + e.getMessage());
                 }
-                if (jugadoresEspera == null) {
-                    break;
-                } else {
-                    //Se acepta la conexion de un cliente.
-                    sc = servidor.accept();
-                    Object object = null;
-                    try {
-                        ObjectInputStream inputd = new ObjectInputStream(sc.getInputStream());
-                        object = inputd.readObject();
-                    } catch (IOException | ClassNotFoundException e) {
-                        System.out.println("Error; " + e.getMessage());
-                    }
 
-                    //Se manda a llamar al metodo del protocolo, con el fin de procesar la entrada del cliente
-                     jugadoresEspera = this.protocoloPartidaLocal.procesandoEspera(sc, jugadores, object);
-                    //Si jugadores es igual a null es que la lista de jugadores actuales no sufrio algun cambio en memoria.
-                    //y que el jugador que queria conectar mando, datos de la creacion de una partida, o que ya habia un jugador
-                    //con los mismos datos. por lo tanto se cierra la conexion
-                    if (jugadoresEspera == null) {
-                        System.out.println("Ya existe un jugador con los mismos datos");
-                        sc.close();
-                    } else {
-                        //si la lista es diferente de nulo se actualiza la lista.
-                        this.jugadores = jugadoresEspera;
-                        //sin embargo se pasa por un ultimo friltro, el cual utiliza el atributo de maximoPermitod
-                        //que fue establecido al momento de el servidor recibio los datos de la partida
-                        if (this.jugadores.size() == this.maximoPermitido) {
-                            break;
-                        }
+                //Se manda a llamar al metodo del protocolo, con el fin de procesar la entrada del cliente
+                jugadoresEspera = this.protocoloPartidaLocal.procesandoEspera(sc, jugadores, object);
+                //Si jugadores es igual a null es que la lista de jugadores actuales no sufrio algun cambio en memoria.
+                //y que el jugador que queria conectar mando, datos de la creacion de una partida, o que ya habia un jugador
+                //con los mismos datos. por lo tanto se cierra la conexion
+                if (jugadoresEspera == null) {
+                    System.out.println("Ya existe un jugador con los mismos datos");
+                    sc.close();
+                } else {
+                    //si la lista es diferente de nulo se actualiza la lista.
+                    this.jugadores = jugadoresEspera;
+                    //sin embargo se pasa por un ultimo friltro, el cual utiliza el atributo de maximoPermitod
+                    //que fue establecido al momento de el servidor recibio los datos de la partida
+                    if (this.jugadores.size() == this.maximoPermitido) {
+                        break;
                     }
                 }
+//                }
             }
             System.out.println("El juego ha iniciado, ha alcanzado el maximo de jugadores");
             int procesarIndice = 0;

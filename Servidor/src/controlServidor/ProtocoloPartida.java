@@ -4,10 +4,8 @@ import entidades.Dado;
 import entidades.Jugador;
 import entidades.Partida;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
 import jugador.JugadorLocal;
 import modeloServidor.PartidaServidor;
@@ -94,8 +92,30 @@ El metodo retorna un JugadorLocal si es que este envia los datos de la partida, 
                 }
             } else if (object instanceof Boolean) {
                 //Evaluar Creacion de la partida
+                                ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());
+                if(jugadores.size()>0){   
+                output.writeObject(true);
+
+//                int auxiliar
+//                for (int i = 0; i < jugadoresNuevos.size(); i++) {
+//                    JugadorLocal get = jugadoresNuevos.get(i);
+//                    if () {
+//                        
+//                    }
+//                }
+//                try {
+//                    ObjectInputStream inputd = new ObjectInputStream(jugadores.get(0).getSocket().getInputStream());
+//                    Object objectIniciar = inputd.readObject();
+//                } catch (IOException | ClassNotFoundException e) {
+//                    System.out.println("Error; " + e.getMessage());
+//                }
+
                 this.iniciarPartida(jugadores.size());
                 return jugadores;
+                }else{
+                    output.writeObject(null);
+                }
+             
             } else {
                 //En cambio si es otra partida la que se recibe este envia algo null con el de que rechaze la conexion
                 ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());
