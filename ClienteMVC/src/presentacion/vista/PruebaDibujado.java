@@ -1,6 +1,7 @@
 package presentacion.vista;
 
 import entidades.Dinero;
+import entidades.Ficha;
 import entidades.Jugador;
 import entidades.Partida;
 import entidades.Tablero;
@@ -22,7 +23,12 @@ public class PruebaDibujado {
         jugador3.inicializarFichas(6);
         Jugador jugador4 = new Jugador("Jose3", "Rojo");
         jugador4.inicializarFichas(6);
-        Partida partida = new Partida(jugador1, new Tablero("30112022", 14), 2000, 100, 4);
+        Tablero tablero= new Tablero("30112022", 10);
+        for (int i = 0; i < tablero.getCasillas().size(); i++) {
+            Ficha ficha=new Ficha(i, jugador1);
+            tablero.getCasillas().get(i).setFicha(ficha);
+        }
+        Partida partida = new Partida(jugador1,tablero, 2000, 100, 4);
 //        partida.getJugadores().add(jugador1);
         partida.getJugadores().add(jugador2);
         partida.getJugadores().add(jugador3);
