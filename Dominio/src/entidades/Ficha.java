@@ -18,6 +18,8 @@ public class Ficha implements Serializable {
      */
     private Jugador jugador;
     private boolean enJuego;
+    private boolean terminoVuelta;
+    private boolean eliminada;
 
 //Constructores
     public Ficha() {
@@ -28,6 +30,8 @@ public class Ficha implements Serializable {
         this.numeroPosicion = numeroPosicion;
         this.jugador = jugador;
         this.enJuego = enJuego;
+        this.terminoVuelta=false;
+        this.eliminada=false;
     }
 
     public Ficha(int numeroPosicion, Jugador jugador) {
@@ -55,6 +59,22 @@ public class Ficha implements Serializable {
 
     public Jugador getJugador() {
         return jugador;
+    }
+
+    public boolean isTerminoVuelta() {
+        return terminoVuelta;
+    }
+
+    public void setTerminoVuelta(boolean terminoVuelta) {
+        this.terminoVuelta = terminoVuelta;
+    }
+
+    public boolean isEliminada() {
+        return eliminada;
+    }
+
+    public void setEliminada(boolean eliminada) {
+        this.eliminada = eliminada;
     }
 
     public boolean isEnJuego() {

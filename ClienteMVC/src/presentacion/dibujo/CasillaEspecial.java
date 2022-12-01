@@ -21,7 +21,19 @@ public class CasillaEspecial extends Figura {
         this.y = y;
         this.p = p;
     }
+
+    public CasillaEspecial(int[] x, int[] y, Polygon p, int posicion, Graphics g) {
+        super(posicion, g);
+        this.x = x;
+        this.y = y;
+        this.p = p;
+    }
+    
+    
+    
 //Metodo que se encarga de dibujar las casillas que poseen triangulos
+
+
     
     @Override
     public void dibujar() {

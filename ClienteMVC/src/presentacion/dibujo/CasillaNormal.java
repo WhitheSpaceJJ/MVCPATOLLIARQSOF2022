@@ -12,13 +12,20 @@ import java.awt.Polygon;
 public class CasillaNormal extends Figura {
     private int[] x;
     private int[] y;
+//
+//    public CasillaNormal(int[] x, int[] y, int  posicion) {
+//        super(posicion);
+//        this.x = x;
+//        this.y = y;
+//    }
 
-    public CasillaNormal(int[] x, int[] y, int  posicion) {
-        super(posicion);
+    public CasillaNormal(int[] x,int[] y, int posicion, Graphics g) {
+        super(posicion, g);
         this.x = x;
         this.y = y;
     }
-//Metodo que se encarga de dibujar la casilla del tipo normal
+
+//   Metodo que se encarga de dibujar la casilla del tipo normal
     @Override
     public void dibujar() {
         g.setColor(Color.black);
@@ -42,12 +49,22 @@ public class CasillaNormal extends Figura {
         this.y = y;
     }
 
-    public Graphics getG() {
-        return g;
-    }
+//    public Integer[] getX() {
+//        return x;
+//    }
+//
+//    public void setX(Integer[] x) {
+//        this.x = x;
+//    }
+//
+//    public Integer[] getY() {
+//        return y;
+//    }
+//
+//    public void setY(Integer[] y) {
+//        this.y = y;
+//    }
 
-    public void setG(Graphics g) {
-        this.g = g;
-    }
+    
 
 }

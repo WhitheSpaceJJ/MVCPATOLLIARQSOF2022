@@ -1,7 +1,11 @@
 package presentacion.vista;
 
+import entidades.Jugador;
 import entidades.Partida;
+import java.awt.Color;
+import java.awt.Container;
 import java.util.Observable;
+import presentacion.dibujo.TableroGrafico;
 
 /**
  * Clase que representa el juego.
@@ -10,18 +14,76 @@ import java.util.Observable;
  */
 public class FJuego extends FrameBase {
 
-    /**
-     * Creates new form FLobbyHost
-     */
-    public FJuego() {
-        initComponents();
-    }
-    // se recibe una partida con el fin de dibujar los datos iniciales de la partida
+    TableroGrafico tablero1;
 
+    // se recibe una partida con el fin de dibujar los datos iniciales de la partida
     public FJuego(Partida partida) {
         initComponents();
         //Se manda a inicializar un jPanel de tablero grafico y de dados con el fin
         //de que estos dibujen los datos correspondiendes
+        //Rojo     Azul    Amarillo   Verde
+//        String[] colores = {"FF0000", "0000CC", "FFFF33", "33FF33"};
+
+////        this.setVisible(true);
+        this.tablero1 = new TableroGrafico(partida.getTablero());
+        this.getContentPane().add(tablero1);
+        tablero1.setBounds(0, 0, 600, 600);
+        tablero1.setBackground(Color.LIGHT_GRAY);
+        this.rellenarDatos(partida);
+
+    }
+
+    // se recibe una partida con el fin de dibujar los datos iniciales de la partida
+    public FJuego() {
+        initComponents();
+    }
+//Prepara tablero y zona de dados
+
+    public void prepararJuego(Partida partida) {
+        this.setVisible(false);
+        this.tablero1.setTablero(partida.getTablero());
+//        this.rellenarDatos(partida);
+        this.setVisible(true);
+    }
+
+    //Rellenar de nuevo los datos y reactualiza el dibujado de tablero y de dados
+    public void actualizarJuego() {
+    }
+//Actualizacion de datoa del turno 
+    public void rellenarDatos(Partida partida) {
+        for (int i = 0; i < partida.getJugadores().size(); i++) {
+            Jugador jugador = partida.getJugadores().get(i);
+            this.jugadores.addItem("Nombre; " + jugador.getNombre() + ", Color; " + jugador.getColor());
+        }
+        this.tamanoTablero.setText(String.valueOf(partida.getTablero().getTamano()));
+        this.penalizacion.setText(String.valueOf(partida.getMontoApuesta()));
+        this.nombre.setText(partida.getTurno().getNombre());
+        this.monto.setText(String.valueOf(partida.getTurno().getDinero().getCantidad()));
+        int contadorFichasEliminadas = 0;
+        int contadorFichasVuelta = 0;
+        for (int i = 0; i < partida.getTurno().getFichas().size(); i++) {
+            if (!partida.getTurno().getFichas().get(i).isEnJuego()) {
+                contadorFichasEliminadas += 1;
+            }
+            if (partida.getTurno().getFichas().get(i).isTerminoVuelta()) {
+                contadorFichasVuelta += 1;
+            }
+        }
+        //Azul, Amarillo, Rojo, Verde
+        this.fichasEliminadas.setText(String.valueOf(contadorFichasEliminadas));
+        this.fichaRestantes.setText(String.valueOf(contadorFichasVuelta));
+        if (partida.getTurno().getColor().equalsIgnoreCase("Rojo")) {
+            this.turno.setBackground(Color.RED);
+        }
+        if (partida.getTurno().getColor().equalsIgnoreCase("Verde")) {
+            this.turno.setBackground(Color.GREEN);
+        }
+        if (partida.getTurno().getColor().equalsIgnoreCase("Amarillo")) {
+            this.turno.setBackground(Color.YELLOW);
+        }
+        if (partida.getTurno().getColor().equalsIgnoreCase("Azul")) {
+            this.turno.setBackground(Color.BLUE);
+        }
     }
 
     /**
@@ -33,11 +95,11 @@ public class FJuego extends FrameBase {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tablero = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        fichasEnJuego = new javax.swing.JLabel();
+        turno = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         nombre = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -49,9 +111,10 @@ public class FJuego extends FrameBase {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         fichaRestantes = new javax.swing.JLabel();
-        montoJugador = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        fichasEnJuego = new javax.swing.JLabel();
+        monto = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        fichasEliminadas = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lanzar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
@@ -60,65 +123,47 @@ public class FJuego extends FrameBase {
         jLabel16 = new javax.swing.JLabel();
         fichas = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
-        datoJugador = new javax.swing.JPanel();
         MontoTitulo = new javax.swing.JLabel();
-        lTotalJugadores = new javax.swing.JLabel();
         MontoTitulo2 = new javax.swing.JLabel();
         MontoTitulo1 = new javax.swing.JLabel();
-        LPena1 = new javax.swing.JLabel();
-        lTamañoTableroi = new javax.swing.JLabel();
+        penalizacion = new javax.swing.JLabel();
+        tamanoTablero = new javax.swing.JLabel();
+        jugadores = new javax.swing.JComboBox<>();
+
+        jLabel4.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel4.setText("Fichas En Juego");
+
+        fichasEnJuego.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        fichasEnJuego.setText("0");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Juego");
         setMinimumSize(new java.awt.Dimension(1268, 640));
         getContentPane().setLayout(null);
 
-        tablero.setBackground(new java.awt.Color(204, 204, 204));
-        tablero.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        tablero.setMinimumSize(new java.awt.Dimension(600, 600));
-
-        javax.swing.GroupLayout tableroLayout = new javax.swing.GroupLayout(tablero);
-        tablero.setLayout(tableroLayout);
-        tableroLayout.setHorizontalGroup(
-            tableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 598, Short.MAX_VALUE)
-        );
-        tableroLayout.setVerticalGroup(
-            tableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 598, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(tablero);
-        tablero.setBounds(0, 0, 600, 0);
-
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.setLayout(null);
+        turno.setBackground(new java.awt.Color(204, 204, 204));
+        turno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        turno.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLabel1.setText("Turno  Actual");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 10, 160, 20);
+        turno.add(jLabel1);
+        jLabel1.setBounds(50, 30, 160, 20);
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel2.setText("Jugador");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 50, 90, 21);
-
-        jLabel3.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel3.setText("Fichas Actuales");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(10, 150, 160, 19);
+        turno.add(jLabel2);
+        jLabel2.setBounds(10, 70, 90, 21);
 
         nombre.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         nombre.setText("VACIO");
-        jPanel1.add(nombre);
-        nombre.setBounds(160, 50, 80, 20);
+        turno.add(nombre);
+        nombre.setBounds(140, 70, 80, 20);
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel6.setText("Monto Actual");
-        jPanel1.add(jLabel6);
-        jLabel6.setBounds(10, 80, 120, 21);
+        turno.add(jLabel6);
+        jLabel6.setBounds(10, 110, 120, 21);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setLayout(null);
@@ -151,31 +196,36 @@ public class FJuego extends FrameBase {
         jPanel2.add(jLabel14);
         jLabel14.setBounds(120, 80, 41, 16);
 
-        jPanel1.add(jPanel2);
+        turno.add(jPanel2);
         jPanel2.setBounds(0, 600, 240, 170);
 
         fichaRestantes.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        fichaRestantes.setText("VACIO");
-        jPanel1.add(fichaRestantes);
-        fichaRestantes.setBounds(150, 150, 70, 19);
+        fichaRestantes.setText("0");
+        turno.add(fichaRestantes);
+        fichaRestantes.setBounds(120, 210, 70, 19);
 
-        montoJugador.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        montoJugador.setText("VACIO");
-        jPanel1.add(montoJugador);
-        montoJugador.setBounds(160, 80, 42, 19);
+        monto.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        monto.setText("VACIO");
+        turno.add(monto);
+        monto.setBounds(140, 110, 42, 19);
 
-        jLabel4.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel4.setText("Fichas En Juego");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(10, 110, 160, 19);
+        jLabel5.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel5.setText("Fichas Restantes");
+        turno.add(jLabel5);
+        jLabel5.setBounds(50, 180, 160, 19);
 
-        fichasEnJuego.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        fichasEnJuego.setText("0");
-        jPanel1.add(fichasEnJuego);
-        fichasEnJuego.setBounds(160, 110, 70, 19);
+        fichasEliminadas.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        fichasEliminadas.setText("0");
+        turno.add(fichasEliminadas);
+        fichasEliminadas.setBounds(150, 150, 70, 19);
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(1000, 0, 250, 240);
+        jLabel7.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel7.setText("Fichas Eliminadas");
+        turno.add(jLabel7);
+        jLabel7.setBounds(10, 150, 140, 19);
+
+        getContentPane().add(turno);
+        turno.setBounds(1000, 0, 250, 240);
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -210,12 +260,12 @@ public class FJuego extends FrameBase {
             }
         });
         jPanel4.add(jButtonSalir);
-        jButtonSalir.setBounds(50, 80, 140, 40);
+        jButtonSalir.setBounds(30, 80, 190, 40);
 
         jLabel16.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel16.setText("Desea abondonar juego");
         jPanel4.add(jLabel16);
-        jLabel16.setBounds(30, 20, 200, 30);
+        jLabel16.setBounds(10, 20, 230, 30);
 
         getContentPane().add(jPanel4);
         jPanel4.setBounds(1000, 430, 250, 170);
@@ -240,41 +290,33 @@ public class FJuego extends FrameBase {
         getContentPane().add(jSeparator1);
         jSeparator1.setBounds(460, 380, 0, 2);
 
-        datoJugador.setBackground(new java.awt.Color(204, 204, 204));
-        datoJugador.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        datoJugador.setLayout(null);
-        getContentPane().add(datoJugador);
-        datoJugador.setBounds(600, 0, 400, 0);
-
         MontoTitulo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        MontoTitulo.setText("Total Jugadores;");
+        MontoTitulo.setText("Jugadores;");
         getContentPane().add(MontoTitulo);
-        MontoTitulo.setBounds(610, 80, 210, 40);
-
-        lTotalJugadores.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        lTotalJugadores.setText("VACIO");
-        getContentPane().add(lTotalJugadores);
-        lTotalJugadores.setBounds(840, 90, 120, 30);
+        MontoTitulo.setBounds(600, 100, 120, 40);
 
         MontoTitulo2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         MontoTitulo2.setText("Penalización En Juego;");
         getContentPane().add(MontoTitulo2);
-        MontoTitulo2.setBounds(610, 40, 210, 40);
+        MontoTitulo2.setBounds(780, 10, 210, 40);
 
         MontoTitulo1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         MontoTitulo1.setText("Tamaño Tablero");
         getContentPane().add(MontoTitulo1);
-        MontoTitulo1.setBounds(610, 0, 170, 60);
+        MontoTitulo1.setBounds(600, 10, 170, 40);
 
-        LPena1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        LPena1.setText("VACIO");
-        getContentPane().add(LPena1);
-        LPena1.setBounds(840, 50, 120, 30);
+        penalizacion.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        penalizacion.setText("0");
+        getContentPane().add(penalizacion);
+        penalizacion.setBounds(860, 50, 120, 30);
 
-        lTamañoTableroi.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        lTamañoTableroi.setText("VACIO");
-        getContentPane().add(lTamañoTableroi);
-        lTamañoTableroi.setBounds(840, 20, 110, 22);
+        tamanoTablero.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        tamanoTablero.setText("0");
+        getContentPane().add(tamanoTablero);
+        tamanoTablero.setBounds(650, 50, 110, 22);
+
+        getContentPane().add(jugadores);
+        jugadores.setBounds(730, 100, 260, 40);
 
         pack();
         setLocationRelativeTo(null);
@@ -284,7 +326,8 @@ public class FJuego extends FrameBase {
     private void lanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lanzarActionPerformed
 //Se manda a llamar al metodo del control correspondientes y este a su vez al cliente que envia datos,
 //sin embargo, no se actualizara o se realizara algo si este jugador no es su turno actual
-    
+//        tablero.paint(this.getGraphics());
+
     }//GEN-LAST:event_lanzarActionPerformed
 
 
@@ -301,14 +344,13 @@ public class FJuego extends FrameBase {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JLabel LPena1;
     private javax.swing.JLabel MontoTitulo;
     private javax.swing.JLabel MontoTitulo1;
     private javax.swing.JLabel MontoTitulo2;
-    private javax.swing.JPanel datoJugador;
-    public static javax.swing.JLabel fichaRestantes;
+    private javax.swing.JLabel fichaRestantes;
     private javax.swing.JPanel fichas;
-    public static javax.swing.JLabel fichasEnJuego;
+    private javax.swing.JLabel fichasEliminadas;
+    private javax.swing.JLabel fichasEnJuego;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JLabel jLabel1;
@@ -319,22 +361,23 @@ public class FJuego extends FrameBase {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
-    public static javax.swing.JLabel lTamañoTableroi;
-    public static javax.swing.JLabel lTotalJugadores;
+    private javax.swing.JComboBox<String> jugadores;
     private javax.swing.JButton lanzar;
-    public static javax.swing.JLabel montoJugador;
-    public static javax.swing.JLabel nombre;
-    private javax.swing.JPanel tablero;
+    private javax.swing.JLabel monto;
+    private javax.swing.JLabel nombre;
+    private javax.swing.JLabel penalizacion;
+    private javax.swing.JLabel tamanoTablero;
+    private javax.swing.JPanel turno;
     // End of variables declaration//GEN-END:variables
 
     //Al ejecutar este metodo recibe los nuevos datos de la partida

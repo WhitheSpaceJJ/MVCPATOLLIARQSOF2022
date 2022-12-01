@@ -67,8 +67,8 @@ public class Servidor extends Thread implements Observer {
             //Como se abaran dado cuenta el o1, se castea a una instancia de Integer, ya que este recibe un entero por parte de 
             //PartidaServidor, y los datos de una partida.
             notificarClientes(((PartidaServidor) o).getPartidaLocal(), ((Integer) o1));
-            if(((Integer)o1)==-1){
-                this.maximoPermitido=jugadores.size();
+            if (((Integer) o1) == -1) {
+                this.maximoPermitido = jugadores.size();
             }
         }
     }
@@ -231,5 +231,4 @@ public class Servidor extends Thread implements Observer {
         //nueva condicion cuando se quiere iniciar la partida
 
     }
-
 }

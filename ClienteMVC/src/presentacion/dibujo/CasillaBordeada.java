@@ -1,4 +1,3 @@
-
 package presentacion.dibujo;
 
 import java.awt.Color;
@@ -10,11 +9,18 @@ public class CasillaBordeada extends Figura {
     private int[] x;
     private int[] y;
     private Color color;
-    
-    public CasillaBordeada(int[] x, int[] y,int posicion) {
+
+    public CasillaBordeada(int[] x, int[] y, int posicion) {
         super(posicion);
         this.x = x;
         this.y = y;
+    }
+
+    public CasillaBordeada(int[] x, int[] y, Color color, int posicion, Graphics g) {
+        super(posicion, g);
+        this.x = x;
+        this.y = y;
+        this.color = color;
     }
 
     public CasillaBordeada(int[] x, int[] y, Color color, int posicion) {
@@ -24,13 +30,13 @@ public class CasillaBordeada extends Figura {
         this.color = color;
     }
 
-    
     public void setColor(Color color) {
         this.color = color;
     }
-/*
+
+    /*
     Metodo dibuja la casilla bordeada
-    */
+     */
     @Override
     public void dibujar() {
         g.setColor(color);
@@ -64,6 +70,5 @@ public class CasillaBordeada extends Figura {
     public void setG(Graphics g) {
         this.g = g;
     }
-
 
 }

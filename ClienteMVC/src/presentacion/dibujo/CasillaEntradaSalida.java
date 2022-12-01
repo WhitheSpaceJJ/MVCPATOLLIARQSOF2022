@@ -16,12 +16,20 @@ public class CasillaEntradaSalida extends Figura {
         this.y = y;
     }
 
-    public CasillaEntradaSalida(int[] x, int[] y, int marcador, int posicion) {
-        super(posicion);
+    public CasillaEntradaSalida(int[] x, int[] y, int posicion, Graphics g) {
+        super(posicion, g);
         this.x = x;
         this.y = y;
-        this.marcador = marcador;
     }
+//
+//    public CasillaEntradaSalida(int[] x, int[] y, int marcador, int posicion) {
+//        super(posicion);
+//        this.x = x;
+//        this.y = y;
+//        this.marcador = marcador;
+//    }
+
+ 
 
     public int getMarcador() {
         return marcador;

@@ -92,9 +92,9 @@ El metodo retorna un JugadorLocal si es que este envia los datos de la partida, 
                 }
             } else if (object instanceof Boolean) {
                 //Evaluar Creacion de la partida
-                                ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());
-                if(jugadores.size()>0){   
-                output.writeObject(true);
+                ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());
+                if (jugadores.size() >= 2) {
+                    output.writeObject(true);
 
 //                int auxiliar
 //                for (int i = 0; i < jugadoresNuevos.size(); i++) {
@@ -109,13 +109,12 @@ El metodo retorna un JugadorLocal si es que este envia los datos de la partida, 
 //                } catch (IOException | ClassNotFoundException e) {
 //                    System.out.println("Error; " + e.getMessage());
 //                }
-
-                this.iniciarPartida(jugadores.size());
-                return jugadores;
-                }else{
+                    this.iniciarPartida(jugadores.size());
+                    return null;
+                } else {
                     output.writeObject(null);
                 }
-             
+
             } else {
                 //En cambio si es otra partida la que se recibe este envia algo null con el de que rechaze la conexion
                 ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());

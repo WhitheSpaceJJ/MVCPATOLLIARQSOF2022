@@ -13,6 +13,11 @@ public abstract class Figura {
         this.posicion = posicion;
     }
 
+    public Figura(int posicion, Graphics g) {
+        this.posicion = posicion;
+        this.g = g;
+    }
+
     public abstract void dibujar();
 
     public int getPosicion() {
@@ -21,6 +26,14 @@ public abstract class Figura {
 
     public void setPosicion(int posicion) {
         this.posicion = posicion;
+    }
+
+    public Graphics getG() {
+        return g;
+    }
+
+    public void setG(Graphics g) {
+        this.g = g;
     }
 
     @Override

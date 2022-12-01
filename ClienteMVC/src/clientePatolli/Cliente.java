@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.util.List;
 import java.util.Observable;
 
@@ -225,8 +226,10 @@ public class Cliente extends Observable implements Runnable {
      */
     public boolean iniciarPartida() {
         try {
+            this.socket = new Socket(host, 80);
+            System.out.println("Se ha establecido la conexion correctamente");
             this.output = new ObjectOutputStream(socket.getOutputStream());
-            this.output.writeObject(true);
+            this.output.writeObject(this.jugador);
             System.out.println("Se ha enviado la peticion de iniciar la partida");
             //Por lo tanto se regresa true ya que se enviaron los dados
         } catch (IOException e) {

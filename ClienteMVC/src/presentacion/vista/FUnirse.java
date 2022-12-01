@@ -71,6 +71,11 @@ public class FUnirse extends FrameBase {
 
         BoxColor.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         BoxColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Azul", "Amarillo", "Rojo", "Verde" }));
+        BoxColor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoxColorActionPerformed(evt);
+            }
+        });
 
         jButtonUnirse.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jButtonUnirse.setForeground(new java.awt.Color(102, 255, 102));
@@ -171,6 +176,10 @@ public class FUnirse extends FrameBase {
 
 
     }//GEN-LAST:event_jButtonUnirseActionPerformed
+
+    private void BoxColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoxColorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BoxColorActionPerformed
 
     /**
      * @param args the command line arguments
