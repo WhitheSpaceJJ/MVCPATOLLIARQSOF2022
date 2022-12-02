@@ -38,29 +38,7 @@ public class TableroGrafico extends JPanel {
     public TableroGrafico(Tablero tablero) {
         this.tablero = tablero;
         this.tamaño = tablero.getTamano();
-        this.listaX = new ArrayList<List<Integer>>();
-        this.listaY = new ArrayList<List<Integer>>();
-        this.triangulos = new ArrayList<>();
-        this.x14 = Arrays.asList(358, 385, 412, 439, 466, 493, 520, 480, 453, 426, 399, 372, 345, 318, 280, 251, 221, 194, 167, 140, 110, 80,
-                40, 70, 100, 127, 154, 181, 211, 240, 210, 180, 148, 121, 94, 67, 40, 80, 107, 134, 161, 188, 220, 250, 280,
-                310, 340, 370, 400, 430, 460, 490, 525, 500, 470, 440, 415, 390, 365, 320);
-        this.y14 = Arrays.asList(250, 220, 188, 161, 134, 107, 80, 40, 67, 94, 121, 148, 180, 210, 256, 211, 181, 154, 127, 100, 70, 40,
-                80, 110, 140, 167, 194, 221, 251, 290, 318, 345, 372, 399, 426, 453, 480, 520, 493, 466, 439, 412, 385, 358, 320,
-                365, 390, 415, 440, 470, 500, 525, 490, 460, 430, 400, 370, 340, 310, 290);
-        this.x12 = Arrays.asList(358, 385, 412, 439, 466, 493, 453, 426, 399, 372, 345, 318, 280, 251, 221, 194, 167, 140, 110, 70, 100, 127, 154, 181, 211, 240, 210, 180, 148, 121, 94, 67, 107, 134, 161, 188, 220, 250,
-                280, 310, 340, 370, 400, 430, 460, 500, 470, 440, 415, 390, 365, 320);
-        this.y12 = Arrays.asList(250, 220, 188, 161, 134, 107, 67, 94, 121, 148, 180, 210, 256, 211, 181, 154, 127, 100, 70, 110, 140, 167, 194, 221, 251, 290, 318, 345, 372, 399, 426, 453, 493, 466, 439, 412, 385, 358,
-                320, 365, 390, 415, 440, 470, 500, 460, 430, 400, 370, 340, 310, 290);
-        this.x10 = Arrays.asList(358, 385, 412, 439, 466, 426, 399, 372, 345, 318, 280, 251, 221, 194, 167, 140, 100, 127, 154, 181, 211, 240, 210, 180, 148, 121, 94, 134, 161, 188, 220, 250,
-                280, 310, 340, 370, 400, 430, 470, 440, 415, 390, 365, 320);
-        this.y10 = Arrays.asList(250, 220, 188, 161, 134, 94, 121, 148, 180, 210, 256,
-                211, 181, 154, 127, 100, 140, 167, 194, 221, 251, 290, 318, 345, 372,
-                399, 426, 466, 439, 412, 385, 358, 320, 365, 390, 415, 440, 470, 430,
-                400);
-        this.y10.add(370);
-        this.y10.add(340);
-        this.y10.add(310);
-        this.y10.add(290);
+        this.inicializarArreglos();
         this.rellenarCasillas();
     }
 
@@ -86,6 +64,409 @@ public class TableroGrafico extends JPanel {
     public void actualizarTablero(Tablero tablero) {
         this.tablero = tablero;
         repaint();
+    }
+
+//Metodo que pinta el tablero, en base al tablero este se reactualizara
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        this.dibujarTablero(g);
+        this.dibujarFichas(tablero.getCasillas(), g);
+    }
+
+    public void dibujarTablero(Graphics g) {
+        CompositorCasilla tableroGrafico = new CompositorCasilla(tamaño);
+        if (tamaño == 14) {
+            int triangulosContador = 0;
+            for (int i = 0; i < 60; i++) {
+                Casilla casilla = this.tablero.getCasillas().get(i);
+                Figura f = null;
+                switch (casilla.getTipo()) {
+                    case EntradaSalida:
+                        f = new CasillaEntradaSalida(
+                                new int[]{
+                                    listaX.get(i).get(0),
+                                    listaX.get(i).get(1),
+                                    listaX.get(i).get(2),
+                                    listaX.get(i).get(3)
+                                },
+                                new int[]{
+                                    listaY.get(i).get(0),
+                                    listaY.get(i).get(1),
+                                    listaY.get(i).get(2),
+                                    listaY.get(i).get(3)
+                                },
+                                (i + 1), g);
+                        ((CasillaEntradaSalida) f).setMarcador((i + 1));
+                        break;
+                    case Normal:
+                        f = new CasillaNormal(
+                                new int[]{
+                                    listaX.get(i).get(0),
+                                    listaX.get(i).get(1),
+                                    listaX.get(i).get(2),
+                                    listaX.get(i).get(3)
+                                },
+                                new int[]{
+                                    listaY.get(i).get(0),
+                                    listaY.get(i).get(1),
+                                    listaY.get(i).get(2),
+                                    listaY.get(i).get(3)
+                                },
+                                (i + 1), g);
+                        break;
+                    case Central:
+                        f = new CasillaNormal(
+                                new int[]{
+                                    listaX.get(i).get(0),
+                                    listaX.get(i).get(1),
+                                    listaX.get(i).get(2),
+                                    listaX.get(i).get(3)
+                                },
+                                new int[]{
+                                    listaY.get(i).get(0),
+                                    listaY.get(i).get(1),
+                                    listaY.get(i).get(2),
+                                    listaY.get(i).get(3)
+                                },
+                                (i + 1), g);
+                        break;
+
+                    case Penalizacion:
+                        f = new CasillaEspecial(
+                                new int[]{
+                                    listaX.get(i).get(0),
+                                    listaX.get(i).get(1),
+                                    listaX.get(i).get(2),
+                                    listaX.get(i).get(3)
+                                },
+                                new int[]{
+                                    listaY.get(i).get(0),
+                                    listaY.get(i).get(1),
+                                    listaY.get(i).get(2),
+                                    listaY.get(i).get(3)
+                                },
+                                triangulos.get(triangulosContador), (i + 1), g);
+                        triangulosContador += 1;
+                        break;
+                    case Bordeada:
+                        f = new CasillaBordeada(
+                                new int[]{
+                                    listaX.get(i).get(0),
+                                    listaX.get(i).get(1),
+                                    listaX.get(i).get(2),
+                                    listaX.get(i).get(3)
+                                },
+                                new int[]{
+                                    listaY.get(i).get(0),
+                                    listaY.get(i).get(1),
+                                    listaY.get(i).get(2),
+                                    listaY.get(i).get(3)
+                                },
+                                Color.RED,
+                                (i + 1),
+                                g);
+                        break;
+                    default:
+                        break;
+                }
+                tableroGrafico.addElemento(f);
+            }
+            tableroGrafico.dibujar();
+
+        } else if (tamaño == 12) {
+
+            int triangulosContador = 0;
+            for (int i = 0; i < 52; i++) {
+                Casilla casilla = this.tablero.getCasillas().get(i);
+                Figura f = null;
+                switch (casilla.getTipo()) {
+                    case EntradaSalida:
+                        f = new CasillaEntradaSalida(
+                                new int[]{
+                                    listaX.get(i).get(0),
+                                    listaX.get(i).get(1),
+                                    listaX.get(i).get(2),
+                                    listaX.get(i).get(3)
+                                },
+                                new int[]{
+                                    listaY.get(i).get(0),
+                                    listaY.get(i).get(1),
+                                    listaY.get(i).get(2),
+                                    listaY.get(i).get(3)
+                                },
+                                (i + 1), g);
+                        ((CasillaEntradaSalida) f).setMarcador((i + 1));
+                        break;
+                    case Normal:
+                        f = new CasillaNormal(
+                                new int[]{
+                                    listaX.get(i).get(0),
+                                    listaX.get(i).get(1),
+                                    listaX.get(i).get(2),
+                                    listaX.get(i).get(3)
+                                },
+                                new int[]{
+                                    listaY.get(i).get(0),
+                                    listaY.get(i).get(1),
+                                    listaY.get(i).get(2),
+                                    listaY.get(i).get(3)
+                                },
+                                (i + 1), g);
+                        break;
+                    case Central:
+                        f = new CasillaNormal(
+                                new int[]{
+                                    listaX.get(i).get(0),
+                                    listaX.get(i).get(1),
+                                    listaX.get(i).get(2),
+                                    listaX.get(i).get(3)
+                                },
+                                new int[]{
+                                    listaY.get(i).get(0),
+                                    listaY.get(i).get(1),
+                                    listaY.get(i).get(2),
+                                    listaY.get(i).get(3)
+                                },
+                                (i + 1), g);
+                        break;
+
+                    case Penalizacion:
+                        f = new CasillaEspecial(
+                                new int[]{
+                                    listaX.get(i).get(0),
+                                    listaX.get(i).get(1),
+                                    listaX.get(i).get(2),
+                                    listaX.get(i).get(3)
+                                },
+                                new int[]{
+                                    listaY.get(i).get(0),
+                                    listaY.get(i).get(1),
+                                    listaY.get(i).get(2),
+                                    listaY.get(i).get(3)
+                                },
+                                triangulos.get(triangulosContador), (i + 1), g);
+                        triangulosContador += 1;
+                        break;
+                    case Bordeada:
+                        f = new CasillaBordeada(
+                                new int[]{
+                                    listaX.get(i).get(0),
+                                    listaX.get(i).get(1),
+                                    listaX.get(i).get(2),
+                                    listaX.get(i).get(3)
+                                },
+                                new int[]{
+                                    listaY.get(i).get(0),
+                                    listaY.get(i).get(1),
+                                    listaY.get(i).get(2),
+                                    listaY.get(i).get(3)
+                                },
+                                Color.RED,
+                                (i + 1),
+                                g);
+                        break;
+                    default:
+                        break;
+                }
+                tableroGrafico.addElemento(f);
+            }
+            tableroGrafico.dibujar();
+        } else if (tamaño == 10) {
+
+            int triangulosContador = 0;
+            for (int i = 0; i < 44; i++) {
+                Casilla casilla = this.tablero.getCasillas().get(i);
+                Figura f = null;
+                switch (casilla.getTipo()) {
+                    case EntradaSalida:
+                        f = new CasillaEntradaSalida(
+                                new int[]{
+                                    listaX.get(i).get(0),
+                                    listaX.get(i).get(1),
+                                    listaX.get(i).get(2),
+                                    listaX.get(i).get(3)
+                                },
+                                new int[]{
+                                    listaY.get(i).get(0),
+                                    listaY.get(i).get(1),
+                                    listaY.get(i).get(2),
+                                    listaY.get(i).get(3)
+                                },
+                                (i + 1), g);
+                        ((CasillaEntradaSalida) f).setMarcador((i + 1));
+                        break;
+                    case Normal:
+                        f = new CasillaNormal(
+                                new int[]{
+                                    listaX.get(i).get(0),
+                                    listaX.get(i).get(1),
+                                    listaX.get(i).get(2),
+                                    listaX.get(i).get(3)
+                                },
+                                new int[]{
+                                    listaY.get(i).get(0),
+                                    listaY.get(i).get(1),
+                                    listaY.get(i).get(2),
+                                    listaY.get(i).get(3)
+                                },
+                                (i + 1), g);
+                        break;
+                    case Central:
+                        f = new CasillaNormal(
+                                new int[]{
+                                    listaX.get(i).get(0),
+                                    listaX.get(i).get(1),
+                                    listaX.get(i).get(2),
+                                    listaX.get(i).get(3)
+                                },
+                                new int[]{
+                                    listaY.get(i).get(0),
+                                    listaY.get(i).get(1),
+                                    listaY.get(i).get(2),
+                                    listaY.get(i).get(3)
+                                },
+                                (i + 1), g);
+                        break;
+
+                    case Penalizacion:
+                        f = new CasillaEspecial(
+                                new int[]{
+                                    listaX.get(i).get(0),
+                                    listaX.get(i).get(1),
+                                    listaX.get(i).get(2),
+                                    listaX.get(i).get(3)
+                                },
+                                new int[]{
+                                    listaY.get(i).get(0),
+                                    listaY.get(i).get(1),
+                                    listaY.get(i).get(2),
+                                    listaY.get(i).get(3)
+                                },
+                                triangulos.get(triangulosContador), (i + 1), g);
+                        triangulosContador += 1;
+                        break;
+                    case Bordeada:
+                        f = new CasillaBordeada(
+                                new int[]{
+                                    listaX.get(i).get(0),
+                                    listaX.get(i).get(1),
+                                    listaX.get(i).get(2),
+                                    listaX.get(i).get(3)
+                                },
+                                new int[]{
+                                    listaY.get(i).get(0),
+                                    listaY.get(i).get(1),
+                                    listaY.get(i).get(2),
+                                    listaY.get(i).get(3)
+                                },
+                                Color.RED,
+                                (i + 1),
+                                g);
+                        break;
+                    default:
+                        break;
+                }
+                tableroGrafico.addElemento(f);
+            }
+            tableroGrafico.dibujar();
+        }
+        this.dibujarFichas(tablero.getCasillas(), g);
+    }
+
+    public void dibujarFichas(List<Casilla> casilla, Graphics g) {
+        if (tamaño == 14) {
+            for (int i = 0; i < casilla.size(); i++) {
+                Ficha get = casilla.get(i).getFicha();
+                if (get != null) {
+                    if (get.getJugador().getColor().equalsIgnoreCase("Azul")) {
+                        g.setColor(Color.BLUE);
+                        g.fillOval(x14.get(i), y14.get(i), 28, 28);
+                    }
+                    if (get.getJugador().getColor().equalsIgnoreCase("Rosa")) {
+                        g.setColor(Color.PINK);
+                        g.fillOval(x14.get(i), y14.get(i), 28, 28);
+                    }
+                    if (get.getJugador().getColor().equalsIgnoreCase("Verde")) {
+                        g.setColor(Color.GREEN);
+                        g.fillOval(x14.get(i), y14.get(i), 28, 28);
+                    }
+                    if (get.getJugador().getColor().equalsIgnoreCase("Rojo")) {
+                        g.setColor(Color.RED);
+                        g.fillOval(x14.get(i), y14.get(i), 28, 28);
+                    }
+                }
+            }
+        }
+        if (tamaño == 12) {
+            for (int i = 0; i < casilla.size(); i++) {
+                Ficha get = casilla.get(i).getFicha();
+                if (get != null) {
+                    if (get.getJugador().getColor().equalsIgnoreCase("Azul")) {
+                        g.setColor(Color.BLUE);
+                        g.fillOval(x12.get(i), y12.get(i), 28, 28);
+                    }
+                    if (get.getJugador().getColor().equalsIgnoreCase("Rosa")) {
+                        g.setColor(Color.PINK);
+                        g.fillOval(x12.get(i), y12.get(i), 28, 28);
+                    }
+                    if (get.getJugador().getColor().equalsIgnoreCase("Verde")) {
+                        g.setColor(Color.GREEN);
+                        g.fillOval(x12.get(i), y12.get(i), 28, 28);
+                    }
+                    if (get.getJugador().getColor().equalsIgnoreCase("Rojo")) {
+                        g.setColor(Color.RED);
+                        g.fillOval(x12.get(i), y12.get(i), 28, 28);
+                    }
+                }
+            }
+        }
+        if (tamaño == 10) {
+            for (int i = 0; i < casilla.size(); i++) {
+                Ficha get = casilla.get(i).getFicha();
+                if (get != null) {
+                    if (get.getJugador().getColor().equalsIgnoreCase("Azul")) {
+                        g.setColor(Color.BLUE);
+                        g.fillOval(x10.get(i), y10.get(i), 28, 28);
+                    }
+                    if (get.getJugador().getColor().equalsIgnoreCase("Rosa")) {
+                        g.setColor(Color.PINK);
+                        g.fillOval(x10.get(i), y10.get(i), 28, 28);
+                    }
+                    if (get.getJugador().getColor().equalsIgnoreCase("Verde")) {
+                        g.setColor(Color.GREEN);
+                        g.fillOval(x10.get(i), y10.get(i), 28, 28);
+                    }
+                    if (get.getJugador().getColor().equalsIgnoreCase("Rojo")) {
+                        g.setColor(Color.RED);
+                        g.fillOval(x10.get(i), y10.get(i), 28, 28);
+                    }
+                }
+            }
+        }
+    }
+
+    public void inicializarArreglos() {
+        this.listaX = new ArrayList<List<Integer>>();
+        this.listaY = new ArrayList<List<Integer>>();
+        this.triangulos = new ArrayList<>();
+        this.x14 = Arrays.asList(358, 385, 412, 439, 466, 493, 520, 480, 453, 426, 399, 372, 345, 318, 280, 251, 221, 194, 167, 140, 110, 80,
+                40, 70, 100, 127, 154, 181, 211, 240, 210, 180, 148, 121, 94, 67, 40, 80, 107, 134, 161, 188, 220, 250, 280,
+                310, 340, 370, 400, 430, 460, 490, 525, 500, 470, 440, 415, 390, 365, 320);
+        this.y14 = Arrays.asList(250, 220, 188, 161, 134, 107, 80, 40, 67, 94, 121, 148, 180, 210, 256, 211, 181, 154, 127, 100, 70, 40,
+                80, 110, 140, 167, 194, 221, 251, 290, 318, 345, 372, 399, 426, 453, 480, 520, 493, 466, 439, 412, 385, 358, 320,
+                365, 390, 415, 440, 470, 500, 525, 490, 460, 430, 400, 370, 340, 310, 290);
+        this.x12 = Arrays.asList(358, 385, 412, 439, 466, 493, 453, 426, 399, 372, 345, 318, 280, 251, 221, 194, 167, 140, 110, 70, 100, 127, 154, 181, 211, 240, 210, 180, 148, 121, 94, 67, 107, 134, 161, 188, 220, 250,
+                280, 310, 340, 370, 400, 430, 460, 500, 470, 440, 415, 390, 365, 320);
+        this.y12 = Arrays.asList(250, 220, 188, 161, 134, 107, 67, 94, 121, 148, 180, 210, 256, 211, 181, 154, 127, 100, 70, 110, 140, 167, 194, 221, 251, 290, 318, 345, 372, 399, 426, 453, 493, 466, 439, 412, 385, 358,
+                320, 365, 390, 415, 440, 470, 500, 460, 430, 400, 370, 340, 310, 290);
+        this.x10 = Arrays.asList(358, 385, 412, 439, 466, 426, 399, 372, 345, 318, 280, 251, 221, 194, 167, 140, 100, 127, 154, 181, 211, 240, 210, 180, 148, 121, 94, 134, 161, 188, 220, 250,
+                280, 310, 340, 370, 400, 430, 470, 440, 415, 390, 365, 320);
+        this.y10 = Arrays.asList(250, 220, 188, 161, 134, 94, 121, 148, 180, 210, 256,
+                211, 181, 154, 127, 100, 140, 167, 194, 221, 251, 290, 318, 345, 372,
+                399, 426, 466, 439, 412, 385, 358, 320, 365, 390, 415, 440, 470, 430,
+                400, 370, 340, 310, 290);
+
     }
 
     public void rellenarCasillas() {
@@ -678,382 +1059,4 @@ public class TableroGrafico extends JPanel {
 
         triangulos.add(p16);
     }
-
-//Metodo que pinta el tablero, en base al tablero este se reactualizara
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        CompositorCasilla tableroGrafico = new CompositorCasilla(tamaño);
-        if (tamaño == 14) {
-
-            int triangulosContador = 0;
-            for (int i = 0; i < 60; i++) {
-                Casilla casilla = this.tablero.getCasillas().get(i);
-                Figura f = null;
-                switch (casilla.getTipo()) {
-                    case EntradaSalida:
-                        f = new CasillaEntradaSalida(
-                                new int[]{
-                                    listaX.get(i).get(0),
-                                    listaX.get(i).get(1),
-                                    listaX.get(i).get(2),
-                                    listaX.get(i).get(3)
-                                },
-                                new int[]{
-                                    listaY.get(i).get(0),
-                                    listaY.get(i).get(1),
-                                    listaY.get(i).get(2),
-                                    listaY.get(i).get(3)
-                                },
-                                (i + 1), g);
-                        ((CasillaEntradaSalida) f).setMarcador((i + 1));
-                        break;
-                    case Normal:
-                        f = new CasillaNormal(
-                                new int[]{
-                                    listaX.get(i).get(0),
-                                    listaX.get(i).get(1),
-                                    listaX.get(i).get(2),
-                                    listaX.get(i).get(3)
-                                },
-                                new int[]{
-                                    listaY.get(i).get(0),
-                                    listaY.get(i).get(1),
-                                    listaY.get(i).get(2),
-                                    listaY.get(i).get(3)
-                                },
-                                (i + 1), g);
-                        break;
-                    case Central:
-                        f = new CasillaNormal(
-                                new int[]{
-                                    listaX.get(i).get(0),
-                                    listaX.get(i).get(1),
-                                    listaX.get(i).get(2),
-                                    listaX.get(i).get(3)
-                                },
-                                new int[]{
-                                    listaY.get(i).get(0),
-                                    listaY.get(i).get(1),
-                                    listaY.get(i).get(2),
-                                    listaY.get(i).get(3)
-                                },
-                                (i + 1), g);
-                        break;
-
-                    case Penalizacion:
-                        f = new CasillaEspecial(
-                                new int[]{
-                                    listaX.get(i).get(0),
-                                    listaX.get(i).get(1),
-                                    listaX.get(i).get(2),
-                                    listaX.get(i).get(3)
-                                },
-                                new int[]{
-                                    listaY.get(i).get(0),
-                                    listaY.get(i).get(1),
-                                    listaY.get(i).get(2),
-                                    listaY.get(i).get(3)
-                                },
-                                triangulos.get(triangulosContador), (i + 1), g);
-                        triangulosContador += 1;
-                        break;
-                    case Bordeada:
-                        f = new CasillaBordeada(
-                                new int[]{
-                                    listaX.get(i).get(0),
-                                    listaX.get(i).get(1),
-                                    listaX.get(i).get(2),
-                                    listaX.get(i).get(3)
-                                },
-                                new int[]{
-                                    listaY.get(i).get(0),
-                                    listaY.get(i).get(1),
-                                    listaY.get(i).get(2),
-                                    listaY.get(i).get(3)
-                                },
-                                Color.RED,
-                                (i + 1),
-                                g);
-                        break;
-                    default:
-                        break;
-                }
-                tableroGrafico.addElemento(f);
-            }
-            tableroGrafico.dibujar();
-
-        } else if (tamaño == 12) {
-
-            int triangulosContador = 0;
-            for (int i = 0; i < 52; i++) {
-                Casilla casilla = this.tablero.getCasillas().get(i);
-                Figura f = null;
-                switch (casilla.getTipo()) {
-                    case EntradaSalida:
-                        f = new CasillaEntradaSalida(
-                                new int[]{
-                                    listaX.get(i).get(0),
-                                    listaX.get(i).get(1),
-                                    listaX.get(i).get(2),
-                                    listaX.get(i).get(3)
-                                },
-                                new int[]{
-                                    listaY.get(i).get(0),
-                                    listaY.get(i).get(1),
-                                    listaY.get(i).get(2),
-                                    listaY.get(i).get(3)
-                                },
-                                (i + 1), g);
-                        ((CasillaEntradaSalida) f).setMarcador((i + 1));
-                        break;
-                    case Normal:
-                        f = new CasillaNormal(
-                                new int[]{
-                                    listaX.get(i).get(0),
-                                    listaX.get(i).get(1),
-                                    listaX.get(i).get(2),
-                                    listaX.get(i).get(3)
-                                },
-                                new int[]{
-                                    listaY.get(i).get(0),
-                                    listaY.get(i).get(1),
-                                    listaY.get(i).get(2),
-                                    listaY.get(i).get(3)
-                                },
-                                (i + 1), g);
-                        break;
-                    case Central:
-                        f = new CasillaNormal(
-                                new int[]{
-                                    listaX.get(i).get(0),
-                                    listaX.get(i).get(1),
-                                    listaX.get(i).get(2),
-                                    listaX.get(i).get(3)
-                                },
-                                new int[]{
-                                    listaY.get(i).get(0),
-                                    listaY.get(i).get(1),
-                                    listaY.get(i).get(2),
-                                    listaY.get(i).get(3)
-                                },
-                                (i + 1), g);
-                        break;
-
-                    case Penalizacion:
-                        f = new CasillaEspecial(
-                                new int[]{
-                                    listaX.get(i).get(0),
-                                    listaX.get(i).get(1),
-                                    listaX.get(i).get(2),
-                                    listaX.get(i).get(3)
-                                },
-                                new int[]{
-                                    listaY.get(i).get(0),
-                                    listaY.get(i).get(1),
-                                    listaY.get(i).get(2),
-                                    listaY.get(i).get(3)
-                                },
-                                triangulos.get(triangulosContador), (i + 1), g);
-                        triangulosContador += 1;
-                        break;
-                    case Bordeada:
-                        f = new CasillaBordeada(
-                                new int[]{
-                                    listaX.get(i).get(0),
-                                    listaX.get(i).get(1),
-                                    listaX.get(i).get(2),
-                                    listaX.get(i).get(3)
-                                },
-                                new int[]{
-                                    listaY.get(i).get(0),
-                                    listaY.get(i).get(1),
-                                    listaY.get(i).get(2),
-                                    listaY.get(i).get(3)
-                                },
-                                Color.RED,
-                                (i + 1),
-                                g);
-                        break;
-                    default:
-                        break;
-                }
-                tableroGrafico.addElemento(f);
-            }
-            tableroGrafico.dibujar();
-        } else if (tamaño == 10) {
-
-            int triangulosContador = 0;
-            for (int i = 0; i < 44; i++) {
-                Casilla casilla = this.tablero.getCasillas().get(i);
-                Figura f = null;
-                switch (casilla.getTipo()) {
-                    case EntradaSalida:
-                        f = new CasillaEntradaSalida(
-                                new int[]{
-                                    listaX.get(i).get(0),
-                                    listaX.get(i).get(1),
-                                    listaX.get(i).get(2),
-                                    listaX.get(i).get(3)
-                                },
-                                new int[]{
-                                    listaY.get(i).get(0),
-                                    listaY.get(i).get(1),
-                                    listaY.get(i).get(2),
-                                    listaY.get(i).get(3)
-                                },
-                                (i + 1), g);
-                        ((CasillaEntradaSalida) f).setMarcador((i + 1));
-                        break;
-                    case Normal:
-                        f = new CasillaNormal(
-                                new int[]{
-                                    listaX.get(i).get(0),
-                                    listaX.get(i).get(1),
-                                    listaX.get(i).get(2),
-                                    listaX.get(i).get(3)
-                                },
-                                new int[]{
-                                    listaY.get(i).get(0),
-                                    listaY.get(i).get(1),
-                                    listaY.get(i).get(2),
-                                    listaY.get(i).get(3)
-                                },
-                                (i + 1), g);
-                        break;
-                    case Central:
-                        f = new CasillaNormal(
-                                new int[]{
-                                    listaX.get(i).get(0),
-                                    listaX.get(i).get(1),
-                                    listaX.get(i).get(2),
-                                    listaX.get(i).get(3)
-                                },
-                                new int[]{
-                                    listaY.get(i).get(0),
-                                    listaY.get(i).get(1),
-                                    listaY.get(i).get(2),
-                                    listaY.get(i).get(3)
-                                },
-                                (i + 1), g);
-                        break;
-
-                    case Penalizacion:
-                        f = new CasillaEspecial(
-                                new int[]{
-                                    listaX.get(i).get(0),
-                                    listaX.get(i).get(1),
-                                    listaX.get(i).get(2),
-                                    listaX.get(i).get(3)
-                                },
-                                new int[]{
-                                    listaY.get(i).get(0),
-                                    listaY.get(i).get(1),
-                                    listaY.get(i).get(2),
-                                    listaY.get(i).get(3)
-                                },
-                                triangulos.get(triangulosContador), (i + 1), g);
-                        triangulosContador += 1;
-                        break;
-                    case Bordeada:
-                        f = new CasillaBordeada(
-                                new int[]{
-                                    listaX.get(i).get(0),
-                                    listaX.get(i).get(1),
-                                    listaX.get(i).get(2),
-                                    listaX.get(i).get(3)
-                                },
-                                new int[]{
-                                    listaY.get(i).get(0),
-                                    listaY.get(i).get(1),
-                                    listaY.get(i).get(2),
-                                    listaY.get(i).get(3)
-                                },
-                                Color.RED,
-                                (i + 1),
-                                g);
-                        break;
-                    default:
-                        break;
-                }
-                tableroGrafico.addElemento(f);
-            }
-            tableroGrafico.dibujar();
-        }
-        this.dibujarFichas(tablero.getCasillas(), g);
-    }
-
-    public void dibujarFichas(List<Casilla> casilla, Graphics g) {
-        if (tamaño == 14) {
-            for (int i = 0; i < casilla.size(); i++) {
-                Ficha get = casilla.get(i).getFicha();
-                if (get != null) {
-                    if (get.getJugador().getColor().equalsIgnoreCase("Azul")) {
-                        g.setColor(Color.BLUE);
-                        g.fillOval(x14.get(i), y14.get(i), 28, 28);
-                    }
-                    if (get.getJugador().getColor().equalsIgnoreCase("Amarillo")) {
-                        g.setColor(Color.YELLOW);
-                        g.fillOval(x14.get(i), y14.get(i), 28, 28);
-                    }
-                    if (get.getJugador().getColor().equalsIgnoreCase("Verde")) {
-                        g.setColor(Color.GREEN);
-                        g.fillOval(x14.get(i), y14.get(i), 28, 28);
-                    }
-                    if (get.getJugador().getColor().equalsIgnoreCase("Rojo")) {
-                        g.setColor(Color.RED);
-                        g.fillOval(x14.get(i), y14.get(i), 28, 28);
-                    }
-                }
-            }
-        }
-        if (tamaño == 12) {
-            for (int i = 0; i < casilla.size(); i++) {
-                Ficha get = casilla.get(i).getFicha();
-                if (get != null) {
-                    if (get.getJugador().getColor().equalsIgnoreCase("Azul")) {
-                        g.setColor(Color.BLUE);
-                        g.fillOval(x12.get(i), y12.get(i), 28, 28);
-                    }
-                    if (get.getJugador().getColor().equalsIgnoreCase("Amarillo")) {
-                        g.setColor(Color.YELLOW);
-                        g.fillOval(x12.get(i), y12.get(i), 28, 28);
-                    }
-                    if (get.getJugador().getColor().equalsIgnoreCase("Verde")) {
-                        g.setColor(Color.GREEN);
-                        g.fillOval(x12.get(i), y12.get(i), 28, 28);
-                    }
-                    if (get.getJugador().getColor().equalsIgnoreCase("Rojo")) {
-                        g.setColor(Color.RED);
-                        g.fillOval(x12.get(i), y12.get(i), 28, 28);
-                    }
-                }
-            }
-        }
-        if (tamaño == 10) {
-            for (int i = 0; i < casilla.size(); i++) {
-                Ficha get = casilla.get(i).getFicha();
-                if (get != null) {
-                    if (get.getJugador().getColor().equalsIgnoreCase("Azul")) {
-                        g.setColor(Color.BLUE);
-                        g.fillOval(x10.get(i), y10.get(i), 28, 28);
-                    }
-                    if (get.getJugador().getColor().equalsIgnoreCase("Amarillo")) {
-                        g.setColor(Color.YELLOW);
-                        g.fillOval(x10.get(i), y10.get(i), 28, 28);
-                    }
-                    if (get.getJugador().getColor().equalsIgnoreCase("Verde")) {
-                        g.setColor(Color.GREEN);
-                        g.fillOval(x10.get(i), y10.get(i), 28, 28);
-                    }
-                    if (get.getJugador().getColor().equalsIgnoreCase("Rojo")) {
-                        g.setColor(Color.RED);
-                        g.fillOval(x10.get(i), y10.get(i), 28, 28);
-                    }
-                }
-            }
-        }
-    }
-
-//    Metodo Repaint utilizara estas cordenadas
 }

@@ -13,23 +13,35 @@ public class Cana extends Figura {
     private int heigth;
     private boolean cara;
 
-    public Cana(int x, int y, int width, int heigth, boolean cara, int posicion) {
-        super(posicion);
+//    public Cana(int x, int y, int width, int heigth, boolean cara, int posicion) {
+//        super(posicion);
+//        this.x = x;
+//        this.y = y;
+//        this.width = width;
+//        this.heigth = heigth;
+//        this.cara = cara;
+//    }
+    public Cana(int x, int y, int width, int heigth, boolean cara, int posicion, Graphics g) {
+        super(posicion, g);
         this.x = x;
         this.y = y;
         this.width = width;
         this.heigth = heigth;
         this.cara = cara;
     }
-/*
+
+
+    /*
     Metodo que se encargar de dibujar la caña de acuerdo a lo que se solicite la clase de dado grafico
- */
+     */
     @Override
     public void dibujar() {
         if (cara) {
-            //Aun no implementando         g.drawOval(52, 87, 35, 35);
-        } else {
             g.setColor(Color.BLACK);
+            g.drawRect(x, y, width, heigth);
+            g.fillOval(x+25, y+50, 30, 30);
+
+        } else {
             g.drawRect(x, y, width, heigth);
         }
     }

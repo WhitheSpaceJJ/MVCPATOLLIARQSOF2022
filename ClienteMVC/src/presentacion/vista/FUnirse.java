@@ -70,7 +70,7 @@ public class FUnirse extends FrameBase {
         jLabel8.setText("Escriba su apodo;");
 
         BoxColor.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        BoxColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Azul", "Amarillo", "Rojo", "Verde" }));
+        BoxColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Azul", "Rosa", "Rojo", "Verde" }));
         BoxColor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BoxColorActionPerformed(evt);

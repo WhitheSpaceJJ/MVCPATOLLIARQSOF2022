@@ -179,7 +179,7 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
             <StringItem index="0" value="Azul"/>
-            <StringItem index="1" value="Amarillo"/>
+            <StringItem index="1" value="Rosa"/>
             <StringItem index="2" value="Rojo"/>
             <StringItem index="3" value="Verde"/>
           </StringArray>

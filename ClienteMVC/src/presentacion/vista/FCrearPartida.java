@@ -113,7 +113,7 @@ public class FCrearPartida extends FrameBase {
         jLabel8.setBounds(10, 90, 170, 20);
 
         colorJugador.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        colorJugador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Azul", "Amarillo", "Rojo", "Verde" }));
+        colorJugador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Azul", "Rosa", "Rojo", "Verde" }));
         jPanel1.add(colorJugador);
         colorJugador.setBounds(170, 130, 120, 30);
 
