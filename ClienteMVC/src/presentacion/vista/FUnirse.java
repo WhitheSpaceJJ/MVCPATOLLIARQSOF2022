@@ -231,7 +231,7 @@ public class FUnirse extends FrameBase {
             ModeloBase modeloPartida = new MPartida(((Partida) o1));
             ((CJugador) this.control).establecerModelo(modeloPartida);
             this.control.getCliente().addObserver((Observer) modeloPartida);
-            FrameBase frameJuego = new FJuego();
+            FrameBase frameJuego = new FJuego((Partida) o1);
             frameJuego.establecerControl(this.control);
             java.awt.EventQueue.invokeLater(() -> {
                 frameJuego.setVisible(true);

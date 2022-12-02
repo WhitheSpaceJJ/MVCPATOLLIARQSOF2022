@@ -3,10 +3,13 @@ package presentacion.vista;
 import control.CJugador;
 import control.CPartida;
 import control.ControlBase;
+import entidades.Dado;
 import entidades.Jugador;
 import entidades.Partida;
 import entidades.Tablero;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
@@ -209,6 +212,14 @@ public class FCrearPartida extends FrameBase {
             double montoJugadorD = Double.valueOf(this.fondoJugador.getText());
             Tablero tablero = new Tablero(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "" + Calendar.getInstance().get(Calendar.SECOND), tamaño);
             Partida partida = new Partida(new Jugador(this.nombreJugador.getText(), color), tablero, montoJugadorD, montoApuestaD, totalJugadores);
+             List<Dado> dados = new ArrayList<>();
+            for (int i = 0; i < 5; i++) {
+                Dado dado = new Dado(false);
+//                dado.cambiarCara();
+                dados.add(dado);
+            }
+            partida.setDados(dados);
+
             ((CPartida) this.control).crearPartida(partida);
         }
     }//GEN-LAST:event_jButtonComenzarActionPerformed
