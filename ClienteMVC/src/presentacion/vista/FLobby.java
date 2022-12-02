@@ -226,7 +226,7 @@ public class FLobby extends FrameBase {
         if (((MPartida) o).getPartida().getTotalJugadores() == ((MPartida) o).getPartida().getJugadores().size()) {
             this.dispose();
             ((MPartida) o).deleteObserver(this);
-            FrameBase frameJuego = new FJuego();
+            FrameBase frameJuego = new FJuego(((MPartida) o).getPartida());
             frameJuego.establecerControl(this.control);
             java.awt.EventQueue.invokeLater(() -> {
                 frameJuego.setVisible(true);

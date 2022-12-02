@@ -29,6 +29,7 @@ public class Jugador implements Serializable {
         this.color = color;
         this.fichas = new ArrayList<>();
         this.dinero=new Dinero(0);
+        this.inicializarFichas(6);
     }
 
 //Metodos get y set   

@@ -320,6 +320,7 @@ public class FCrearPartida extends FrameBase {
         modeloPartida.deleteObserver(this);
         fLobby.establecerControl(control);
         modeloPartida.addObserver(fLobby);
+        ((FLobby) fLobby).apagarBoton();
         ((FLobby) fLobby).actualizarLobby(((MPartida) o).getPartida().getJugadores());
         this.mostrarPantallaLobby((FLobby) fLobby);
 

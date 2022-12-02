@@ -23,7 +23,7 @@ import presentacion.dibujo.TableroGrafico;
  * @author Equipo1.
  */
 public class FJuego extends FrameBase {
-
+    
     TableroGrafico tablero1;
     DadoGrafico dadoJ;
 
@@ -34,39 +34,27 @@ public class FJuego extends FrameBase {
         this.getContentPane().add(tablero1);
         tablero1.setBounds(0, 0, 600, 600);
         tablero1.setBackground(Color.LIGHT_GRAY);
-
+        
         this.dadoJ = new DadoGrafico(
                 new int[]{35, 140, 245, 70, 210},
                 new int[]{35, 35, 35, 175, 175},
                 partida.getDados());
-
+        
         this.getContentPane().add(dadoJ);
         dadoJ.setBounds(600, 200, 400, 400);
         dadoJ.setBackground(Color.WHITE);
-
+        
         this.rellenarDatos(partida);
-        this.partida = partida;
 
+//        this.partida = partida;
     }
 
     // se recibe una partida con el fin de dibujar los datos iniciales de la partida
     public FJuego() {
         initComponents();
     }
-//Prepara tablero y zona de dados
-//
-//    public void prepararJuego(Partida partida) {
-//        this.setVisible(false);
-//        this.tablero1.setTablero(partida.getTablero());
-////        this.rellenarDatos(partida);
-//        this.setVisible(true);
-//    }
 
-    //Rellenar de nuevo los datos y reactualiza el dibujado de tablero y de dados
-    public void actualizarJuego() {
-    }
 //Actualizacion de datoa del turno 
-
     public void rellenarDatos(Partida partida) {
         this.jugadores.removeAllItems();
         for (int i = 0; i < partida.getJugadores().size(); i++) {
@@ -351,59 +339,66 @@ public class FJuego extends FrameBase {
 //Se manda a llamar al metodo del control correspondientes y este a su vez al cliente que envia datos,
 //sin embargo, no se actualizara o se realizara algo si este jugador no es su turno actual
 
-        if (partida != null) {
-
-            Jugador jugador1 = new Jugador("Jose", "Azul");
-            jugador1.inicializarFichas(6);
-            Jugador jugador2 = new Jugador("Jose1", "Rosa");
-            jugador1.inicializarFichas(6);
-            Jugador jugador3 = new Jugador("Jose2", "Verde");
-            jugador3.inicializarFichas(6);
-            Jugador jugador4 = new Jugador("Jose3", "Rojo");
-            jugador4.inicializarFichas(6);
-            Tablero tablero = new Tablero("30112022", 14);
-            Random r = new Random();
-            for (int i = 0; i < tablero.getCasillas().size(); i++) {
-                int x = r.nextInt(5);
-                if (x == 1) {
-                    Ficha ficha = new Ficha(i, jugador1);
-                    tablero.getCasillas().get(i).setFicha(ficha);
-                }
-                if (x == 2) {
-                    Ficha ficha = new Ficha(i, jugador2);
-                    tablero.getCasillas().get(i).setFicha(ficha);
-                }
-                if (x == 3) {
-                    Ficha ficha = new Ficha(i, jugador3);
-                    tablero.getCasillas().get(i).setFicha(ficha);
-                }
-                if (x == 4) {
-                    Ficha ficha = new Ficha(i, jugador4);
-                    tablero.getCasillas().get(i).setFicha(ficha);
-                }
-//          
-            }
-            partida.setTablero(tablero);
-//            this.tablero1.actualizarTablero(partida.getTablero());
-            List<Dado> dados = new ArrayList<>();
-            for (int i = 0; i < 5; i++) {
-                Dado dado = new Dado(false);
-                dado.cambiarCara();
-                dados.add(dado);
-            }
-            partida.setDados(dados);
-
-            int indice = partida.getJugadores().indexOf(partida.getTurno())+1;
-            if ((indice) == partida.getTotalJugadores() ) {
-                indice = 0;
-            }
-            Jugador jugador = partida.getJugadores().get(indice);
-            partida.setTurno(jugador);
-            this.rellenarDatos(partida);
-        }
+//Descomentar Simulacion
+//        if (partida != null) {
+//
+//            Jugador jugador1 = new Jugador("Jose", "Azul");
+//            jugador1.inicializarFichas(6);
+//            Jugador jugador2 = new Jugador("Jose1", "Rosa");
+//            jugador1.inicializarFichas(6);
+//            Jugador jugador3 = new Jugador("Jose2", "Verde");
+//            jugador3.inicializarFichas(6);
+//            Jugador jugador4 = new Jugador("Jose3", "Rojo");
+//            jugador4.inicializarFichas(6);
+//            Tablero tablero = new Tablero("30112022", 14);
+//            Random r = new Random();
+//            for (int i = 0; i < tablero.getCasillas().size(); i++) {
+//                int x = r.nextInt(5);
+//                if (x == 1) {
+//                    Ficha ficha = new Ficha(i, jugador1);
+//                    tablero.getCasillas().get(i).setFicha(ficha);
+//                }
+//                if (x == 2) {
+//                    Ficha ficha = new Ficha(i, jugador2);
+//                    tablero.getCasillas().get(i).setFicha(ficha);
+//                }
+//                if (x == 3) {
+//                    Ficha ficha = new Ficha(i, jugador3);
+//                    tablero.getCasillas().get(i).setFicha(ficha);
+//                }
+//                if (x == 4) {
+//                    Ficha ficha = new Ficha(i, jugador4);
+//                    tablero.getCasillas().get(i).setFicha(ficha);
+//                }
+////          
+//            }
+//            partida.setTablero(tablero);
+////            this.tablero1.actualizarTablero(partida.getTablero());
+//            List<Dado> dados = new ArrayList<>();
+//            for (int i = 0; i < 5; i++) {
+//                Dado dado = new Dado(false);
+//                dado.cambiarCara();
+//                dados.add(dado);
+//            }
+//            partida.setDados(dados);
+//
+//            int indice = partida.getJugadores().indexOf(partida.getTurno()) + 1;
+//            if ((indice) == partida.getTotalJugadores()) {
+//                indice = 0;
+//            }
+//            Jugador jugador = partida.getJugadores().get(indice);
+//            partida.setTurno(jugador);
+//            this.rellenarDatos(partida);
+//        }
 
     }//GEN-LAST:event_lanzarActionPerformed
-
+    
+    public void apagarBotonTurno() {
+        this.lanzar.setEnabled(false);
+    }
+     public void encenderBotonTurno() {
+        this.lanzar.setEnabled(true);
+    }
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
 //        /* Create and display the form */
@@ -464,5 +459,5 @@ public class FJuego extends FrameBase {
     public void update(Observable o, Object o1) {
         this.rellenarDatos(((MPartida) o).getPartida());
     }
-
+    
 }
