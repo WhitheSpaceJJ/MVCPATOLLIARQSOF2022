@@ -26,7 +26,7 @@ public class Cliente extends Observable implements Runnable {
         this.conexionEstablecida = true;
 //Si desea levantar un servidor como se menciono en el proyecto del patolliServidor, este es el dato que se 
 //necesita cambiar con respecto a la computadora a la que se desmilitarizo, y su correspiende ip y puerto que se establecio.
-        this.host = "192.168.100.4";
+        this.host = "192.168.100.04";
         this.puerto = 80;
     }
 
