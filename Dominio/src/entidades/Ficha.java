@@ -1,6 +1,7 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Clase que representa la ficha del jugador.
@@ -23,7 +24,7 @@ public class Ficha implements Serializable {
 
 //Constructores
     public Ficha() {
-        this.enJuego = true;
+        this.enJuego = false;
     }
 
     public Ficha(int numeroPosicion, Jugador jugador, boolean enJuego) {
@@ -37,7 +38,9 @@ public class Ficha implements Serializable {
     public Ficha(int numeroPosicion, Jugador jugador) {
         this.numeroPosicion = numeroPosicion;
         this.jugador = jugador;
-        this.enJuego = true;
+        this.enJuego = false;
+         this.terminoVuelta=false;
+        this.eliminada=false;
     }
 //Metodos get y set
 
@@ -88,6 +91,29 @@ public class Ficha implements Serializable {
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.jugador);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Ficha other = (Ficha) obj;
+        return Objects.equals(this.jugador, other.jugador);
+    }
+    
 //Metodo to String
 
     @Override

@@ -13,12 +13,13 @@ import modeloServidor.PartidaServidor;
 public class ProtocoloPartida {
 
     private PartidaServidor partidaLocal;
-
+    private int auxiliar;
     public ProtocoloPartida() {
     }
 
     public ProtocoloPartida(PartidaServidor partidaLocal) {
         this.partidaLocal = partidaLocal;
+        this.auxiliar=0;
     }
 
     /*
@@ -35,6 +36,8 @@ El metodo retorna un JugadorLocal si es que este envia los datos de la partida, 
             Condicion que determina si el objeto es de instancia de partida
              */
             if (aux instanceof Partida) {
+                ((Partida) aux).setActiva(true);
+                this.auxiliar=((Partida) aux).getTotalJugadores();
                 //Se crea jugador deacuerdo al turno, ya que el jugador, creador de una partida, siempre tendra el primer turno
                 Jugador jugador = ((Partida) aux).getTurno();
                 System.out.println("La partida ha sido creada");
@@ -74,7 +77,9 @@ El metodo retorna un JugadorLocal si es que este envia los datos de la partida, 
             //condicion que determina si el objeto leido es una instancia de jugador
             //Si es asi pasa pasa por el filtro de aceptacion si este no se encuentra en la lista de jugadores Locales
             if (object instanceof Jugador) {
-                Jugador jugador = (Jugador) object;
+                Jugador jugadorObjecto =((Jugador) object) ;
+                jugadorObjecto.inicializarFichas(auxiliar);
+                Jugador jugador=jugadorObjecto;
                 JugadorLocal jugadorLocal = new JugadorLocal(jugador, sc);
                 int jugadorEsta = jugadores.indexOf(jugadorLocal);
                 ObjectOutputStream output = new ObjectOutputStream(sc.getOutputStream());

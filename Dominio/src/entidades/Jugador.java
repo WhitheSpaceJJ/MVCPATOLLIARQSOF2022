@@ -13,7 +13,6 @@ import java.util.Objects;
  */
 public class Jugador implements Serializable {
 //Nombre color
-
     private String nombre;
     private String color;
     //Dinero
@@ -22,14 +21,30 @@ public class Jugador implements Serializable {
      * Lista de fichas.
      */
     private List<Ficha> fichas;
+    private int totalLanzamientos;
 //Constructores
-
+   private boolean activo;
     public Jugador(String nombre, String color) {
         this.nombre = nombre;
         this.color = color;
         this.fichas = new ArrayList<>();
-        this.dinero=new Dinero(0);
-        this.inicializarFichas(6);
+        this.totalLanzamientos=0;
+    }
+
+    public int getTotalLanzamientos() {
+        return totalLanzamientos;
+    }
+
+    public void setTotalLanzamientos(int totalLanzamientos) {
+        this.totalLanzamientos = totalLanzamientos;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
 //Metodos get y set   

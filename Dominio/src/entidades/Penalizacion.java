@@ -3,6 +3,9 @@ package entidades;
 //Clase que representa la penalizacion.
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Penalizacion implements Serializable{
 
@@ -53,3 +56,4 @@ public class Penalizacion implements Serializable{
     }
 
 }
+

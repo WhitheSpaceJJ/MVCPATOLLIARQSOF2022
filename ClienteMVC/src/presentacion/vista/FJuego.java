@@ -150,6 +150,7 @@ public class FJuego extends FrameBase {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Juego");
         setMinimumSize(new java.awt.Dimension(1268, 640));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         turno.setBackground(new java.awt.Color(204, 204, 204));

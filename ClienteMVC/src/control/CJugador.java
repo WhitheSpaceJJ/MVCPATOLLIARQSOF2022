@@ -18,15 +18,22 @@ public class CJugador extends ControlBase {
     public CJugador(ModeloBase modelo) {
         super(modelo);
     }
+
     /*
     Metodo que solicita o hace uso
      */
     public void unirsePartida(Jugador jugador) {
-        Partida partida = (this.cliente.unirsePartida(jugador));
-        if (partida != null) {
-            ((MJugador) this.modelo).unirsePartida(jugador,partida);
-            Thread thradCliente = new Thread(this.cliente);
-            thradCliente.start();
+        if (!jugador.getNombre().isEmpty()) {
+            Partida partida = (this.cliente.unirsePartida(jugador));
+            if (partida != null) {
+                jugador = partida.getJugadores().get(partida.getJugadores().size() - 1);
+//                jugador.inicializarFichas(partida.getCantidadFichas());
+                ((MJugador) this.modelo).unirsePartida(jugador, partida);
+                Thread thradCliente = new Thread(this.cliente);
+                thradCliente.start();
+            } else {
+                ((MJugador) this.modelo).unirsePartida(jugador, partida);
+            }
         }
     }
 

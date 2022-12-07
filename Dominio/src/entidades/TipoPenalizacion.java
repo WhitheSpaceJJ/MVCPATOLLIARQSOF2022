@@ -5,5 +5,5 @@ import java.io.Serializable;
 
 
 public enum TipoPenalizacion implements Serializable{
-    CasillaTriangulo, FichaMeta, MovidaFichaEspecial;
+    CasillaTriangulo, FichaMeta, MovidaFichaEspecial,TiradaNoExitosa;
 }

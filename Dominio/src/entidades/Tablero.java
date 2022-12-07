@@ -19,7 +19,9 @@ public class Tablero implements Serializable {
 
     //Jugadores del tablero.
 //Constructores 
-    public Tablero() {
+    public Tablero(String numeroTablero) {
+        this.numeroTablero = numeroTablero;
+        this.casillas = new ArrayList();
     }
 
     public Tablero(String numeroTablero, int tamano) {

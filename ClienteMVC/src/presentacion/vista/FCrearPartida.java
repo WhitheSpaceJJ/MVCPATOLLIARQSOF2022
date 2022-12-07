@@ -50,17 +50,17 @@ public class FCrearPartida extends FrameBase {
         jLabel8 = new javax.swing.JLabel();
         colorJugador = new javax.swing.JComboBox<>();
         nombreJugador = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
-        montoApuesta = new javax.swing.JTextField();
-        fondoJugador = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jButtonComenzar = new javax.swing.JButton();
-        cantidadJugadores = new javax.swing.JComboBox<>();
-        tamanoTablero = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        tamanoTablero = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jSpinnerFondoJugador = new javax.swing.JSpinner();
+        jLabel12 = new javax.swing.JLabel();
+        cantidadJugadores = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        jSpinnerMontoApuesta = new javax.swing.JSpinner();
+        jLabel7 = new javax.swing.JLabel();
+        cantidadFichas = new javax.swing.JComboBox<>();
+        jButtonComenzar = new javax.swing.JButton();
 
         resetDatos.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         resetDatos.setForeground(new java.awt.Color(204, 0, 0));
@@ -99,26 +99,26 @@ public class FCrearPartida extends FrameBase {
         jLabel2.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel2.setText("Escoga su color;");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 130, 150, 30);
+        jLabel2.setBounds(330, 110, 150, 30);
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLabel3.setText("Datos del creador");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(10, 50, 210, 20);
+        jLabel3.setBounds(10, 60, 210, 20);
         jPanel1.add(jSeparator1);
         jSeparator1.setBounds(0, 40, 700, 10);
         jPanel1.add(jSeparator2);
-        jSeparator2.setBounds(0, 200, 700, 10);
+        jSeparator2.setBounds(0, 160, 700, 10);
 
         jLabel8.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel8.setText("Escriba su apodo;");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(10, 90, 170, 20);
+        jLabel8.setBounds(10, 110, 170, 20);
 
         colorJugador.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         colorJugador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Azul", "Rosa", "Rojo", "Verde" }));
         jPanel1.add(colorJugador);
-        colorJugador.setBounds(170, 130, 120, 30);
+        colorJugador.setBounds(490, 110, 120, 30);
 
         nombreJugador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,27 +126,57 @@ public class FCrearPartida extends FrameBase {
             }
         });
         jPanel1.add(nombreJugador);
-        nombreJugador.setBounds(170, 90, 150, 30);
+        nombreJugador.setBounds(170, 110, 150, 30);
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 630, 230);
+        jLabel10.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        jLabel10.setText("Tamaño:");
+        jPanel1.add(jLabel10);
+        jLabel10.setBounds(10, 180, 110, 30);
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel2.setLayout(null);
-        jPanel2.add(montoApuesta);
-        montoApuesta.setBounds(490, 100, 130, 30);
-        jPanel2.add(fondoJugador);
-        fondoJugador.setBounds(490, 50, 130, 30);
-
-        jLabel9.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        jLabel9.setText("Monto apuesta");
-        jPanel2.add(jLabel9);
-        jLabel9.setBounds(320, 90, 140, 30);
+        tamanoTablero.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        tamanoTablero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "14", "12", "10" }));
+        jPanel1.add(tamanoTablero);
+        tamanoTablero.setBounds(170, 180, 120, 30);
 
         jLabel11.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel11.setText("Fondo por jugador:");
-        jPanel2.add(jLabel11);
-        jLabel11.setBounds(320, 50, 170, 30);
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(320, 210, 170, 30);
+
+        jSpinnerFondoJugador.setModel(new javax.swing.SpinnerNumberModel(1000, 1000, 2000, 50));
+        jSpinnerFondoJugador.setEditor(new javax.swing.JSpinner.NumberEditor(jSpinnerFondoJugador, ""));
+        jPanel1.add(jSpinnerFondoJugador);
+        jSpinnerFondoJugador.setBounds(510, 210, 100, 30);
+
+        jLabel12.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        jLabel12.setText("Total Jugadores:");
+        jPanel1.add(jLabel12);
+        jLabel12.setBounds(10, 230, 150, 30);
+
+        cantidadJugadores.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        cantidadJugadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "4" }));
+        jPanel1.add(cantidadJugadores);
+        cantidadJugadores.setBounds(170, 230, 120, 30);
+
+        jLabel9.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        jLabel9.setText("Monto apuesta:");
+        jPanel1.add(jLabel9);
+        jLabel9.setBounds(320, 270, 140, 30);
+
+        jSpinnerMontoApuesta.setModel(new javax.swing.SpinnerNumberModel(100, 100, 750, 50));
+        jSpinnerMontoApuesta.setEditor(new javax.swing.JSpinner.NumberEditor(jSpinnerMontoApuesta, ""));
+        jPanel1.add(jSpinnerMontoApuesta);
+        jSpinnerMontoApuesta.setBounds(510, 270, 100, 30);
+
+        jLabel7.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        jLabel7.setText("Total Fichas:");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(10, 280, 180, 30);
+
+        cantidadFichas.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        cantidadFichas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "4", "5", "6" }));
+        jPanel1.add(cantidadFichas);
+        cantidadFichas.setBounds(170, 280, 120, 30);
 
         jButtonComenzar.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jButtonComenzar.setForeground(new java.awt.Color(0, 153, 0));
@@ -156,36 +186,11 @@ public class FCrearPartida extends FrameBase {
                 jButtonComenzarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonComenzar);
-        jButtonComenzar.setBounds(250, 130, 120, 40);
+        jPanel1.add(jButtonComenzar);
+        jButtonComenzar.setBounds(260, 360, 120, 40);
 
-        cantidadJugadores.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        cantidadJugadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2", "3", "4" }));
-        jPanel2.add(cantidadJugadores);
-        cantidadJugadores.setBounds(190, 90, 120, 30);
-
-        tamanoTablero.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        tamanoTablero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "14", "12", "10" }));
-        jPanel2.add(tamanoTablero);
-        tamanoTablero.setBounds(190, 50, 120, 30);
-
-        jLabel7.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        jLabel7.setText("Total Jugadores");
-        jPanel2.add(jLabel7);
-        jLabel7.setBounds(0, 90, 180, 30);
-
-        jLabel10.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        jLabel10.setText("Tamaño:");
-        jPanel2.add(jLabel10);
-        jLabel10.setBounds(10, 50, 110, 30);
-
-        jLabel6.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel6.setText("Configuración Partida");
-        jPanel2.add(jLabel6);
-        jLabel6.setBounds(10, 10, 250, 20);
-
-        getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 220, 630, 230);
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(0, 0, 630, 450);
 
         pack();
         setLocationRelativeTo(null);
@@ -203,106 +208,51 @@ public class FCrearPartida extends FrameBase {
     }//GEN-LAST:event_nombreJugadorActionPerformed
 
     private void jButtonComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComenzarActionPerformed
-        if (validarConfiguracion() == false) {
-
-            String color = colorJugador.getSelectedItem().toString();
-            int tamaño = Integer.valueOf(tamanoTablero.getSelectedItem().toString());
-            int totalJugadores = Integer.valueOf(cantidadJugadores.getSelectedItem().toString());
-            double montoApuestaD = Double.valueOf(this.montoApuesta.getText());
-            double montoJugadorD = Double.valueOf(this.fondoJugador.getText());
-            Tablero tablero = new Tablero(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "" + Calendar.getInstance().get(Calendar.SECOND), tamaño);
-            Partida partida = new Partida(new Jugador(this.nombreJugador.getText(), color), tablero, montoJugadorD, montoApuestaD, totalJugadores);
-             List<Dado> dados = new ArrayList<>();
-            for (int i = 0; i < 5; i++) {
-                Dado dado = new Dado(false);
-//                dado.cambiarCara();
-                dados.add(dado);
-            }
-            partida.setDados(dados);
-
-            ((CPartida) this.control).crearPartida(partida);
-        }
+//      Partida partida2=new Partida(turno, tablero, montoJugador,montoApuesta, totalJugadores,cantidadFichas);
+        Partida partida = new Partida(
+                new Jugador(this.nombreJugador.getText(), this.colorJugador.getSelectedItem().toString()),
+                new Tablero(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + "",
+                        Integer.valueOf(this.tamanoTablero.getSelectedItem().toString())),
+                ((Integer) this.jSpinnerFondoJugador.getValue()),
+                ((Integer) this.jSpinnerMontoApuesta.getValue()),
+                Integer.valueOf(this.cantidadJugadores.getSelectedItem().toString()),
+                Integer.valueOf(this.cantidadFichas.getSelectedItem().toString())
+        );
+        ((CPartida) this.control).crearPartida(partida);
+//        }
     }//GEN-LAST:event_jButtonComenzarActionPerformed
 
     private void resetDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetDatosActionPerformed
-        this.nombreJugador.setText("");
-        this.colorJugador.setSelectedIndex(0);
+//        this.nombreJugador.setText("");
+//        this.colorJugador.setSelectedIndex(0);
     }//GEN-LAST:event_resetDatosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cantidadFichas;
     private javax.swing.JComboBox<String> cantidadJugadores;
     private javax.swing.JComboBox<String> colorJugador;
-    private javax.swing.JTextField fondoJugador;
     private javax.swing.JButton jButtonComenzar;
     private javax.swing.JButton jButtonMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField montoApuesta;
+    private javax.swing.JSpinner jSpinnerFondoJugador;
+    private javax.swing.JSpinner jSpinnerMontoApuesta;
     private javax.swing.JTextField nombreJugador;
     private javax.swing.JButton resetDatos;
     private javax.swing.JComboBox<String> tamanoTablero;
     // End of variables declaration//GEN-END:variables
-
-//Valida la configuracion de la creacion datos, nombre del jugador, montos,etc.
-    public boolean validarConfiguracion() {
-        if (this.nombreJugador.getText().isEmpty()) {
-            this.mostrarMensaje("Establece el nombre del jugador");
-            return true;
-        }
-
-        if (this.fondoJugador.getText().isEmpty()) {
-            this.mostrarMensaje("Necesita escribir el fondo por jugador");
-            return true;
-        }
-
-        if (this.montoApuesta.getText().isEmpty()) {
-            this.mostrarMensaje("Necesita escribir el monto de apuesta");
-            return true;
-        }
-        Double m;
-        try {
-            m = Double.valueOf(this.fondoJugador.getText());
-        } catch (NumberFormatException e) {
-            this.mostrarMensaje("El monto de dinero contienen caracteres invalidos");
-            return true;
-        }
-
-        if (m > 2000) {
-            this.mostrarMensaje("Por el momentto el monto de dinero debe de ser menor a 2000");
-            return true;
-        } else if (m < 1000) {
-            this.mostrarMensaje("Por el momentto el monto de dinero debe de ser mayor a 1000");
-            return true;
-        } else {
-            Double a;
-            try {
-                a = Double.valueOf(this.montoApuesta.getText());
-            } catch (NumberFormatException e) {
-                this.mostrarMensaje("El monto de apuesta contienen caracteres invalidos");
-                return true;
-            }
-
-            double diezP = m * 0.1;
-            if (a > diezP) {
-                this.mostrarMensaje("Para un buen juego el monto por apuesta debe de ser menor a " + diezP);
-                return true;
-            }
-        }
-        return false;
-    }
-//mostrar mensaje 
+//
 
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(null, mensaje);
@@ -318,22 +268,30 @@ public class FCrearPartida extends FrameBase {
 
     @Override
     public void update(Observable o, Object o1) {
-        this.dispose();
-        Partida partida = ((MPartida) o).getPartida();
-        JOptionPane.showMessageDialog(this, "Usted ha creado una partida; Nombre Escogigo=" + partida.getTurno().getNombre() + " Color; " + partida.getTurno().getColor());
-        ModeloBase modeloPartida = (MPartida) o;
-        ControlBase controlJugador = new CJugador();
-        controlJugador.establecerModelo(modeloPartida);
-        this.control.getCliente().addObserver((Observer) modeloPartida);
-        controlJugador.establecerCliente(this.control.getCliente());
-        FrameBase fLobby = new FLobby(((MPartida) o).getPartida().getMontoJugador(),
-                ((MPartida) o).getPartida().getMontoApuesta(), ((MPartida) o).getPartida().getTablero().getTamano());
-        modeloPartida.deleteObserver(this);
-        fLobby.establecerControl(control);
-        modeloPartida.addObserver(fLobby);
-        ((FLobby) fLobby).apagarBoton();
-        ((FLobby) fLobby).actualizarLobby(((MPartida) o).getPartida().getJugadores());
-        this.mostrarPantallaLobby((FLobby) fLobby);
+//        if (((MPartida) o).getPartida().getTurno().getNombre().isEmpty()) {
+//            this.mostrarMensaje("Porfavor ingrese su nombre.");
+//        } else {
+        if (((MPartida) o).getPartida().isActiva()) {
+            this.dispose();
+            Partida partida = ((MPartida) o).getPartida();
+            JOptionPane.showMessageDialog(this, "Usted ha creado una partida; Nombre Escogigo=" + partida.getTurno().getNombre() + " Color; " + partida.getTurno().getColor());
+            ModeloBase modeloPartida = (MPartida) o;
+            ControlBase controlJugador = new CJugador();
+            controlJugador.establecerModelo(modeloPartida);
+            this.control.getCliente().addObserver((Observer) modeloPartida);
+            controlJugador.establecerCliente(this.control.getCliente());
+            FrameBase fLobby = new FLobby(((MPartida) o).getPartida().getMontoJugador(),
+                    ((MPartida) o).getPartida().getMontoApuesta(), ((MPartida) o).getPartida().getTablero().getTamano());
+            modeloPartida.deleteObserver(this);
+            fLobby.establecerControl(control);
+            modeloPartida.addObserver(fLobby);
+            ((FLobby) fLobby).apagarBoton();
+            ((FLobby) fLobby).actualizarLobby(((MPartida) o).getPartida().getJugadores());
+            this.mostrarPantallaLobby((FLobby) fLobby);
+        } else {
+            this.mostrarMensaje("No se ha podido establecer la creacion de la partida con el servidor, contacte a los creadores del servidor");
+        }
+//        }
 
     }
 }

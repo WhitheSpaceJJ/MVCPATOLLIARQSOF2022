@@ -160,21 +160,21 @@ public class Servidor extends Thread implements Observer {
 //                }
             }
             System.out.println("El juego ha iniciado, ha alcanzado el maximo de jugadores");
-            int procesarIndice = 0;
-//            Ciclo que procesara la entrada de los datos o dados
-            while (enServicio) {
-                Object object = null;
-                try {
-                    ObjectInputStream inputd = new ObjectInputStream(jugadores.get(procesarIndice).getSocket().getInputStream());
-                    object = inputd.readObject();
-                } catch (IOException | ClassNotFoundException e) {
-                    System.out.println("Error; " + e.getMessage());
-                }
-                procesarIndice = this.protocoloPartidaLocal.procesarDados(object);
-                if (procesarIndice == 100) {
-                    System.out.println("La partida ha finalizado");
-                }
-            }
+//            int procesarIndice = 0;
+////            Ciclo que procesara la entrada de los datos o dados
+//            while (enServicio) {
+//                Object object = null;
+//                try {
+//                    ObjectInputStream inputd = new ObjectInputStream(jugadores.get(procesarIndice).getSocket().getInputStream());
+//                    object = inputd.readObject();
+//                } catch (IOException | ClassNotFoundException e) {
+//                    System.out.println("Error; " + e.getMessage());
+//                }
+//                procesarIndice = this.protocoloPartidaLocal.procesarDados(object);
+//                if (procesarIndice == 100) {
+//                    System.out.println("La partida ha finalizado");
+//                }
+//            }
         } catch (IOException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }

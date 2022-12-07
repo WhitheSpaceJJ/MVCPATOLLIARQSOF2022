@@ -53,21 +53,34 @@ public class FUnirse extends FrameBase {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Unirse a Partida");
+        setTitle("Unirse");
         setMinimumSize(new java.awt.Dimension(550, 300));
         setResizable(false);
+        getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         jLabel1.setText("Unirse a partida");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(161, 1, 240, 30);
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        jLabel2.setText("Escoga su color;");
+        jLabel2.setText("Escoga su color:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(10, 160, 150, 30);
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLabel3.setText("Datos del jugador");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(10, 60, 190, 30);
+        getContentPane().add(jSeparator1);
+        jSeparator1.setBounds(1, 41, 540, 10);
+        getContentPane().add(jSeparator2);
+        jSeparator2.setBounds(6, 244, 550, 10);
 
         jLabel8.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        jLabel8.setText("Escriba su apodo;");
+        jLabel8.setText("Escriba su apodo:");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(10, 110, 160, 30);
 
         BoxColor.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         BoxColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Azul", "Rosa", "Rojo", "Verde" }));
@@ -76,6 +89,8 @@ public class FUnirse extends FrameBase {
                 BoxColorActionPerformed(evt);
             }
         });
+        getContentPane().add(BoxColor);
+        BoxColor.setBounds(200, 170, 140, 30);
 
         jButtonUnirse.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jButtonUnirse.setForeground(new java.awt.Color(102, 255, 102));
@@ -85,76 +100,10 @@ public class FUnirse extends FrameBase {
                 jButtonUnirseActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtnomjugador, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(BoxColor, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonUnirse, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72))))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(160, 160, 160)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 21, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtnomjugador, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(BoxColor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                        .addComponent(jButtonUnirse, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(114, 114, 114))))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 1, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(10, 10, 10)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 249, Short.MAX_VALUE)))
-        );
+        getContentPane().add(jButtonUnirse);
+        jButtonUnirse.setBounds(410, 130, 90, 40);
+        getContentPane().add(txtnomjugador);
+        txtnomjugador.setBounds(200, 110, 140, 30);
 
         pack();
         setLocationRelativeTo(null);
@@ -169,10 +118,10 @@ public class FUnirse extends FrameBase {
 
     private void jButtonUnirseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUnirseActionPerformed
 
-        if (!this.validarCampos()) {
-            String color = BoxColor.getSelectedItem().toString();
-            ((CJugador) this.control).unirsePartida(new Jugador(this.txtnomjugador.getText(), color));
-        }
+//        if (!this.validarCampos()) {
+//            String color = ;
+        ((CJugador) this.control).unirsePartida(new Jugador(this.txtnomjugador.getText(), BoxColor.getSelectedItem().toString()));
+//        }
 
 
     }//GEN-LAST:event_jButtonUnirseActionPerformed
@@ -212,52 +161,42 @@ public class FUnirse extends FrameBase {
 
     @Override
     public void update(Observable o, Object o1) {
-        this.dispose();
-        Jugador jugador = ((MJugador) o).getJugador();
-        JOptionPane.showMessageDialog(this, "Se ha unido a una partida; Nombre Escogigo=" + jugador.getNombre() + " Color; " + jugador.getColor());
-////        ModeloBase modeloPartida = new MPartida(((Partida) o1));
-//        ModeloBase modeloPartida = new MPartida(((Partida) o1));
-//        ((CJugador) this.control).establecerModelo(modeloPartida);
-//        this.control.getCliente().addObserver((Observer) modeloPartida);
-//        FrameBase fLobby = new FLobby(((Partida) o1).getMontoJugador(),
-//                ((Partida) o1).getMontoApuesta(), ((Partida) o1).getTablero().getTamano());
-//        fLobby.establecerControl(((CJugador) this.control));
-//        modeloPartida.addObserver(fLobby);
-//        ((FLobby) fLobby).apagarBoton();
-//        ((FLobby) fLobby).actualizarLobby(((Partida) o1).getJugadores());
-//        this.mostrarPantallaLobby((FLobby) fLobby);
-//        
-        if (((Partida) o1).getTotalJugadores() == ((Partida) o1).getJugadores().size()) {
-            ModeloBase modeloPartida = new MPartida(((Partida) o1));
-            ((CJugador) this.control).establecerModelo(modeloPartida);
-            this.control.getCliente().addObserver((Observer) modeloPartida);
-            FrameBase frameJuego = new FJuego((Partida) o1);
-            frameJuego.establecerControl(this.control);
-            java.awt.EventQueue.invokeLater(() -> {
-                frameJuego.setVisible(true);
-            });
+        if (o1 == null) {
+this.mostrarMensaje("La union de partida no se ha ejecutado correctamente, contacte a los creadores. ");
         } else {
-            ModeloBase modeloPartida = new MPartida(((Partida) o1));
-            ((CJugador) this.control).establecerModelo(modeloPartida);
-            this.control.getCliente().addObserver((Observer) modeloPartida);
-            FrameBase fLobby = new FLobby(((Partida) o1).getMontoJugador(),
-                    ((Partida) o1).getMontoApuesta(), ((Partida) o1).getTablero().getTamano());
-            fLobby.establecerControl(((CJugador) this.control));
-            modeloPartida.addObserver(fLobby);
-            ((FLobby) fLobby).apagarBoton();
-            ((FLobby) fLobby).actualizarLobby(((Partida) o1).getJugadores());
-            this.mostrarPantallaLobby((FLobby) fLobby);
+            this.dispose();
+            Jugador jugador = ((MJugador) o).getJugador();
+            this.mostrarMensaje("Se ha unido a una partida; Nombre Escogigo=" + jugador.getNombre() + " Color; " + jugador.getColor());
+            if (((Partida) o1).getTotalJugadores() == ((Partida) o1).getJugadores().size()) {
+                ModeloBase modeloPartida = new MPartida(((Partida) o1));
+                ((CJugador) this.control).establecerModelo(modeloPartida);
+                this.control.getCliente().addObserver((Observer) modeloPartida);
+                FrameBase frameJuego = new FJuego((Partida) o1);
+                frameJuego.establecerControl(this.control);
+                java.awt.EventQueue.invokeLater(() -> {
+                    frameJuego.setVisible(true);
+                });
+            } else {
+                ModeloBase modeloPartida = new MPartida(((Partida) o1));
+                ((CJugador) this.control).establecerModelo(modeloPartida);
+                this.control.getCliente().addObserver((Observer) modeloPartida);
+                FrameBase fLobby = new FLobby(((Partida) o1).getMontoJugador(),
+                        ((Partida) o1).getMontoApuesta(), ((Partida) o1).getTablero().getTamano());
+                fLobby.establecerControl(((CJugador) this.control));
+                modeloPartida.addObserver(fLobby);
+                ((FLobby) fLobby).apagarBoton();
+                ((FLobby) fLobby).actualizarLobby(((Partida) o1).getJugadores());
+                this.mostrarPantallaLobby((FLobby) fLobby);
+            }
         }
-
     }
 //Metodo que valida la configuración  datos del jugador, si la partida tiene espacios, etc.
 
-    public boolean validarCampos() {
-        if (this.txtnomjugador.getText().isEmpty()) {
-            this.mostrarMensaje("Establece el nombre del jugador, este no debe de estar vacio");
-            return true;
-        }
-        return false;
-    }
-
+//    public boolean validarCampos() {
+//        if (this.txtnomjugador.getText().isEmpty()) {
+//            this.mostrarMensaje("Establece el nombre del jugador, este no debe de estar vacio");
+//            return true;
+//        }
+//        return false;
+//    }
 }
