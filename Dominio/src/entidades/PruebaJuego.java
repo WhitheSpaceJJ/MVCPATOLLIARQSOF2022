@@ -288,7 +288,7 @@ public class PruebaJuego {
                                 Casilla casillaActualizar = new Casilla(tablero.getCasillas().get(indiceCasilla).getTipo());
                                 System.out.println("La ficha; " + (enJuego.getNumeroPosicion() + 1)
                                         + " ha terminado la vuelta, posicion que estaba; " + indiceCasilla);
-                                enJuego.setEnJuego(true);
+//                                enJuego.setEnJuego(true);
                                 casillas.set(indiceCasilla, casillaActualizar);
                             }
                         }
@@ -360,6 +360,7 @@ public class PruebaJuego {
             }
             System.out.println(fichasConVuelta.size() + " de las fichas del jugador " + turno.getNombre() + " han dado la vuelta");
             if (fichasConVuelta.size() == partida.getCantidadFichas()) {
+                            partida.setTurno(turno);
                 partida.setActiva(false);
 //                limpiarCasillas();
                 break;
