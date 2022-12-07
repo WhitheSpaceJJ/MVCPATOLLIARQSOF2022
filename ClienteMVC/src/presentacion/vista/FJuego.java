@@ -24,7 +24,7 @@ import presentacion.dibujo.TableroGrafico;
  * @author Equipo1.
  */
 public class FJuego extends FrameBase {
-    
+
     TableroGrafico tablero1;
     DadoGrafico dadoJ;
 
@@ -35,16 +35,16 @@ public class FJuego extends FrameBase {
         this.getContentPane().add(tablero1);
         tablero1.setBounds(0, 0, 600, 600);
         tablero1.setBackground(Color.LIGHT_GRAY);
-        
+
         this.dadoJ = new DadoGrafico(
                 new int[]{35, 140, 245, 70, 210},
                 new int[]{35, 35, 35, 175, 175},
                 partida.getDados());
-        
+
         this.getContentPane().add(dadoJ);
         dadoJ.setBounds(600, 200, 400, 400);
         dadoJ.setBackground(Color.WHITE);
-        
+
         this.rellenarDatos(partida);
 
 //        this.partida = partida;
@@ -57,6 +57,7 @@ public class FJuego extends FrameBase {
 
 //Actualizacion de datoa del turno 
     public void rellenarDatos(Partida partida) {
+        if(partida.isActiva()){
         this.jugadores.removeAllItems();
         for (int i = 0; i < partida.getJugadores().size(); i++) {
             Jugador jugador = partida.getJugadores().get(i);
@@ -66,19 +67,27 @@ public class FJuego extends FrameBase {
         this.penalizacion.setText(String.valueOf(partida.getMontoApuesta()));
         this.nombre.setText(partida.getTurno().getNombre());
 //        this.monto.setText(String.valueOf(partida.getTurno().getDinero().getCantidad()));
-this.monto.setText(String.valueOf(0));
+        this.monto.setText(String.valueOf(partida.getTurno().getDinero().getCantidad()));
         int contadorFichasEliminadas = 0;
         int contadorFichasVuelta = 0;
-        for (int i = 0; i < partida.getTurno().getFichas().size(); i++) {
-            if (!partida.getTurno().getFichas().get(i).isEnJuego()) {
-                contadorFichasEliminadas += 1;
-            }
-            if (partida.getTurno().getFichas().get(i).isTerminoVuelta()) {
+        Jugador turno=partida.getTurno();
+        
+        for (int i = 0; i < turno.getFichas().size(); i++) {
+            Ficha ficha = turno.getFichas().get(i);
+            if (ficha.isTerminoVuelta()) {
                 contadorFichasVuelta += 1;
             }
         }
+//        for (int i = 0; i < partida.getTurno().getFichas().size(); i++) {
+//            if (!partida.getTurno().getFichas().get(i).isEnJuego()) {
+//                contadorFichasEliminadas += 1;
+//            }
+//            if (partida.getTurno().getFichas().get(i).isTerminoVuelta()) {
+//                contadorFichasVuelta += 1;
+//            }
+//        }
         //Azul, Amarillo, Rojo, Verde
-        this.fichasEliminadas.setText(String.valueOf(contadorFichasEliminadas));
+//        this.fichasEliminadas.setText(String.valueOf(contadorFichasEliminadas));
         this.fichaRestantes.setText(String.valueOf(contadorFichasVuelta));
         if (partida.getTurno().getColor().equalsIgnoreCase("Rojo")) {
             this.turno.setBackground(Color.RED);
@@ -94,6 +103,10 @@ this.monto.setText(String.valueOf(0));
         }
         this.tablero1.actualizarTablero(partida.getTablero());
         this.dadoJ.setDados(partida.getDados());
+                }
+        else{
+            System.out.println("La partida ha finalizado; Ganador="+partida.getTurno().getNombre() );
+        }
     }
 
     /**
@@ -108,6 +121,8 @@ this.monto.setText(String.valueOf(0));
         jLabel4 = new javax.swing.JLabel();
         fichasEnJuego = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        fichasEliminadas = new javax.swing.JLabel();
         turno = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -124,8 +139,6 @@ this.monto.setText(String.valueOf(0));
         fichaRestantes = new javax.swing.JLabel();
         monto = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        fichasEliminadas = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lanzar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
@@ -149,6 +162,12 @@ this.monto.setText(String.valueOf(0));
 
         jLabel3.setText("jLabel3");
 
+        jLabel7.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel7.setText("Fichas Con");
+
+        fichasEliminadas.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        fichasEliminadas.setText("0");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Juego");
         setMinimumSize(new java.awt.Dimension(1268, 640));
@@ -167,17 +186,17 @@ this.monto.setText(String.valueOf(0));
         jLabel2.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel2.setText("Jugador");
         turno.add(jLabel2);
-        jLabel2.setBounds(10, 70, 90, 21);
+        jLabel2.setBounds(10, 90, 90, 21);
 
         nombre.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         nombre.setText("0");
         turno.add(nombre);
-        nombre.setBounds(140, 70, 90, 20);
+        nombre.setBounds(140, 90, 90, 20);
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel6.setText("Monto Actual");
         turno.add(jLabel6);
-        jLabel6.setBounds(10, 110, 120, 21);
+        jLabel6.setBounds(10, 130, 120, 21);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setLayout(null);
@@ -221,22 +240,12 @@ this.monto.setText(String.valueOf(0));
         monto.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         monto.setText("0");
         turno.add(monto);
-        monto.setBounds(140, 110, 90, 19);
+        monto.setBounds(140, 130, 90, 19);
 
         jLabel5.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel5.setText("Fichas Restantes");
         turno.add(jLabel5);
         jLabel5.setBounds(50, 180, 160, 19);
-
-        fichasEliminadas.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        fichasEliminadas.setText("0");
-        turno.add(fichasEliminadas);
-        fichasEliminadas.setBounds(150, 150, 70, 19);
-
-        jLabel7.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel7.setText("Fichas Eliminadas");
-        turno.add(jLabel7);
-        jLabel7.setBounds(10, 150, 140, 19);
 
         getContentPane().add(turno);
         turno.setBounds(1000, 0, 250, 240);
@@ -341,67 +350,15 @@ this.monto.setText(String.valueOf(0));
     private void lanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lanzarActionPerformed
 //Se manda a llamar al metodo del control correspondientes y este a su vez al cliente que envia datos,
 //sin embargo, no se actualizara o se realizara algo si este jugador no es su turno actual
-((CJugador)this.control).lanzarDados();
-
-//((CJugador)this.control.lanzarDados());
-//Descomentar Simulacion
-//        if (partida != null) {
-//
-//            Jugador jugador1 = new Jugador("Jose", "Azul");
-//            jugador1.inicializarFichas(6);
-//            Jugador jugador2 = new Jugador("Jose1", "Rosa");
-//            jugador1.inicializarFichas(6);
-//            Jugador jugador3 = new Jugador("Jose2", "Verde");
-//            jugador3.inicializarFichas(6);
-//            Jugador jugador4 = new Jugador("Jose3", "Rojo");
-//            jugador4.inicializarFichas(6);
-//            Tablero tablero = new Tablero("30112022", 14);
-//            Random r = new Random();
-//            for (int i = 0; i < tablero.getCasillas().size(); i++) {
-//                int x = r.nextInt(5);
-//                if (x == 1) {
-//                    Ficha ficha = new Ficha(i, jugador1);
-//                    tablero.getCasillas().get(i).setFicha(ficha);
-//                }
-//                if (x == 2) {
-//                    Ficha ficha = new Ficha(i, jugador2);
-//                    tablero.getCasillas().get(i).setFicha(ficha);
-//                }
-//                if (x == 3) {
-//                    Ficha ficha = new Ficha(i, jugador3);
-//                    tablero.getCasillas().get(i).setFicha(ficha);
-//                }
-//                if (x == 4) {
-//                    Ficha ficha = new Ficha(i, jugador4);
-//                    tablero.getCasillas().get(i).setFicha(ficha);
-//                }
-////          
-//            }
-//            partida.setTablero(tablero);
-////            this.tablero1.actualizarTablero(partida.getTablero());
-//            List<Dado> dados = new ArrayList<>();
-//            for (int i = 0; i < 5; i++) {
-//                Dado dado = new Dado(false);
-//                dado.cambiarCara();
-//                dados.add(dado);
-//            }
-//            partida.setDados(dados);
-//
-//            int indice = partida.getJugadores().indexOf(partida.getTurno()) + 1;
-//            if ((indice) == partida.getTotalJugadores()) {
-//                indice = 0;
-//            }
-//            Jugador jugador = partida.getJugadores().get(indice);
-//            partida.setTurno(jugador);
-//            this.rellenarDatos(partida);
-//        }
+        ((CJugador) this.control).lanzarDados();
 
     }//GEN-LAST:event_lanzarActionPerformed
-    
+
     public void apagarBotonTurno() {
         this.lanzar.setEnabled(false);
     }
-     public void encenderBotonTurno() {
+
+    public void encenderBotonTurno() {
         this.lanzar.setEnabled(true);
     }
 
@@ -464,5 +421,5 @@ this.monto.setText(String.valueOf(0));
     public void update(Observable o, Object o1) {
         this.rellenarDatos(((MPartida) o).getPartida());
     }
-    
+
 }
