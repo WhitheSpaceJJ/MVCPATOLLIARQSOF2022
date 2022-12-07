@@ -10,10 +10,6 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- *
- * @author Judi
- */
 public class PruebaJuego {
 
     //Version1
@@ -62,16 +58,16 @@ public class PruebaJuego {
         // TODO code application logic here
         Jugador jugador1 = new Jugador("Jose1", "Amarillo");
         Jugador jugador2 = new Jugador("Jose2", "Rosa");
-//        Jugador jugador3 = new Jugador("Jose3", "Azul");
-//        Jugador jugador4 = new Jugador("Jose4", "Rojo");
+        Jugador jugador3 = new Jugador("Jose3", "Azul");
+        Jugador jugador4 = new Jugador("Jose4", "Rojo");
         List<Jugador> jugadores = new ArrayList<>();
         jugadores.add(jugador1);
         jugadores.add(jugador2);
-//        jugadores.add(jugador3);
-//        jugadores.add(jugador4);
+        jugadores.add(jugador3);
+        jugadores.add(jugador4);
         Tablero tablero = new Tablero("4122022", 10);
 
-        partida = new Partida(jugador1, tablero, 2000, 100, 2, 2);
+        partida = new Partida(jugador1, tablero, 2000, 100, 4, 4);
         for (int i = 0; i < jugadores.size(); i++) {
             jugadores.get(i).setActivo(true);
             jugadores.get(i).inicializarFichas(partida.getCantidadFichas());
@@ -288,7 +284,6 @@ public class PruebaJuego {
                                 Casilla casillaActualizar = new Casilla(tablero.getCasillas().get(indiceCasilla).getTipo());
                                 System.out.println("La ficha; " + (enJuego.getNumeroPosicion() + 1)
                                         + " ha terminado la vuelta, posicion que estaba; " + indiceCasilla);
-//                                enJuego.setEnJuego(true);
                                 casillas.set(indiceCasilla, casillaActualizar);
                             }
                         }

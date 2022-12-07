@@ -159,7 +159,7 @@ public class FUnirse extends FrameBase {
     }
 //metodo que valida o ejecutado cuando un jugador ha sido aceptado en una partida, y este a su vez abre el lobby
 
-    @Override
+    @Override                       //Partida
     public void update(Observable o, Object o1) {
         if (o1 == null) {
 this.mostrarMensaje("La union de partida no se ha ejecutado correctamente, contacte a los creadores. ");
