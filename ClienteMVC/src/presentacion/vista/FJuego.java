@@ -65,7 +65,8 @@ public class FJuego extends FrameBase {
         this.tamanoTablero.setText(String.valueOf(partida.getTablero().getTamano()));
         this.penalizacion.setText(String.valueOf(partida.getMontoApuesta()));
         this.nombre.setText(partida.getTurno().getNombre());
-        this.monto.setText(String.valueOf(partida.getTurno().getDinero().getCantidad()));
+//        this.monto.setText(String.valueOf(partida.getTurno().getDinero().getCantidad()));
+this.monto.setText(String.valueOf(0));
         int contadorFichasEliminadas = 0;
         int contadorFichasVuelta = 0;
         for (int i = 0; i < partida.getTurno().getFichas().size(); i++) {
@@ -341,6 +342,8 @@ public class FJuego extends FrameBase {
 //Se manda a llamar al metodo del control correspondientes y este a su vez al cliente que envia datos,
 //sin embargo, no se actualizara o se realizara algo si este jugador no es su turno actual
 ((CJugador)this.control).lanzarDados();
+
+//((CJugador)this.control.lanzarDados());
 //Descomentar Simulacion
 //        if (partida != null) {
 //

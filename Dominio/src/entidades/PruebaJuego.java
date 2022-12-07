@@ -292,7 +292,11 @@ public class PruebaJuego {
         System.out.println("");
         for (int f = 0; f < partida.getTablero().getCasillas().size(); f++) {
             Casilla get = partida.getTablero().getCasillas().get(f);
-            System.out.print((get.getFicha() != null ? " " + get.getFicha().getJugador().getNombre() + " " : (" " + (f) + " ")));
+            System.out.print(
+                    
+                    (get.getFicha() != null ?
+                            
+                            " [ Tipo Casilla; "+get.getTipo() + " "+get.getFicha().getJugador().getNombre() + " ] " : (" [ Tipo Casilla"+ get.getTipo()+""+ (f) + " ] ")));
         }
         System.out.println("");
         System.out.println("------------------");

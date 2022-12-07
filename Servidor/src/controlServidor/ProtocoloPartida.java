@@ -960,7 +960,7 @@ El metodo retorna un JugadorLocal si es que este envia los datos de la partida, 
         System.out.println("La ficha; " + (enJuego.getNumeroPosicion() + 1)
                 + " del jugador ha movido a la posicion; " + (indiceCasilla + avance));
         enJuego.setEnJuego(true);
-        Casilla actualizarBase = tablero.getCasillas().get(indiceCasilla);
+        Casilla actualizarBase = tablero.getCasillas().get(indiceCasilla+avance);
         //Se verificara la nueva posicion,reglas,de triangulos,etc
         Casilla casillaActualizar = new Casilla(actualizarBase.getTipo());
         casillaActualizar.setFicha(enJuego);

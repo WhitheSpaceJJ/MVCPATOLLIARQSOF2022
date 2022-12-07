@@ -24,6 +24,7 @@ public class MPartida extends ModeloBase implements Observer {
 
     public void actualizarPartida(Partida partida) {
         this.partida = partida;
+        int observer=this.countObservers();
         this.actualizarModelo();
     }
 

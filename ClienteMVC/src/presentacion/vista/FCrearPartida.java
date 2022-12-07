@@ -280,7 +280,7 @@ public class FCrearPartida extends FrameBase {
 //            controlJugador.establecerModelo(modeloPartida);
 //            controlJugador.establecerCliente(this.control.getCliente());
 ////            this.control.getCliente().addObserver((Observer) modeloPartida);
-//controlJugador.getCliente().addObserver((Observer) modeloPartida);
+//            controlJugador.getCliente().addObserver((Observer) modeloPartida);
 ////            controlJugador.establecerCliente(this.control.getCliente());
 //            FrameBase fLobby = new FLobby(((MPartida) o).getPartida().getMontoJugador(),
 //                    ((MPartida) o).getPartida().getMontoApuesta(), ((MPartida) o).getPartida().getTablero().getTamano());
@@ -290,8 +290,6 @@ public class FCrearPartida extends FrameBase {
 //            ((FLobby) fLobby).apagarBoton();
 //            ((FLobby) fLobby).actualizarLobby(((MPartida) o).getPartida().getJugadores());
 //            this.mostrarPantallaLobby((FLobby) fLobby);
-
- this.dispose();
             Partida partida = ((MPartida) o).getPartida();
             JOptionPane.showMessageDialog(this, "Usted ha creado una partida; Nombre Escogigo=" + partida.getTurno().getNombre() + " Color; " + partida.getTurno().getColor());
             ModeloBase modeloPartida = (MPartida) o;
@@ -299,16 +297,18 @@ public class FCrearPartida extends FrameBase {
             controlJugador.establecerModelo(modeloPartida);
             controlJugador.establecerCliente(this.control.getCliente());
             controlJugador.getCliente().addObserver((Observer) modeloPartida);
+
             FrameBase fLobby = new FLobby(((MPartida) o).getPartida().getMontoJugador(),
                     ((MPartida) o).getPartida().getMontoApuesta(), ((MPartida) o).getPartida().getTablero().getTamano());
             modeloPartida.deleteObserver(this);
-             this.dispose();
+            this.dispose();
             fLobby.establecerControl(controlJugador);
             modeloPartida.addObserver(fLobby);
             ((FLobby) fLobby).apagarBoton();
             ((FLobby) fLobby).actualizarLobby(((MPartida) o).getPartida().getJugadores());
             this.mostrarPantallaLobby((FLobby) fLobby);
-this.control=null;
+            this.control=null;
+
         } else {
             this.mostrarMensaje("No se ha podido establecer la creacion de la partida con el servidor, contacte a los creadores del servidor");
         }

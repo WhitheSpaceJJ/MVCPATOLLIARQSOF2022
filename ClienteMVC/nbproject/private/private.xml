@@ -2,6 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/WhiteSpace/Desktop/ClienteMVC/src/control/CJugador.java</file>
+            <file>file:/C:/Users/WhiteSpace/Desktop/ClienteMVC/src/presentacion/dibujo/DadoGrafico.java</file>
+            <file>file:/C:/Users/WhiteSpace/Desktop/ClienteMVC/src/presentacion/dibujo/TableroGrafico.java</file>
+            <file>file:/C:/Users/WhiteSpace/Desktop/ClienteMVC/src/presentacion/vista/FCrearPartida.java</file>
+            <file>file:/C:/Users/WhiteSpace/Desktop/ClienteMVC/src/clientePatolli/Cliente.java</file>
+            <file>file:/C:/Users/WhiteSpace/Desktop/ClienteMVC/src/modelo/MPartida.java</file>
+            <file>file:/C:/Users/WhiteSpace/Desktop/ClienteMVC/src/presentacion/vista/FJuego.java</file>
+            <file>file:/C:/Users/WhiteSpace/Desktop/ClienteMVC/src/presentacion/vista/Principal.java</file>
+            <file>file:/C:/Users/WhiteSpace/Desktop/ClienteMVC/src/presentacion/vista/FLobby.java</file>
+        </group>
     </open-files>
 </project-private>

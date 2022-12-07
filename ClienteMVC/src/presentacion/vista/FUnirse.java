@@ -1,6 +1,7 @@
 package presentacion.vista;
 
 import control.CJugador;
+import control.ControlBase;
 import entidades.Jugador;
 import entidades.Partida;
 import java.util.Observable;
@@ -162,31 +163,77 @@ public class FUnirse extends FrameBase {
     @Override                       //Partida
     public void update(Observable o, Object o1) {
         if (o1 == null) {
-this.mostrarMensaje("La union de partida no se ha ejecutado correctamente, contacte a los creadores. ");
+            this.mostrarMensaje("La union de partida no se ha ejecutado correctamente, contacte a los creadores. ");
         } else {
-            this.dispose();
+//            this.dispose();
             Jugador jugador = ((MJugador) o).getJugador();
             this.mostrarMensaje("Se ha unido a una partida; Nombre Escogigo=" + jugador.getNombre() + " Color; " + jugador.getColor());
             if (((Partida) o1).getTotalJugadores() == ((Partida) o1).getJugadores().size()) {
+//                
+//                ((MPartida) o).deleteObserver(this);
+//                FrameBase frameJuego = new FJuego(((MPartida) o).getPartida());
+//                frameJuego.establecerControl(this.control);
+//                ((MPartida) o).addObserver(frameJuego);
+//                this.dispose();
+//                java.awt.EventQueue.invokeLater(() -> {
+//                    frameJuego.setVisible(true);
+//                });
+
                 ModeloBase modeloPartida = new MPartida(((Partida) o1));
-                ((CJugador) this.control).establecerModelo(modeloPartida);
-                this.control.getCliente().addObserver((Observer) modeloPartida);
+                ControlBase controlJugador = new CJugador();
+                controlJugador.establecerModelo(modeloPartida);
+                controlJugador.establecerCliente(this.control.getCliente());
+                controlJugador.getCliente().addObserver((Observer) modeloPartida);
+//                FrameBase fLobby = new FLobby(((MPartida) o).getPartida().getMontoJugador(),
+//                        ((MPartida) o).getPartida().getMontoApuesta(), ((MPartida) o).getPartida().getTablero().getTamano());
+//                modeloPartida.deleteObserver(this);
+                this.dispose();
+//                fLobby.establecerControl(controlJugador);
+//                modeloPartida.addObserver(fLobby);
+//                ((FLobby) fLobby).apagarBoton();
+//                ((FLobby) fLobby).actualizarLobby(((MPartida) o).getPartida().getJugadores());
+//                this.mostrarPantallaLobby((FLobby) fLobby);
+
+//                ModeloBase modeloPartida = new MPartida(((Partida) o1));
+//                ((CJugador) this.control).establecerModelo(modeloPartida);
+//                this.control.getCliente().addObserver((Observer) modeloPartida);
                 FrameBase frameJuego = new FJuego((Partida) o1);
-                frameJuego.establecerControl(this.control);
+                frameJuego.establecerControl(controlJugador);
+                modeloPartida.addObserver(frameJuego);
                 java.awt.EventQueue.invokeLater(() -> {
                     frameJuego.setVisible(true);
                 });
             } else {
+
+//             Partida partida = ((MPartida) o).getPartida();
+//            JOptionPane.showMessageDialog(this, "Usted ha creado una partida; Nombre Escogigo=" + partida.getTurno().getNombre() + " Color; " + partida.getTurno().getColor());
+//            ModeloBase modeloPartida = (MPartida) o;
                 ModeloBase modeloPartida = new MPartida(((Partida) o1));
-                ((CJugador) this.control).establecerModelo(modeloPartida);
-                this.control.getCliente().addObserver((Observer) modeloPartida);
-                FrameBase fLobby = new FLobby(((Partida) o1).getMontoJugador(),
-                        ((Partida) o1).getMontoApuesta(), ((Partida) o1).getTablero().getTamano());
-                fLobby.establecerControl(((CJugador) this.control));
+                ControlBase controlJugador = new CJugador();
+                controlJugador.establecerModelo(modeloPartida);
+                controlJugador.establecerCliente(this.control.getCliente());
+                controlJugador.getCliente().addObserver((Observer) modeloPartida);
+                FrameBase fLobby = new FLobby(((MPartida) o).getPartida().getMontoJugador(),
+                        ((MPartida) o).getPartida().getMontoApuesta(), ((MPartida) o).getPartida().getTablero().getTamano());
+                modeloPartida.deleteObserver(this);
+                this.dispose();
+                fLobby.establecerControl(controlJugador);
                 modeloPartida.addObserver(fLobby);
                 ((FLobby) fLobby).apagarBoton();
-                ((FLobby) fLobby).actualizarLobby(((Partida) o1).getJugadores());
+                ((FLobby) fLobby).actualizarLobby(((MPartida) o).getPartida().getJugadores());
                 this.mostrarPantallaLobby((FLobby) fLobby);
+//                this.control = null;
+
+//                ModeloBase modeloPartida = new MPartida(((Partida) o1));
+//                ((CJugador) this.control).establecerModelo(modeloPartida);
+//                this.control.getCliente().addObserver((Observer) modeloPartida);
+//                FrameBase fLobby = new FLobby(((Partida) o1).getMontoJugador(),
+//                        ((Partida) o1).getMontoApuesta(), ((Partida) o1).getTablero().getTamano());
+//                fLobby.establecerControl(((CJugador) this.control));
+//                modeloPartida.addObserver(fLobby);
+//                ((FLobby) fLobby).apagarBoton();
+//                ((FLobby) fLobby).actualizarLobby(((Partida) o1).getJugadores());
+//                this.mostrarPantallaLobby((FLobby) fLobby);
             }
         }
     }

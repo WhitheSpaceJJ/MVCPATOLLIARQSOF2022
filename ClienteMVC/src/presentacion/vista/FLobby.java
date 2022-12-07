@@ -224,10 +224,11 @@ public class FLobby extends FrameBase {
     public void update(Observable o, Object o1) {
         //Aqui se verificara si la partida tiene el total de jugadores requeridos se inicie el juego
         if (((MPartida) o).getPartida().getTotalJugadores() == ((MPartida) o).getPartida().getJugadores().size()) {
-            this.dispose();
             ((MPartida) o).deleteObserver(this);
             FrameBase frameJuego = new FJuego(((MPartida) o).getPartida());
             frameJuego.establecerControl(this.control);
+           ((MPartida) o).addObserver(frameJuego);
+                        this.dispose();
             java.awt.EventQueue.invokeLater(() -> {
                 frameJuego.setVisible(true);
             });
