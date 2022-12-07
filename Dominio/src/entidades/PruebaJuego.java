@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package entidades;
 
 import com.sun.org.apache.bcel.internal.generic.D2F;
@@ -12,62 +8,21 @@ import java.util.List;
 
 public class PruebaJuego {
 
-    //Version1
-    /*                                       J3
-                                            15
-                                     J1   30  60    J2 
-                                            45
-                                            J4
-     */
-    //  Version 2
-    /*                                       J3
-                                            16
-                                     J1   31  1    J2 
-                                            46
-                                            J4
-     */
-//    private static int[] indicesCentro14 = {31, 1, 16, 46};
-    private static int[] indicesCentro14 = {30, 0, 15, 45};
-
-//    private static int[] indicesCentro14 = {30, 60, 15, 45};
-    /*
-                                        
-                                             14  J3
-                                        J1 27   1 J2     
-                                             40  J4
-     */
-//    private static int[] indicesCentro12 = {27, 1, 13, 40};
-    private static int[] indicesCentro12 = {26, 0, 12, 39};
-
-//    private static int[] indicesCentro12 = {26, 52, 13, 39};
-    /*
-                                            12 J3
-                                       J1 23  1  J2   
-                                            34 J4
-     */
-//    private static int[] indicesCentro10 = {23, 1, 12, 34};
-    private static int[] indicesCentro10 = {22, 0, 11, 33};
-
-//    private static int[] indicesCentro10 = {22, 44, 11, 33};
     private static Partida partida;
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
         Jugador jugador1 = new Jugador("Jose1", "Amarillo");
         Jugador jugador2 = new Jugador("Jose2", "Rosa");
         Jugador jugador3 = new Jugador("Jose3", "Azul");
-        Jugador jugador4 = new Jugador("Jose4", "Rojo");
+//        Jugador jugador4 = new Jugador("Jose4", "Rojo");
         List<Jugador> jugadores = new ArrayList<>();
         jugadores.add(jugador1);
         jugadores.add(jugador2);
         jugadores.add(jugador3);
-        jugadores.add(jugador4);
+//        jugadores.add(jugador4);
         Tablero tablero = new Tablero("4122022", 10);
 
-        partida = new Partida(jugador1, tablero, 2000, 100, 4, 4);
+        partida = new Partida(jugador1, tablero, 2000, 100, 4, 6);
         for (int i = 0; i < jugadores.size(); i++) {
             jugadores.get(i).setActivo(true);
             jugadores.get(i).inicializarFichas(partida.getCantidadFichas());
@@ -90,10 +45,12 @@ public class PruebaJuego {
         System.out.println("Ganador nombre;  " + partida.getTurno().getNombre() + " color; " + partida.getTurno().getColor());
     }
 
-    /*
-    Metodos que actualizaran la respectiva partida, moveran la ficha, realizaran pagos,etc.
-    Estos metodos seran la logica del juego, y la clave para que se finalice una partida, o se elimine un jugador    
-     */
+    private static int[] indicesCentro14 = {30, 0, 15, 45};
+
+    private static int[] indicesCentro12 = {26, 0, 12, 39};
+
+    private static int[] indicesCentro10 = {22, 0, 11, 33};
+
     public static void lanzarDados(List<Dado> lista) {
         int cara = 0;
         int sinCara = 0;
@@ -108,14 +65,14 @@ public class PruebaJuego {
         }
         System.out.println("Con cara; " + cara);
         System.out.println("Sin cara; " + sinCara);
-        introducirFicha(cara, sinCara);
+        preIntroduccionFicha(cara, sinCara);
     }
 
-    public static boolean realizarPago() {
-        return true;
-    }
 
-    public static void introducirFicha(int conCara, int sinCara) {
+
+
+
+    public static void preIntroduccionFicha(int conCara, int sinCara) {
         int indiceJugador = partida.getJugadores().
                 indexOf(partida.getTurno());
         Jugador turno = partida.getTurno();
@@ -180,6 +137,7 @@ public class PruebaJuego {
             System.out.println("Se cedera el turno casilla");
             opcion = 6;
         }
+
         int auxliarSalidaJugador = -1;
         Tablero tablero = partida.getTablero();
         if (Arrays.asList(1, 2, 3, 4, 5).contains(opcion)) {
@@ -320,7 +278,13 @@ public class PruebaJuego {
         }
         verificarTotal();
         mostrarDatos();
-        System.out.println("---------------------------------------------------");
+    }
+
+    public void introducirFicha(){
+    }
+    
+    public static boolean realizarPago() {
+        return true;
     }
 
     public static void mostrarDatos() {
@@ -335,6 +299,8 @@ public class PruebaJuego {
     }
 
     public static void verificarTotal() {
+        Jugador jugador=null;
+        int auxiliar = -1;
         for (int i = 0; i < partida.getJugadores().size(); i++) {
             Jugador turno = partida.getJugadores().get(i);
             List<Ficha> fichasDisponibles = new ArrayList<>();
@@ -355,11 +321,13 @@ public class PruebaJuego {
             }
             System.out.println(fichasConVuelta.size() + " de las fichas del jugador " + turno.getNombre() + " han dado la vuelta");
             if (fichasConVuelta.size() == partida.getCantidadFichas()) {
-                            partida.setTurno(turno);
-                partida.setActiva(false);
-//                limpiarCasillas();
-                break;
+                jugador=turno;
+                auxiliar = 0;
             }
+        }
+        if (auxiliar == 0) {
+            partida.setTurno(jugador);
+            partida.setActiva(false);
         }
 
     }
@@ -380,14 +348,12 @@ public class PruebaJuego {
                     indice = i;
                     break;
                 }
-
             }
         }
         return indice;
     }
 
-    public static boolean verificarLanzamiento() {
-        return true;
+    public static void verificarLanzamiento() {
     }
 
     public static boolean pasarTurno() {
@@ -403,4 +369,5 @@ public class PruebaJuego {
     }
 
 }
+
 

@@ -20,6 +20,7 @@ public class Cliente extends Observable implements Runnable {
     private ObjectOutputStream output;
     private Jugador jugador;
     private boolean conexionEstablecida;
+    private boolean esTurno = false;
 //Constructor del cliente que se encarga de procesar los datos del juego conrespecto al servidor
 
     public Cliente() {
@@ -110,12 +111,18 @@ public class Cliente extends Observable implements Runnable {
         //Si la partida esta activa se procesa la informacion
         if (partida.isActiva()) {
             System.out.println("Se ha actualizado la partida");
+            //Se procesa si es el turno del jugador
+            if (jugador.equals(partida.getTurno())) {
+                this.esTurno = true;
+            }
             this.setChanged();
             this.notifyObservers(partida);
         } else {
             //En cambio si la partida ha finalizado esta finaliza el ciclo run estableciendo la variabl conexionEstablecida a 
             //false y cerrando el socket correspondiente de este cliente
             this.conexionEstablecida = false;
+            //En el tablero del jugador se reflejara quien gano en base al turno
+            this.notifyObservers(partida);
         }
     }
 
@@ -151,6 +158,7 @@ public class Cliente extends Observable implements Runnable {
             if (partidaAuxiliar != null) {
                 System.out.println("Se ha creado la partida satisfactoriamente");
                 this.conexionEstablecida = true;
+                this.esTurno = true;
                 this.jugador = partida.getTurno();
                 return true;
             } else {
@@ -166,17 +174,21 @@ public class Cliente extends Observable implements Runnable {
     Metodo que es jecutado cuando se necesita o se requiere enviar una lista de dados al servidor, si el envio tiene exito 
     es que se procesaron los dados, ya que era el turno actual de este cliente, en cambios no se procesara nada
      */
-    public boolean lanzarDados(List<Dado> dados) {
-        try {
-            this.output = new ObjectOutputStream(socket.getOutputStream());
-            this.output.writeObject(dados);
-            System.out.println("Se ha enviado los dados para la verificacion, porque ha sido tu turno");
-            //Por lo tanto se regresa true ya que se enviaron los dados
-        } catch (IOException e) {
-            System.out.println("No se ha enviado los dados porque no es el turno del jugador.");
-            return false;
+    public void lanzarDados(List<Dado> dados) {
+        if (esTurno) {
+            try {
+                this.output = new ObjectOutputStream(socket.getOutputStream());
+                this.output.writeObject(dados);
+                System.out.println("Se ha enviado los dados para la verificacion, porque ha sido tu turno");
+                //Por lo tanto se regresa true ya que se enviaron los dados
+                this.esTurno=false;
+//                return true;
+            } catch (IOException e) {
+                System.out.println("No se ha enviado los dados porque no es el turno del jugador.");
+//                return false;
+            }
         }
-        return true;
+//        return false;
     }
 
     /*

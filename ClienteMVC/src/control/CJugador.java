@@ -1,8 +1,11 @@
 package control;
 
 import clientePatolli.Cliente;
+import entidades.Dado;
 import entidades.Jugador;
 import entidades.Partida;
+import java.util.ArrayList;
+import java.util.List;
 import modelo.MJugador;
 import modelo.ModeloBase;
 
@@ -38,5 +41,12 @@ public class CJugador extends ControlBase {
     }
 
     public void lanzarDados() {
+        List<Dado> lista = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            Dado dado = new Dado(false);
+            dado.cambiarCara();
+            lista.add(dado);
+        }
+        this.cliente.lanzarDados(lista);
     }
 }

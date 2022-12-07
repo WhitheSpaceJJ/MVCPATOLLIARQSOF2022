@@ -1,5 +1,6 @@
 package presentacion.vista;
 
+import control.CJugador;
 import entidades.Dado;
 import entidades.Dinero;
 import entidades.Ficha;
@@ -339,7 +340,7 @@ public class FJuego extends FrameBase {
     private void lanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lanzarActionPerformed
 //Se manda a llamar al metodo del control correspondientes y este a su vez al cliente que envia datos,
 //sin embargo, no se actualizara o se realizara algo si este jugador no es su turno actual
-
+((CJugador)this.control).lanzarDados();
 //Descomentar Simulacion
 //        if (partida != null) {
 //
